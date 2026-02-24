@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/roshan/Desktop/research-live/pages/index.js"],"sourcesContent":["import App from '../components/App';\n\nexport default function Home() {\n  return <App />;\n}"],"names":[],"mappings":";;;;;;;;;;;;AAEe,SAAS;IACtB,qBAAO,qKAAC;;;;;AACV"}}]
+}

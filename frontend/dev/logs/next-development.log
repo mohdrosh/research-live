@@ -1,0 +1,140 @@
+[00:00:00.403] Server  LOG     ✓ Ready in 262ms
+[00:00:15.210] Browser LOG     Starting PDF analysis...
+[00:00:15.211] Browser LOG     PDF filename: Tokyo Business Trip.pdf
+[00:00:18.402] Browser LOG     API response status: 500
+[00:00:18.402] Browser ERROR   API error response: {"detail":"PDF analysis failed. Please try again."}
+[00:00:18.402] Browser ERROR   Detailed error in analyzePDF: {}
+[00:00:18.402] Browser ERROR   PDF analysis error: {}
+[00:03:33.304] Server  ERROR   ⨯ ./pages/index.js:1:1
+Module not found: Can't resolve '../components/App'
+> 1 | import App from '../components/App';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function Home() {
+  4 |   return <App />;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:03:33.304] Server  ERROR   ⨯ ./pages/index.js:1:1
+Module not found: Can't resolve '../components/App'
+> 1 | import App from '../components/App';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function Home() {
+  4 |   return <App />;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:03:33.304] Server  ERROR   ⨯ ./pages/index.js:1:1
+Module not found: Can't resolve '../components/App'
+> 1 | import App from '../components/App';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function Home() {
+  4 |   return <App />;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:03:33.304] Server  ERROR   ⨯ ./pages/index.js:1:1
+Module not found: Can't resolve '../components/App'
+> 1 | import App from '../components/App';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function Home() {
+  4 |   return <App />;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:03:33.305] Server  ERROR   ⨯ ./pages/index.js:1:1
+Module not found: Can't resolve '../components/App'
+> 1 | import App from '../components/App';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function Home() {
+  4 |   return <App />;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:03:33.305] Server  ERROR   ⨯ ./pages/index.js:1:1
+Module not found: Can't resolve '../components/App'
+> 1 | import App from '../components/App';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function Home() {
+  4 |   return <App />;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:03:33.305] Server  ERROR   ⨯ ./pages/index.js:1:1
+Module not found: Can't resolve '../components/App'
+> 1 | import App from '../components/App';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function Home() {
+  4 |   return <App />;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:03:33.305] Server  ERROR   ⨯ ./pages/index.js:1:1
+Module not found: Can't resolve '../components/App'
+> 1 | import App from '../components/App';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function Home() {
+  4 |   return <App />;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:03:33.335] Server  LOG     ✓ Compiled in 26ms
+[00:03:34.427] Browser ERROR   ./pages/index.js:1:1
+Module not found: Can't resolve '../components/App'
+> 1 | import App from '../components/App';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function Home() {
+  4 |   return <App />;
+
+https://nextjs.org/docs/messages/module-not-found
+[00:03:37.428] Browser ERROR   ./pages/index.js:1:1
+Module not found: Can't resolve '../components/App'
+> 1 | import App from '../components/App';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function Home() {
+  4 |   return <App />;
+
+https://nextjs.org/docs/messages/module-not-found
+[00:03:45.428] Browser ERROR   ./pages/index.js:1:1
+Module not found: Can't resolve '../components/App'
+> 1 | import App from '../components/App';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | export default function Home() {
+  4 |   return <App />;
+
+https://nextjs.org/docs/messages/module-not-found
+[00:03:45.779] Server  LOG     ✓ Compiled in 42ms

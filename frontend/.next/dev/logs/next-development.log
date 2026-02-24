@@ -1,0 +1,10 @@
+[00:00:00.271] Server  LOG     ✓ Ready in 162ms
+[00:00:03.479] Browser ERROR   Failed to load papers: {}
+[00:02:18.193] Browser LOG     Starting PDF analysis...
+[00:02:18.193] Browser LOG     PDF filename: Tokyo Business Trip.pdf
+[00:02:23.331] Browser LOG     API response status: 500
+[00:02:23.331] Browser ERROR   API error response: {"detail":"PDF analysis failed. Please try again."}
+[00:02:23.331] Browser ERROR   Detailed error in analyzePDF: {}
+[00:02:23.331] Browser ERROR   PDF analysis error: {}
+[00:08:53.252] Browser LOG     Starting PDF analysis...
+[00:08:53.252] Browser LOG     PDF filename: Tokyo Business Trip.pdf

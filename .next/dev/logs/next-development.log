@@ -1,9 +1,0 @@
-[00:00:00.995] Server  LOG     ✓ Ready in 785ms
-[00:01:09.528] Server  LOG     Analyzing PDF...
-[00:01:09.562] Browser LOG     Starting PDF analysis...
-[00:01:09.562] Browser LOG     PDF filename: Tokyo Business Trip.pdf
-[00:01:10.779] Server  ERROR   API Error: Error: 401 {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYRzUCFyZ8LoiLvNGATDX"}
-[00:01:14.900] Browser LOG     API response status: 500
-[00:01:14.900] Browser ERROR   API error response: {"error":"401 {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011CYRzUCFyZ8LoiLvNGATDX\"}","details":"PDF analysis failed. Please try again."}
-[00:01:14.900] Browser ERROR   Detailed error in analyzePDF: {}
-[00:01:14.900] Browser ERROR   PDF analysis error: {}

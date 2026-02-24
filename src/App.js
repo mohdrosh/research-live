@@ -37,6 +37,78 @@ const [viewingPaper, setViewingPaper] = useState(null);
   const [selectedRelatedPapers, setSelectedRelatedPapers] = useState([]);
   const [pdfText, setPdfText] = useState('');
 
+  // AI Analysis Function
+  const analyzePDF = async (base64Data, filename) => {
+    try {
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 4000,
+          messages: [
+            {
+              role: "user",
+              content: [
+                {
+                  type: "document",
+                  source: {
+                    type: "base64",
+                    media_type: "application/pdf",
+                    data: base64Data
+                  }
+                },
+                {
+                  type: "text",
+                  text: `この研究論文を詳しく分析し、以下の質問に日本語で回答してください。
+
+回答はJSON形式で返してください。マークダウンのバッククオート(\`\`\`json)は使わず、純粋なJSONのみを返してください。
+
+{
+  "mainConclusion": "この研究で明らかになった最も重要な発見を1-2文で記述",
+  "priorWork": "この研究が基づいている3-5つの重要な先行研究を改行区切りで列挙",
+  "novelty": "この研究の独自の貢献と新規性を詳しく説明",
+  "unknownQuestions": "この研究では答えられなかった2-3の具体的な疑問を改行区切りで",
+  "failedApproach": "うまくいかなかった手法とその理由",
+  "crossDomain": "他分野での類似問題や応用可能性を詳しく",
+  "industrialPain": "この研究が解決できる具体的な産業課題",
+  "abstractPrinciple": "小学5年生でも理解できるように簡単に説明",
+  "experimentalReason": "なぜこのパラメータ・手法を選んだのか",
+  "scalingPossibility": "この技術は異なるスケールで機能するか",
+  "combinationPotential": "他の技術と組み合わせる可能性"
+}
+
+重要: 回答は必ず上記のJSON形式で、\`\`\`jsonや\`\`\`などのマークダウン記号なしで返してください。`
+                }
+              ]
+            }
+          ]
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const text = data.content.find(item => item.type === "text")?.text || "";
+      
+      // Clean and parse JSON
+      let cleanText = text.trim();
+      // Remove markdown code blocks if present
+      cleanText = cleanText.replace(/```json\n?/g, "").replace(/```\n?/g, "");
+      
+      const parsedData = JSON.parse(cleanText);
+      return parsedData;
+      
+    } catch (error) {
+      console.error('Error analyzing PDF:', error);
+      throw new Error('PDF分析に失敗しました。もう一度お試しください。');
+    }
+  };
+
   const relationshipTypes = [
     'Cited',
     'Builds upon',
@@ -695,30 +767,31 @@ const [viewingPaper, setViewingPaper] = useState(null);
     }
   };
 
-  const processFile = (file) => {
+  const processFile = async (file) => {
     if (file && file.type === 'application/pdf') {
       setUploadedFile(file);
       setIsProcessing(true);
       
-      setTimeout(() => {
-        // Check which PDF was uploaded and load corresponding answers
-        let answersFound = false;
+      try {
+        // Read PDF as base64
+        const base64Data = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(',')[1]);
+          reader.onerror = () => reject(new Error('Failed to read file'));
+          reader.readAsDataURL(file);
+        });
         
-        for (const [key, answers] of Object.entries(pdfAnswerMappings)) {
-          if (file.name.includes(key)) {
-            setFormData(answers);
-            answersFound = true;
-            break;
-          }
-        }
+        // Call Claude API to analyze PDF
+        const analysis = await analyzePDF(base64Data, file.name);
         
-        if (!answersFound) {
-          setFormData({});  // Empty form if no matching PDF
-        }
-        
+        setFormData(analysis);
         setIsProcessing(false);
         setCurrentView('form');
-      }, 3000);
+      } catch (error) {
+        console.error('PDF analysis error:', error);
+        alert('PDF分析中にエラーが発生しました: ' + error.message);
+        setIsProcessing(false);
+      }
     } else {
       alert('PDFファイルのみアップロード可能です');
     }

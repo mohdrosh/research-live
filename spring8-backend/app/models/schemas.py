@@ -116,6 +116,14 @@ class PDFAnalysisRequest(BaseModel):
 # ---------- PDF Analysis Response ----------
 
 class PDFAnalysisResponse(BaseModel):
+    title: Optional[str] = None
+    title_en: Optional[str] = None
+    authors: Optional[str] = None
+    year: Optional[int] = None
+    field: Optional[str] = None
+    method: Optional[str] = None
+    beamline: Optional[str] = None
+    application: Optional[str] = None
     mainConclusion: Optional[str] = None
     priorWork: Optional[str] = None
     novelty: Optional[str] = None

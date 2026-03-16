@@ -10,12 +10,12 @@ var __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$run
 var __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/react [external] (react, cjs)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$upload$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Upload$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/upload.mjs [ssr] (ecmascript) <export default as Upload>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/search.mjs [ssr] (ecmascript) <export default as Search>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$file$2d$text$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__FileText$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/file-text.mjs [ssr] (ecmascript) <export default as FileText>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$loader$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Loader$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/loader.mjs [ssr] (ecmascript) <export default as Loader>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/chevron-down.mjs [ssr] (ecmascript) <export default as ChevronDown>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$up$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronUp$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/chevron-up.mjs [ssr] (ecmascript) <export default as ChevronUp>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__X$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/x.mjs [ssr] (ecmascript) <export default as X>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$link$2d$2$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Link2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/link-2.mjs [ssr] (ecmascript) <export default as Link2>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$home$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Home$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/home.mjs [ssr] (ecmascript) <export default as Home>");
 ;
 ;
 ;
@@ -59,6 +59,11 @@ const App = ()=>{
     const [papers, setPapers] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])([]);
     const [selectedRelatedPapers, setSelectedRelatedPapers] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])([]);
     const [pdfText, setPdfText] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])('');
+    const [isLoggedIn, setIsLoggedIn] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
+    const [showLoginModal, setShowLoginModal] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
+    const [loginUsername, setLoginUsername] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])('');
+    const [loginPassword, setLoginPassword] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])('');
+    const [loginError, setLoginError] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])('');
     // AI Analysis Function
     const analyzePDF = async (base64Data, filename)=>{
         try {
@@ -85,6 +90,17 @@ const App = ()=>{
         } catch (error) {
             console.error('Detailed error in analyzePDF:', error);
             throw new Error(`PDF分析エラー: ${error.message}`);
+        }
+    };
+    const handleLogin = ()=>{
+        if (loginUsername === 'spring8' && loginPassword === 'article') {
+            setIsLoggedIn(true);
+            setShowLoginModal(false);
+            setLoginError('');
+            setLoginUsername('');
+            setLoginPassword('');
+        } else {
+            setLoginError('ユーザー名またはパスワードが違います (Invalid credentials)');
         }
     };
     const relationshipTypes = [
@@ -257,7 +273,18 @@ const App = ()=>{
                         mainConclusion: p.main_conclusion,
                         industrialApplication: p.industrial_application,
                         crossDomain: p.cross_domain,
-                        failedApproach: p.failed_approach
+                        failedApproach: p.failed_approach,
+                        formData: p.form_data ? {
+                            priorWork: p.form_data.prior_work,
+                            novelty: p.form_data.novelty,
+                            unknownQuestions: p.form_data.unknown_questions,
+                            failedApproach: p.form_data.failed_approach,
+                            crossDomain: p.form_data.cross_domain,
+                            abstractPrinciple: p.form_data.abstract_principle,
+                            experimentalReason: p.form_data.experimental_reason,
+                            scalingPossibility: p.form_data.scaling_possibility,
+                            combinationPotential: p.form_data.combination_potential
+                        } : null
                     }));
                 setPapers(normalized);
             } catch (error) {
@@ -872,6 +899,10 @@ const App = ()=>{
         e.preventDefault();
         e.stopPropagation();
         setIsDragging(false);
+        if (!isLoggedIn) {
+            setShowLoginModal(true);
+            return;
+        }
         const file = e.dataTransfer.files[0];
         processFile(file);
     };
@@ -889,14 +920,14 @@ const App = ()=>{
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    title: uploadedFile ? uploadedFile.name.replace('.pdf', '') : '新規論文',
-                    title_en: 'New Research Paper',
-                    authors: 'Kitagawa, H.',
-                    year: new Date().getFullYear(),
-                    field: '材料科学 (Materials Science)',
-                    method: 'X線回折 (X-ray Diffraction)',
-                    beamline: 'BL19B2',
-                    application: '自動車産業 (Automotive)',
+                    title: formData.title || (uploadedFile ? uploadedFile.name.replace('.pdf', '') : '新規論文'),
+                    title_en: formData.title_en || formData.titleEn || '',
+                    authors: formData.authors || '',
+                    year: formData.year || new Date().getFullYear(),
+                    field: formData.field || '材料科学 (Materials Science)',
+                    method: formData.method || 'X線回折 (X-ray Diffraction)',
+                    beamline: formData.beamline || 'BL19B2',
+                    application: formData.application || '自動車産業 (Automotive)',
                     main_conclusion: formData.mainConclusion || '',
                     industrial_application: formData.industrialPain || '',
                     cross_domain: formData.crossDomain || '',
@@ -928,7 +959,18 @@ const App = ()=>{
                 mainConclusion: newPaper.main_conclusion,
                 industrialApplication: newPaper.industrial_application,
                 crossDomain: newPaper.cross_domain,
-                failedApproach: newPaper.failed_approach
+                failedApproach: newPaper.failed_approach,
+                formData: newPaper.form_data ? {
+                    priorWork: newPaper.form_data.prior_work,
+                    novelty: newPaper.form_data.novelty,
+                    unknownQuestions: newPaper.form_data.unknown_questions,
+                    failedApproach: newPaper.form_data.failed_approach,
+                    crossDomain: newPaper.form_data.cross_domain,
+                    abstractPrinciple: newPaper.form_data.abstract_principle,
+                    experimentalReason: newPaper.form_data.experimental_reason,
+                    scalingPossibility: newPaper.form_data.scaling_possibility,
+                    combinationPotential: newPaper.form_data.combination_potential
+                } : null
             };
             setPapers((prevPapers)=>[
                     normalized,
@@ -966,710 +1008,927 @@ const App = ()=>{
         const matchesYear = selectedFilters.year.length === 0 || selectedFilters.year.includes(paper.year);
         return matchesSearch && matchesField && matchesMethod && matchesApplication && matchesBeamline && matchesYear;
     });
+    // Login Modal (variable, not component, to prevent focus loss)
+    const loginModal = showLoginModal ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+        className: "fixed inset-0 z-50 flex items-center justify-center",
+        style: {
+            backgroundColor: 'rgba(0,0,0,0.25)',
+            backdropFilter: 'blur(4px)'
+        },
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+            className: "bg-white rounded-2xl shadow-xl p-6",
+            style: {
+                width: '320px'
+            },
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
+                    className: "text-xl font-bold text-gray-900 mb-1",
+                    children: "ログイン"
+                }, void 0, false, {
+                    fileName: "[project]/components/App.js",
+                    lineNumber: 945,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0)),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                    className: "bg-gray-50 border border-gray-200 rounded-lg p-3 mb-4 text-xs text-gray-500",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                            className: "font-semibold text-gray-700",
+                            children: "Demo credentials"
+                        }, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 947,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("br", {}, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 947,
+                            columnNumber: 80
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        "Username: ",
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                            className: "font-mono text-gray-800",
+                            children: "spring8"
+                        }, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 948,
+                            columnNumber: 21
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        "  |  Password: ",
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                            className: "font-mono text-gray-800",
+                            children: "article"
+                        }, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 948,
+                            columnNumber: 102
+                        }, ("TURBOPACK compile-time value", void 0))
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/App.js",
+                    lineNumber: 946,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0)),
+                loginError && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                    className: "mb-3 p-2 bg-red-50 border border-red-200 text-red-600 text-xs rounded",
+                    children: loginError
+                }, void 0, false, {
+                    fileName: "[project]/components/App.js",
+                    lineNumber: 951,
+                    columnNumber: 11
+                }, ("TURBOPACK compile-time value", void 0)),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                    className: "mb-3",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
+                            className: "block text-xs font-semibold text-gray-600 mb-1",
+                            children: "ユーザー名"
+                        }, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 956,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                            type: "text",
+                            value: loginUsername,
+                            onChange: (e)=>setLoginUsername(e.target.value),
+                            className: "w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:border-red-800 focus:outline-none",
+                            placeholder: "username"
+                        }, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 957,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0))
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/App.js",
+                    lineNumber: 955,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0)),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                    className: "mb-4",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
+                            className: "block text-xs font-semibold text-gray-600 mb-1",
+                            children: "パスワード"
+                        }, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 966,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                            type: "password",
+                            value: loginPassword,
+                            onChange: (e)=>setLoginPassword(e.target.value),
+                            onKeyDown: (e)=>e.key === 'Enter' && handleLogin(),
+                            className: "w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:border-red-800 focus:outline-none",
+                            placeholder: "password"
+                        }, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 967,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0))
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/App.js",
+                    lineNumber: 965,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0)),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                    className: "flex gap-2",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                            onClick: ()=>{
+                                setShowLoginModal(false);
+                                setLoginError('');
+                            },
+                            className: "flex-1 px-3 py-2 text-sm border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50",
+                            children: "キャンセル"
+                        }, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 977,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                            onClick: handleLogin,
+                            className: "flex-1 px-3 py-2 text-sm bg-red-800 text-white rounded-lg hover:bg-red-900 font-semibold",
+                            children: "ログイン"
+                        }, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 983,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0))
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/App.js",
+                    lineNumber: 976,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0))
+            ]
+        }, void 0, true, {
+            fileName: "[project]/components/App.js",
+            lineNumber: 944,
+            columnNumber: 7
+        }, ("TURBOPACK compile-time value", void 0))
+    }, void 0, false, {
+        fileName: "[project]/components/App.js",
+        lineNumber: 943,
+        columnNumber: 5
+    }, ("TURBOPACK compile-time value", void 0)) : null;
     // アップロードビュー (Upload View)
     if (currentView === 'upload') {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
             className: "min-h-screen bg-white",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                className: "max-w-full mx-auto",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                        className: "bg-white border-b border-gray-200 px-8 py-4",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                            className: "flex items-center justify-between mb-6",
+            children: [
+                loginModal,
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                    className: "max-w-full mx-auto",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                            className: "bg-white border-b border-gray-200 px-8 py-4",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                className: "flex items-center justify-between mb-6",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
+                                        className: "text-2xl font-bold text-gray-900",
+                                        children: "SPring-8 研究データベース"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1005,
+                                        columnNumber: 15
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "flex gap-3",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                onClick: ()=>setCurrentView('upload'),
+                                                className: "px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$home$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Home$3e$__["Home"], {
+                                                    className: "w-4 h-4"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/App.js",
+                                                    lineNumber: 1013,
+                                                    columnNumber: 19
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1009,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            isLoggedIn ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                className: "flex items-center gap-3",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                        className: "text-sm text-gray-700 font-medium",
+                                                        children: "ようこそ、Spring-8さん 👋"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1017,
+                                                        columnNumber: 5
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                        onClick: ()=>setIsLoggedIn(false),
+                                                        className: "px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium",
+                                                        children: "ログアウト"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1018,
+                                                        columnNumber: 5
+                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1016,
+                                                columnNumber: 3
+                                            }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                onClick: ()=>setShowLoginModal(true),
+                                                className: "px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium",
+                                                children: "ログイン"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1026,
+                                                columnNumber: 3
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1008,
+                                        columnNumber: 15
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/App.js",
+                                lineNumber: 1004,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0))
+                        }, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 1003,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                            className: "max-w-5xl mx-auto p-12",
                             children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
-                                    className: "text-2xl font-bold text-gray-900",
-                                    children: "SPring-8 研究データベース"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 907,
-                                    columnNumber: 15
-                                }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "flex gap-3",
+                                    className: "text-center mb-16",
                                     children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            onClick: ()=>setCurrentView('search'),
-                                            className: "px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium",
-                                            children: "検索"
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
+                                            className: "font-serif text-gray-900 mb-5",
+                                            style: {
+                                                fontSize: '52px'
+                                            },
+                                            children: "多次元研究コンテキストグラフシステム"
                                         }, void 0, false, {
                                             fileName: "[project]/components/App.js",
-                                            lineNumber: 911,
-                                            columnNumber: 17
+                                            lineNumber: 1040,
+                                            columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0)),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            className: "px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium",
-                                            children: "ログイン"
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                            className: "text-gray-400 tracking-wide",
+                                            style: {
+                                                fontSize: '19px'
+                                            },
+                                            children: "Multi-Dimensional Research Context Graph System"
                                         }, void 0, false, {
                                             fileName: "[project]/components/App.js",
-                                            lineNumber: 917,
-                                            columnNumber: 17
+                                            lineNumber: 1041,
+                                            columnNumber: 15
+                                        }, ("TURBOPACK compile-time value", void 0)),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                            style: {
+                                                marginBottom: '48px'
+                                            }
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/App.js",
+                                            lineNumber: 1042,
+                                            columnNumber: 15
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/App.js",
-                                    lineNumber: 910,
-                                    columnNumber: 15
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/App.js",
-                            lineNumber: 906,
-                            columnNumber: 13
-                        }, ("TURBOPACK compile-time value", void 0))
-                    }, void 0, false, {
-                        fileName: "[project]/components/App.js",
-                        lineNumber: 905,
-                        columnNumber: 11
-                    }, ("TURBOPACK compile-time value", void 0)),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                        className: "max-w-4xl mx-auto p-8",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                className: "mb-8",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
-                                        className: "text-4xl font-serif text-gray-900 mb-2",
-                                        children: "研究論文アップロード"
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/App.js",
-                                        lineNumber: 927,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0)),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                        className: "text-gray-600",
-                                        children: "多次元研究コンテキストグラフシステム"
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/App.js",
-                                        lineNumber: 928,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0))
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/App.js",
-                                lineNumber: 926,
-                                columnNumber: 13
-                            }, ("TURBOPACK compile-time value", void 0)),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                className: "bg-white border-2 border-gray-300 rounded-lg p-12",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                        onDragOver: handleDragOver,
-                                        onDragLeave: handleDragLeave,
-                                        onDrop: handleDrop,
-                                        className: `border-4 border-dashed rounded-lg p-16 text-center transition-all ${isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-gray-50 hover:bg-gray-100'}`,
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$upload$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Upload$3e$__["Upload"], {
-                                                className: `w-20 h-20 mx-auto mb-6 transition-colors ${isDragging ? 'text-blue-500' : 'text-gray-400'}`
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 942,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
-                                                className: "text-2xl font-semibold text-gray-800 mb-3",
-                                                children: isDragging ? 'ここにドロップしてください' : '研究論文をアップロード'
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 945,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                className: "text-gray-600 mb-8 max-w-2xl mx-auto",
-                                                children: isDragging ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                    className: "text-blue-600 font-semibold",
-                                                    children: "ファイルをドロップ"
+                                    lineNumber: 1039,
+                                    columnNumber: 13
+                                }, ("TURBOPACK compile-time value", void 0)),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                    className: "grid grid-cols-2 gap-6",
+                                    style: {
+                                        maxWidth: '900px',
+                                        margin: '0 auto'
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                            onClick: ()=>setCurrentView('search'),
+                                            style: {
+                                                background: 'white',
+                                                border: '1.5px solid #d1d5db',
+                                                borderRadius: '20px',
+                                                minHeight: '400px',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                cursor: 'pointer',
+                                                padding: '56px 40px',
+                                                transition: 'box-shadow 0.2s'
+                                            },
+                                            onMouseEnter: (e)=>e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.10)',
+                                            onMouseLeave: (e)=>e.currentTarget.style.boxShadow = 'none',
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {
+                                                    style: {
+                                                        width: '72px',
+                                                        height: '72px',
+                                                        color: '#7f1d1d',
+                                                        marginBottom: '32px',
+                                                        strokeWidth: 1.5
+                                                    }
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/App.js",
-                                                    lineNumber: 950,
-                                                    columnNumber: 21
-                                                }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["Fragment"], {
+                                                    lineNumber: 1066,
+                                                    columnNumber: 17
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                    style: {
+                                                        fontWeight: '700',
+                                                        fontSize: '24px',
+                                                        color: '#111',
+                                                        marginBottom: '10px'
+                                                    },
+                                                    children: "研究を検索"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/App.js",
+                                                    lineNumber: 1067,
+                                                    columnNumber: 17
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                    style: {
+                                                        color: '#9ca3af',
+                                                        fontSize: '15px',
+                                                        marginBottom: '14px'
+                                                    },
+                                                    children: "Search Research"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/App.js",
+                                                    lineNumber: 1068,
+                                                    columnNumber: 17
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                    style: {
+                                                        color: '#9ca3af',
+                                                        fontSize: '13px',
+                                                        lineHeight: '1.7',
+                                                        textAlign: 'center'
+                                                    },
                                                     children: [
-                                                        "PDFファイルをドラッグ&ドロップ、またはクリックしてアップロード",
+                                                        "論文、産業応用、異分野応用を",
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("br", {}, void 0, false, {
                                                             fileName: "[project]/components/App.js",
-                                                            lineNumber: 953,
-                                                            columnNumber: 56
+                                                            lineNumber: 1069,
+                                                            columnNumber: 121
                                                         }, ("TURBOPACK compile-time value", void 0)),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                            className: "text-sm",
-                                                            children: "(Drag & drop or click to upload PDF)"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 954,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0))
+                                                        "キーワードで検索できます"
                                                     ]
-                                                }, void 0, true)
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 948,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
-                                                className: "inline-block",
+                                                }, void 0, true, {
+                                                    fileName: "[project]/components/App.js",
+                                                    lineNumber: 1069,
+                                                    columnNumber: 17
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/App.js",
+                                            lineNumber: 1048,
+                                            columnNumber: 15
+                                        }, ("TURBOPACK compile-time value", void 0)),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                            onDragOver: handleDragOver,
+                                            onDragLeave: handleDragLeave,
+                                            onDrop: handleDrop,
+                                            style: {
+                                                background: 'white',
+                                                border: isDragging ? '1.5px solid #60a5fa' : '1.5px solid #d1d5db',
+                                                borderRadius: '20px',
+                                                minHeight: '400px',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                cursor: 'pointer',
+                                                padding: '56px 40px',
+                                                transition: 'box-shadow 0.2s'
+                                            },
+                                            onMouseEnter: (e)=>e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.10)',
+                                            onMouseLeave: (e)=>e.currentTarget.style.boxShadow = 'none',
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
+                                                style: {
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    alignItems: 'center',
+                                                    cursor: 'pointer',
+                                                    width: '100%'
+                                                },
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
                                                         type: "file",
                                                         accept: ".pdf",
-                                                        onChange: handleFileUpload,
-                                                        className: "hidden"
+                                                        onChange: isLoggedIn ? handleFileUpload : (e)=>{
+                                                            e.preventDefault();
+                                                            setShowLoginModal(true);
+                                                        },
+                                                        style: {
+                                                            display: 'none'
+                                                        },
+                                                        onClick: !isLoggedIn ? (e)=>{
+                                                            e.preventDefault();
+                                                            setShowLoginModal(true);
+                                                        } : undefined
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 960,
+                                                        lineNumber: 1094,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                        className: "px-8 py-3 bg-red-800 text-white rounded hover:bg-red-900 font-semibold cursor-pointer inline-block",
-                                                        children: "PDFファイルを選択"
+                                                    isProcessing ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$loader$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Loader$3e$__["Loader"], {
+                                                        style: {
+                                                            width: '72px',
+                                                            height: '72px',
+                                                            color: '#7f1d1d',
+                                                            marginBottom: '32px',
+                                                            strokeWidth: 1.5
+                                                        },
+                                                        className: "animate-spin"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 966,
+                                                        lineNumber: 1102,
+                                                        columnNumber: 23
+                                                    }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$upload$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Upload$3e$__["Upload"], {
+                                                        style: {
+                                                            width: '72px',
+                                                            height: '72px',
+                                                            color: '#7f1d1d',
+                                                            marginBottom: '32px',
+                                                            strokeWidth: 1.5
+                                                        }
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1103,
+                                                        columnNumber: 23
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                        style: {
+                                                            fontWeight: '700',
+                                                            fontSize: '24px',
+                                                            color: '#111',
+                                                            marginBottom: '10px'
+                                                        },
+                                                        children: "論文をアップロード"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1105,
                                                         columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                        style: {
+                                                            color: '#9ca3af',
+                                                            fontSize: '15px',
+                                                            marginBottom: '14px'
+                                                        },
+                                                        children: "Upload Paper"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1106,
+                                                        columnNumber: 19
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    isProcessing ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                        style: {
+                                                            color: '#9ca3af',
+                                                            fontSize: '13px'
+                                                        },
+                                                        children: "AIが解析中..."
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1108,
+                                                        columnNumber: 23
+                                                    }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["Fragment"], {
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                style: {
+                                                                    color: '#9ca3af',
+                                                                    fontSize: '13px',
+                                                                    lineHeight: '1.7',
+                                                                    textAlign: 'center'
+                                                                },
+                                                                children: [
+                                                                    "研究論文をアップロードして",
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("br", {}, void 0, false, {
+                                                                        fileName: "[project]/components/App.js",
+                                                                        lineNumber: 1110,
+                                                                        columnNumber: 128
+                                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                                    "データベースに登録"
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 1110,
+                                                                columnNumber: 25
+                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                            !isLoggedIn && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                style: {
+                                                                    color: '#f59e0b',
+                                                                    fontSize: '13px',
+                                                                    marginTop: '16px'
+                                                                },
+                                                                children: "🔒 ログインが必要です"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 1111,
+                                                                columnNumber: 41
+                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                        ]
+                                                    }, void 0, true)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 959,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            uploadedFile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                className: "mt-8 inline-flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-300",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$file$2d$text$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__FileText$3e$__["FileText"], {
-                                                        className: "w-6 h-6 text-red-800"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 973,
-                                                        columnNumber: 21
-                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                        className: "font-semibold text-gray-800",
-                                                        children: uploadedFile.name
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 974,
-                                                        columnNumber: 21
-                                                    }, ("TURBOPACK compile-time value", void 0))
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 972,
-                                                columnNumber: 19
-                                            }, ("TURBOPACK compile-time value", void 0))
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/App.js",
-                                        lineNumber: 932,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0)),
-                                    isProcessing && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                        className: "mt-12 text-center",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$loader$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Loader$3e$__["Loader"], {
-                                                className: "w-16 h-16 mx-auto animate-spin text-red-800 mb-6"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 981,
-                                                columnNumber: 19
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                className: "text-xl font-semibold text-gray-800 mb-2",
-                                                children: "AIが論文を解析中..."
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 982,
-                                                columnNumber: 19
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                className: "text-sm text-gray-600",
-                                                children: "MDRCG情報を自動生成しています"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 985,
-                                                columnNumber: 19
-                                            }, ("TURBOPACK compile-time value", void 0))
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/App.js",
-                                        lineNumber: 980,
-                                        columnNumber: 17
-                                    }, ("TURBOPACK compile-time value", void 0))
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/App.js",
-                                lineNumber: 931,
-                                columnNumber: 13
-                            }, ("TURBOPACK compile-time value", void 0)),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                className: "mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h4", {
-                                        className: "font-semibold text-gray-900 mb-3",
-                                        children: "アップロード後の流れ"
-                                    }, void 0, false, {
-                                        fileName: "[project]/components/App.js",
-                                        lineNumber: 994,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0)),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("ul", {
-                                        className: "space-y-2 text-sm text-gray-700",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
-                                                className: "flex items-start gap-2",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                        className: "text-blue-600 mt-1",
-                                                        children: "•"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 997,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                        children: "AIが研究論文を分析し、重要な情報を抽出します"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 998,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0))
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 996,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
-                                                className: "flex items-start gap-2",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                        className: "text-blue-600 mt-1",
-                                                        children: "•"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 1001,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                        children: "自動生成されたMDRCGフォームを確認・編集できます"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 1002,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0))
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 1000,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
-                                                className: "flex items-start gap-2",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                        className: "text-blue-600 mt-1",
-                                                        children: "•"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 1005,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                        children: "あなたの研究が多次元で検索可能になります"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 1006,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0))
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 1004,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
-                                                className: "flex items-start gap-2",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                        className: "text-blue-600 mt-1",
-                                                        children: "•"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 1009,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                        children: "異分野との関連性が自動的に特定されます"
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 1010,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0))
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 1008,
+                                                lineNumber: 1093,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/App.js",
-                                        lineNumber: 995,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0))
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/components/App.js",
-                                lineNumber: 993,
-                                columnNumber: 13
-                            }, ("TURBOPACK compile-time value", void 0))
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/components/App.js",
-                        lineNumber: 925,
-                        columnNumber: 11
-                    }, ("TURBOPACK compile-time value", void 0))
-                ]
-            }, void 0, true, {
-                fileName: "[project]/components/App.js",
-                lineNumber: 903,
-                columnNumber: 9
-            }, ("TURBOPACK compile-time value", void 0))
-        }, void 0, false, {
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/App.js",
+                                            lineNumber: 1073,
+                                            columnNumber: 15
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/components/App.js",
+                                    lineNumber: 1045,
+                                    columnNumber: 13
+                                }, ("TURBOPACK compile-time value", void 0))
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 1038,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0))
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/App.js",
+                    lineNumber: 1001,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0))
+            ]
+        }, void 0, true, {
             fileName: "[project]/components/App.js",
-            lineNumber: 902,
+            lineNumber: 999,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0));
     }
     // フォームビュー (Form View)
     if (currentView === 'form') {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-            className: "min-h-screen bg-white",
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                className: "max-w-full mx-auto",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                        className: "bg-white border-b border-gray-200 px-8 py-4",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                            className: "flex items-center justify-between mb-6",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
-                                    className: "text-2xl font-bold text-gray-900",
-                                    children: "SPring-8 研究データベース"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1028,
-                                    columnNumber: 15
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "flex gap-3",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            onClick: ()=>setCurrentView('search'),
-                                            className: "px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium",
-                                            children: "検索"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1032,
-                                            columnNumber: 17
-                                        }, ("TURBOPACK compile-time value", void 0)),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            className: "px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium",
-                                            children: "ログイン"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1038,
-                                            columnNumber: 17
-                                        }, ("TURBOPACK compile-time value", void 0))
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1031,
-                                    columnNumber: 15
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/App.js",
-                            lineNumber: 1027,
-                            columnNumber: 13
-                        }, ("TURBOPACK compile-time value", void 0))
-                    }, void 0, false, {
-                        fileName: "[project]/components/App.js",
-                        lineNumber: 1026,
-                        columnNumber: 11
-                    }, ("TURBOPACK compile-time value", void 0)),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                        className: "max-w-5xl mx-auto p-8",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                            className: "bg-white border border-gray-300 rounded-lg p-8",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "mb-6",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
-                                            className: "text-3xl font-bold text-gray-800 mb-2",
-                                            children: "MDRCG 情報入力フォーム"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1049,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0)),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                            className: "text-gray-600",
-                                            children: "Research Context Information Form"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1052,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0))
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1048,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                papers.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "mb-8 p-6 bg-blue-50 border-2 border-blue-200 rounded-lg",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                            className: "flex items-center gap-2 mb-4",
+            className: "min-h-screen",
+            style: {
+                backgroundColor: '#f0f0f0'
+            },
+            children: [
+                loginModal,
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                    className: "max-w-full mx-auto",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                            className: "bg-white border-b border-gray-200 px-8 py-4",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                className: "flex items-center justify-between mb-6",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
+                                        className: "text-2xl font-bold text-gray-900",
+                                        children: "SPring-8 研究データベース"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1133,
+                                        columnNumber: 15
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "flex gap-3",
+                                        children: isLoggedIn ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                            className: "flex items-center gap-3",
                                             children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$link$2d$2$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Link2$3e$__["Link2"], {
-                                                    className: "w-5 h-5 text-blue-600"
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                    className: "text-sm text-gray-700 font-medium",
+                                                    children: "ようこそ、Spring-8さん 👋"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/App.js",
-                                                    lineNumber: 1059,
-                                                    columnNumber: 19
+                                                    lineNumber: 1140,
+                                                    columnNumber: 5
                                                 }, ("TURBOPACK compile-time value", void 0)),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
-                                                    className: "text-xl font-bold text-gray-800",
-                                                    children: "関連論文の選択 (Related Papers)"
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                    onClick: ()=>setIsLoggedIn(false),
+                                                    className: "px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium",
+                                                    children: "ログアウト"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/App.js",
-                                                    lineNumber: 1060,
-                                                    columnNumber: 19
+                                                    lineNumber: 1141,
+                                                    columnNumber: 5
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/App.js",
-                                            lineNumber: 1058,
-                                            columnNumber: 17
-                                        }, ("TURBOPACK compile-time value", void 0)),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                            className: "text-sm text-gray-600 mb-4",
-                                            children: "この論文と関連する既存の論文を選択し、関係性を指定してください"
+                                            lineNumber: 1139,
+                                            columnNumber: 3
+                                        }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                            onClick: ()=>setShowLoginModal(true),
+                                            className: "px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium",
+                                            children: "ログイン"
                                         }, void 0, false, {
                                             fileName: "[project]/components/App.js",
-                                            lineNumber: 1064,
-                                            columnNumber: 17
-                                        }, ("TURBOPACK compile-time value", void 0)),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                            className: "space-y-3 max-h-64 overflow-y-auto",
-                                            children: papers.map((paper)=>{
-                                                const existingRelation = selectedRelatedPapers.find((r)=>r.paperId === paper.id);
-                                                return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                    className: "flex items-center gap-3 p-3 bg-white rounded border border-gray-300",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
-                                                            type: "checkbox",
-                                                            checked: !!existingRelation,
-                                                            onChange: (e)=>{
-                                                                if (e.target.checked) {
-                                                                    setSelectedRelatedPapers([
-                                                                        ...selectedRelatedPapers,
-                                                                        {
-                                                                            paperId: paper.id,
-                                                                            relationshipType: 'Cited'
-                                                                        }
-                                                                    ]);
-                                                                } else {
-                                                                    setSelectedRelatedPapers(selectedRelatedPapers.filter((r)=>r.paperId !== paper.id));
-                                                                }
-                                                            },
-                                                            className: "w-4 h-4 accent-blue-600"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1072,
-                                                            columnNumber: 25
-                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                            className: "flex-1",
+                                            lineNumber: 1149,
+                                            columnNumber: 3
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1136,
+                                        columnNumber: 15
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/App.js",
+                                lineNumber: 1132,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0))
+                        }, void 0, false, {
+                            fileName: "[project]/components/App.js",
+                            lineNumber: 1131,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                            className: "max-w-5xl mx-auto p-8",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                className: "bg-white border border-gray-300 rounded-lg p-8",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "mb-6",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
+                                                className: "text-3xl font-bold text-gray-800 mb-2",
+                                                children: "MDRCG 情報入力フォーム"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1164,
+                                                columnNumber: 15
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                className: "text-gray-600",
+                                                children: "Research Context Information Form"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1167,
+                                                columnNumber: 15
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1163,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    papers.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "mb-8 p-6 bg-blue-50 border-2 border-blue-200 rounded-lg",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                className: "flex items-center gap-2 mb-4",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$link$2d$2$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Link2$3e$__["Link2"], {
+                                                        className: "w-5 h-5 text-blue-600"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1174,
+                                                        columnNumber: 19
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
+                                                        className: "text-xl font-bold text-gray-800",
+                                                        children: "関連論文の選択 (Related Papers)"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1175,
+                                                        columnNumber: 19
+                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1173,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                className: "text-sm text-gray-600 mb-4",
+                                                children: "この論文と関連する既存の論文を選択し、関係性を指定してください"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1179,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                className: "space-y-3 max-h-64 overflow-y-auto",
+                                                children: papers.map((paper)=>{
+                                                    const existingRelation = selectedRelatedPapers.find((r)=>r.paperId === paper.id);
+                                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                        className: "flex items-center gap-3 p-3 bg-white rounded border border-gray-300",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                                                                type: "checkbox",
+                                                                checked: !!existingRelation,
+                                                                onChange: (e)=>{
+                                                                    if (e.target.checked) {
+                                                                        setSelectedRelatedPapers([
+                                                                            ...selectedRelatedPapers,
+                                                                            {
+                                                                                paperId: paper.id,
+                                                                                relationshipType: 'Cited'
+                                                                            }
+                                                                        ]);
+                                                                    } else {
+                                                                        setSelectedRelatedPapers(selectedRelatedPapers.filter((r)=>r.paperId !== paper.id));
+                                                                    }
+                                                                },
+                                                                className: "w-4 h-4 accent-blue-600"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 1187,
+                                                                columnNumber: 25
+                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                className: "flex-1",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                        className: "text-sm font-semibold text-gray-800",
+                                                                        children: paper.title
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/components/App.js",
+                                                                        lineNumber: 1203,
+                                                                        columnNumber: 27
+                                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                        className: "text-xs text-gray-500",
+                                                                        children: [
+                                                                            paper.authors,
+                                                                            " (",
+                                                                            paper.year,
+                                                                            ")"
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "[project]/components/App.js",
+                                                                        lineNumber: 1204,
+                                                                        columnNumber: 27
+                                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 1202,
+                                                                columnNumber: 25
+                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                            existingRelation && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("select", {
+                                                                value: existingRelation.relationshipType,
+                                                                onChange: (e)=>{
+                                                                    setSelectedRelatedPapers(selectedRelatedPapers.map((r)=>r.paperId === paper.id ? {
+                                                                            ...r,
+                                                                            relationshipType: e.target.value
+                                                                        } : r));
+                                                                },
+                                                                className: "px-3 py-1 border-2 border-gray-300 rounded text-sm font-medium",
+                                                                children: relationshipTypes.map((type)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
+                                                                        value: type,
+                                                                        children: type
+                                                                    }, type, false, {
+                                                                        fileName: "[project]/components/App.js",
+                                                                        lineNumber: 1217,
+                                                                        columnNumber: 31
+                                                                    }, ("TURBOPACK compile-time value", void 0)))
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 1207,
+                                                                columnNumber: 27
+                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                        ]
+                                                    }, paper.id, true, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1186,
+                                                        columnNumber: 23
+                                                    }, ("TURBOPACK compile-time value", void 0));
+                                                })
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1182,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1172,
+                                        columnNumber: 15
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "space-y-6 max-h-[600px] overflow-y-auto pr-4",
+                                        children: mdrcgQuestions.map((question)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                className: "border-b pb-6",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
+                                                        className: "block mb-2",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                            className: "text-lg font-semibold text-gray-800",
                                                             children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                    className: "text-sm font-semibold text-gray-800",
-                                                                    children: paper.title
+                                                                question.label,
+                                                                question.required && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                                    className: "text-red-500 ml-1",
+                                                                    children: "*"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1088,
-                                                                    columnNumber: 27
-                                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                    className: "text-xs text-gray-500",
-                                                                    children: [
-                                                                        paper.authors,
-                                                                        " (",
-                                                                        paper.year,
-                                                                        ")"
-                                                                    ]
-                                                                }, void 0, true, {
-                                                                    fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1089,
-                                                                    columnNumber: 27
+                                                                    lineNumber: 1234,
+                                                                    columnNumber: 45
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/App.js",
-                                                            lineNumber: 1087,
-                                                            columnNumber: 25
-                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                        existingRelation && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("select", {
-                                                            value: existingRelation.relationshipType,
-                                                            onChange: (e)=>{
-                                                                setSelectedRelatedPapers(selectedRelatedPapers.map((r)=>r.paperId === paper.id ? {
-                                                                        ...r,
-                                                                        relationshipType: e.target.value
-                                                                    } : r));
-                                                            },
-                                                            className: "px-3 py-1 border-2 border-gray-300 rounded text-sm font-medium",
-                                                            children: relationshipTypes.map((type)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
-                                                                    value: type,
-                                                                    children: type
-                                                                }, type, false, {
-                                                                    fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1102,
-                                                                    columnNumber: 31
-                                                                }, ("TURBOPACK compile-time value", void 0)))
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1092,
-                                                            columnNumber: 27
+                                                            lineNumber: 1232,
+                                                            columnNumber: 21
                                                         }, ("TURBOPACK compile-time value", void 0))
-                                                    ]
-                                                }, paper.id, true, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1071,
-                                                    columnNumber: 23
-                                                }, ("TURBOPACK compile-time value", void 0));
-                                            })
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1067,
-                                            columnNumber: 17
-                                        }, ("TURBOPACK compile-time value", void 0))
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1057,
-                                    columnNumber: 15
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "space-y-6 max-h-[600px] overflow-y-auto pr-4",
-                                    children: mdrcgQuestions.map((question)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                            className: "border-b pb-6",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
-                                                    className: "block mb-2",
-                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                        className: "text-lg font-semibold text-gray-800",
-                                                        children: [
-                                                            question.label,
-                                                            question.required && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                                className: "text-red-500 ml-1",
-                                                                children: "*"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 1119,
-                                                                columnNumber: 45
-                                                            }, ("TURBOPACK compile-time value", void 0))
-                                                        ]
-                                                    }, void 0, true, {
+                                                    }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1117,
-                                                        columnNumber: 21
+                                                        lineNumber: 1231,
+                                                        columnNumber: 19
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("textarea", {
+                                                        value: formData[question.id] || '',
+                                                        onChange: (e)=>handleInputChange(question.id, e.target.value),
+                                                        placeholder: question.placeholder,
+                                                        className: "w-full p-4 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none min-h-[120px] bg-yellow-50",
+                                                        required: question.required
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1237,
+                                                        columnNumber: 19
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                        className: "text-xs text-gray-500 mt-1",
+                                                        children: "💡 AIが生成した内容です。必要に応じて修正してください"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1244,
+                                                        columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0))
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1116,
-                                                    columnNumber: 19
-                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("textarea", {
-                                                    value: formData[question.id] || '',
-                                                    onChange: (e)=>handleInputChange(question.id, e.target.value),
-                                                    placeholder: question.placeholder,
-                                                    className: "w-full p-4 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none min-h-[120px] bg-yellow-50",
-                                                    required: question.required
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1122,
-                                                    columnNumber: 19
-                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                    className: "text-xs text-gray-500 mt-1",
-                                                    children: "💡 AIが生成した内容です。必要に応じて修正してください"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1129,
-                                                    columnNumber: 19
-                                                }, ("TURBOPACK compile-time value", void 0))
-                                            ]
-                                        }, question.id, true, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1115,
-                                            columnNumber: 17
-                                        }, ("TURBOPACK compile-time value", void 0)))
-                                }, void 0, false, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1113,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "mt-8 flex gap-4",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            onClick: ()=>setCurrentView('upload'),
-                                            className: "px-6 py-3 border border-gray-400 text-gray-700 rounded hover:bg-gray-50 font-semibold",
-                                            children: "← 戻る"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1137,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0)),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            onClick: handleSubmit,
-                                            className: "flex-1 px-6 py-3 bg-red-800 text-white rounded hover:bg-red-900 font-semibold",
-                                            children: "登録して公開"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1143,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0))
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1136,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
+                                                ]
+                                            }, question.id, true, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1230,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0)))
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1228,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "mt-8 flex gap-4",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                onClick: ()=>setCurrentView('upload'),
+                                                className: "px-6 py-3 border border-gray-400 text-gray-700 rounded hover:bg-gray-50 font-semibold",
+                                                children: "← 戻る"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1252,
+                                                columnNumber: 15
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                onClick: handleSubmit,
+                                                className: "flex-1 px-6 py-3 bg-red-800 text-white rounded hover:bg-red-900 font-semibold",
+                                                children: "登録して公開"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1258,
+                                                columnNumber: 15
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1251,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/App.js",
+                                lineNumber: 1162,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0))
+                        }, void 0, false, {
                             fileName: "[project]/components/App.js",
-                            lineNumber: 1047,
-                            columnNumber: 13
+                            lineNumber: 1161,
+                            columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
-                    }, void 0, false, {
-                        fileName: "[project]/components/App.js",
-                        lineNumber: 1046,
-                        columnNumber: 11
-                    }, ("TURBOPACK compile-time value", void 0))
-                ]
-            }, void 0, true, {
-                fileName: "[project]/components/App.js",
-                lineNumber: 1024,
-                columnNumber: 9
-            }, ("TURBOPACK compile-time value", void 0))
-        }, void 0, false, {
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/components/App.js",
+                    lineNumber: 1129,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0))
+            ]
+        }, void 0, true, {
             fileName: "[project]/components/App.js",
-            lineNumber: 1023,
+            lineNumber: 1127,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0));
     }
@@ -1691,7 +1950,7 @@ const App = ()=>{
                                         children: "高度検索"
                                     }, void 0, false, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1165,
+                                        lineNumber: 1280,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -1700,13 +1959,13 @@ const App = ()=>{
                                         children: "← 簡易検索に戻る"
                                     }, void 0, false, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1166,
+                                        lineNumber: 1281,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1164,
+                                lineNumber: 1279,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -1714,13 +1973,13 @@ const App = ()=>{
                                 children: "検索ヘルプ"
                             }, void 0, false, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1173,
+                                lineNumber: 1288,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/App.js",
-                        lineNumber: 1163,
+                        lineNumber: 1278,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -1731,7 +1990,7 @@ const App = ()=>{
                                 children: "全コンテンツ"
                             }, void 0, false, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1178,
+                                lineNumber: 1293,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -1739,13 +1998,13 @@ const App = ()=>{
                                 children: "画像"
                             }, void 0, false, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1181,
+                                lineNumber: 1296,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/App.js",
-                        lineNumber: 1177,
+                        lineNumber: 1292,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -1756,7 +2015,7 @@ const App = ()=>{
                                 children: "検索クエリを構築"
                             }, void 0, false, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1188,
+                                lineNumber: 1303,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             advancedSearchRows.map((row, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -1772,7 +2031,7 @@ const App = ()=>{
                                                         children: "論理演算子"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1195,
+                                                        lineNumber: 1310,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("select", {
@@ -1791,7 +2050,7 @@ const App = ()=>{
                                                                 children: "AND"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1205,
+                                                                lineNumber: 1320,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
@@ -1799,7 +2058,7 @@ const App = ()=>{
                                                                 children: "OR"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1206,
+                                                                lineNumber: 1321,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
@@ -1807,7 +2066,7 @@ const App = ()=>{
                                                                 children: "NOT"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1207,
+                                                                lineNumber: 1322,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
@@ -1815,7 +2074,7 @@ const App = ()=>{
                                                                 children: "NEAR 5"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1208,
+                                                                lineNumber: 1323,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
@@ -1823,7 +2082,7 @@ const App = ()=>{
                                                                 children: "NEAR 10"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1209,
+                                                                lineNumber: 1324,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
@@ -1831,19 +2090,19 @@ const App = ()=>{
                                                                 children: "NEAR 25"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1210,
+                                                                lineNumber: 1325,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1196,
+                                                        lineNumber: 1311,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1194,
+                                                lineNumber: 1309,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -1854,7 +2113,7 @@ const App = ()=>{
                                                         children: "検索語句"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1216,
+                                                        lineNumber: 1331,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
@@ -1871,13 +2130,13 @@ const App = ()=>{
                                                         placeholder: "検索キーワードを入力..."
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1217,
+                                                        lineNumber: 1332,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1215,
+                                                lineNumber: 1330,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -1888,7 +2147,7 @@ const App = ()=>{
                                                         children: "検索フィールド"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1231,
+                                                        lineNumber: 1346,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("select", {
@@ -1907,7 +2166,7 @@ const App = ()=>{
                                                                 children: "全フィールド"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1241,
+                                                                lineNumber: 1356,
                                                                 columnNumber: 23
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
@@ -1915,7 +2174,7 @@ const App = ()=>{
                                                                 children: "タイトル"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1242,
+                                                                lineNumber: 1357,
                                                                 columnNumber: 23
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
@@ -1923,7 +2182,7 @@ const App = ()=>{
                                                                 children: "著者"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1243,
+                                                                lineNumber: 1358,
                                                                 columnNumber: 23
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
@@ -1931,7 +2190,7 @@ const App = ()=>{
                                                                 children: "要旨"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1244,
+                                                                lineNumber: 1359,
                                                                 columnNumber: 23
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
@@ -1939,19 +2198,19 @@ const App = ()=>{
                                                                 children: "説明"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1245,
+                                                                lineNumber: 1360,
                                                                 columnNumber: 23
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1232,
+                                                        lineNumber: 1347,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1230,
+                                                lineNumber: 1345,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             index > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -1965,28 +2224,28 @@ const App = ()=>{
                                                         className: "w-5 h-5"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1257,
+                                                        lineNumber: 1372,
                                                         columnNumber: 25
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/App.js",
-                                                    lineNumber: 1251,
+                                                    lineNumber: 1366,
                                                     columnNumber: 23
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1250,
+                                                lineNumber: 1365,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1192,
+                                        lineNumber: 1307,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0))
                                 }, row.id, false, {
                                     fileName: "[project]/components/App.js",
-                                    lineNumber: 1191,
+                                    lineNumber: 1306,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -2008,14 +2267,14 @@ const App = ()=>{
                                         children: "+"
                                     }, void 0, false, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1274,
+                                        lineNumber: 1389,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     " 行を追加"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1265,
+                                lineNumber: 1380,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2026,7 +2285,7 @@ const App = ()=>{
                                         children: "アクセスタイプを選択"
                                     }, void 0, false, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1279,
+                                        lineNumber: 1394,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("select", {
@@ -2036,26 +2295,26 @@ const App = ()=>{
                                                 children: "すべて"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1281,
+                                                lineNumber: 1396,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("option", {
                                                 children: "アクセス可能なコンテンツ"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1282,
+                                                lineNumber: 1397,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1280,
+                                        lineNumber: 1395,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1278,
+                                lineNumber: 1393,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -2067,13 +2326,13 @@ const App = ()=>{
                                 children: "高度検索を実行"
                             }, void 0, false, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1286,
+                                lineNumber: 1401,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/App.js",
-                        lineNumber: 1187,
+                        lineNumber: 1302,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2084,7 +2343,7 @@ const App = ()=>{
                                 children: "検索結果を絞り込む"
                             }, void 0, false, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1299,
+                                lineNumber: 1414,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2095,7 +2354,7 @@ const App = ()=>{
                                         children: "アイテムタイプ"
                                     }, void 0, false, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1303,
+                                        lineNumber: 1418,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2121,7 +2380,7 @@ const App = ()=>{
                                                         className: "w-4 h-4 accent-red-800"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1307,
+                                                        lineNumber: 1422,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
@@ -2129,24 +2388,24 @@ const App = ()=>{
                                                         children: type
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1317,
+                                                        lineNumber: 1432,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, type, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1306,
+                                                lineNumber: 1421,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)))
                                     }, void 0, false, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1304,
+                                        lineNumber: 1419,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1302,
+                                lineNumber: 1417,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2157,7 +2416,7 @@ const App = ()=>{
                                         children: "出版日"
                                     }, void 0, false, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1325,
+                                        lineNumber: 1440,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2170,7 +2429,7 @@ const App = ()=>{
                                                         children: "開始日"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1328,
+                                                        lineNumber: 1443,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
@@ -2181,13 +2440,13 @@ const App = ()=>{
                                                         className: "w-32 px-3 py-2 border border-gray-400 rounded text-sm"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1329,
+                                                        lineNumber: 1444,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1327,
+                                                lineNumber: 1442,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2197,12 +2456,12 @@ const App = ()=>{
                                                     children: "〜"
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/App.js",
-                                                    lineNumber: 1338,
+                                                    lineNumber: 1453,
                                                     columnNumber: 19
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1337,
+                                                lineNumber: 1452,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2212,7 +2471,7 @@ const App = ()=>{
                                                         children: " "
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1341,
+                                                        lineNumber: 1456,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
@@ -2223,25 +2482,25 @@ const App = ()=>{
                                                         className: "w-32 px-3 py-2 border border-gray-400 rounded text-sm"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1342,
+                                                        lineNumber: 1457,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1340,
+                                                lineNumber: 1455,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1326,
+                                        lineNumber: 1441,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1324,
+                                lineNumber: 1439,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2252,7 +2511,7 @@ const App = ()=>{
                                         children: "学術分野で絞り込む"
                                     }, void 0, false, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1355,
+                                        lineNumber: 1470,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2273,7 +2532,7 @@ const App = ()=>{
                                                             className: "w-4 h-4 mt-0.5 accent-red-800"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/App.js",
-                                                            lineNumber: 1360,
+                                                            lineNumber: 1475,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2283,7 +2542,7 @@ const App = ()=>{
                                                                     children: discipline.label
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1371,
+                                                                    lineNumber: 1486,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 selectedDisciplines.includes(key) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2293,40 +2552,40 @@ const App = ()=>{
                                                                             children: journal
                                                                         }, journal, false, {
                                                                             fileName: "[project]/components/App.js",
-                                                                            lineNumber: 1375,
+                                                                            lineNumber: 1490,
                                                                             columnNumber: 31
                                                                         }, ("TURBOPACK compile-time value", void 0)))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1373,
+                                                                    lineNumber: 1488,
                                                                     columnNumber: 27
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/App.js",
-                                                            lineNumber: 1370,
+                                                            lineNumber: 1485,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/App.js",
-                                                    lineNumber: 1359,
+                                                    lineNumber: 1474,
                                                     columnNumber: 21
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             }, key, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1358,
+                                                lineNumber: 1473,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)))
                                     }, void 0, false, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1356,
+                                        lineNumber: 1471,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1354,
+                                lineNumber: 1469,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -2337,24 +2596,24 @@ const App = ()=>{
                                 children: "高度検索を実行"
                             }, void 0, false, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1388,
+                                lineNumber: 1503,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/App.js",
-                        lineNumber: 1298,
+                        lineNumber: 1413,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/App.js",
-                lineNumber: 1161,
+                lineNumber: 1276,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         }, void 0, false, {
             fileName: "[project]/components/App.js",
-            lineNumber: 1160,
+            lineNumber: 1275,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0));
     }
@@ -2375,7 +2634,7 @@ const App = ()=>{
                                     children: "SPring-8 研究データベース"
                                 }, void 0, false, {
                                     fileName: "[project]/components/App.js",
-                                    lineNumber: 1410,
+                                    lineNumber: 1525,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2387,32 +2646,58 @@ const App = ()=>{
                                             children: "← 検索結果に戻る"
                                         }, void 0, false, {
                                             fileName: "[project]/components/App.js",
-                                            lineNumber: 1414,
+                                            lineNumber: 1529,
                                             columnNumber: 17
                                         }, ("TURBOPACK compile-time value", void 0)),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                        isLoggedIn ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                            className: "flex items-center gap-3",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                    className: "text-sm text-gray-700 font-medium",
+                                                    children: "ようこそ、Spring-8さん 👋"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/App.js",
+                                                    lineNumber: 1537,
+                                                    columnNumber: 5
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                    onClick: ()=>setIsLoggedIn(false),
+                                                    className: "px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium",
+                                                    children: "ログアウト"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/App.js",
+                                                    lineNumber: 1538,
+                                                    columnNumber: 5
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/App.js",
+                                            lineNumber: 1536,
+                                            columnNumber: 3
+                                        }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                            onClick: ()=>setShowLoginModal(true),
                                             className: "px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium",
                                             children: "ログイン"
                                         }, void 0, false, {
                                             fileName: "[project]/components/App.js",
-                                            lineNumber: 1420,
-                                            columnNumber: 17
+                                            lineNumber: 1546,
+                                            columnNumber: 3
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/App.js",
-                                    lineNumber: 1413,
+                                    lineNumber: 1528,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/App.js",
-                            lineNumber: 1409,
+                            lineNumber: 1524,
                             columnNumber: 13
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/components/App.js",
-                        lineNumber: 1408,
+                        lineNumber: 1523,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2429,7 +2714,7 @@ const App = ()=>{
                                                 children: "学術論文"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1432,
+                                                lineNumber: 1562,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
@@ -2437,7 +2722,7 @@ const App = ()=>{
                                                 children: viewingPaper.title
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1433,
+                                                lineNumber: 1563,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2445,7 +2730,7 @@ const App = ()=>{
                                                 children: viewingPaper.titleEn
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1436,
+                                                lineNumber: 1566,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2456,7 +2741,7 @@ const App = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1437,
+                                                lineNumber: 1567,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2470,13 +2755,13 @@ const App = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1438,
+                                                lineNumber: 1568,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1431,
+                                        lineNumber: 1561,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2495,7 +2780,7 @@ const App = ()=>{
                                                 children: "PDFを開く"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1445,
+                                                lineNumber: 1575,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -2503,7 +2788,7 @@ const App = ()=>{
                                                 children: "保存"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1458,
+                                                lineNumber: 1588,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -2511,13 +2796,13 @@ const App = ()=>{
                                                 children: "引用"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1461,
+                                                lineNumber: 1591,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1444,
+                                        lineNumber: 1574,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2530,7 +2815,7 @@ const App = ()=>{
                                                         children: "研究分野"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1469,
+                                                        lineNumber: 1599,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2538,13 +2823,13 @@ const App = ()=>{
                                                         children: viewingPaper.field
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1470,
+                                                        lineNumber: 1600,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1468,
+                                                lineNumber: 1598,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2554,7 +2839,7 @@ const App = ()=>{
                                                         children: "測定手法"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1473,
+                                                        lineNumber: 1603,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2562,13 +2847,13 @@ const App = ()=>{
                                                         children: viewingPaper.method
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1474,
+                                                        lineNumber: 1604,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1472,
+                                                lineNumber: 1602,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2578,7 +2863,7 @@ const App = ()=>{
                                                         children: "ビームライン"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1477,
+                                                        lineNumber: 1607,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2586,13 +2871,13 @@ const App = ()=>{
                                                         children: viewingPaper.beamline
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1478,
+                                                        lineNumber: 1608,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1476,
+                                                lineNumber: 1606,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2602,7 +2887,7 @@ const App = ()=>{
                                                         children: "産業応用"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1481,
+                                                        lineNumber: 1611,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2610,19 +2895,19 @@ const App = ()=>{
                                                         children: viewingPaper.application
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1482,
+                                                        lineNumber: 1612,
                                                         columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1480,
+                                                lineNumber: 1610,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1467,
+                                        lineNumber: 1597,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     viewingPaper.formData && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2633,7 +2918,7 @@ const App = ()=>{
                                                 children: "MDRCG 詳細情報"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1489,
+                                                lineNumber: 1619,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2643,7 +2928,7 @@ const App = ()=>{
                                                         children: "主な結論"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1494,
+                                                        lineNumber: 1624,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2651,13 +2936,13 @@ const App = ()=>{
                                                         children: viewingPaper.mainConclusion
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1495,
+                                                        lineNumber: 1625,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1493,
+                                                lineNumber: 1623,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             viewingPaper.formData.priorWork && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2667,7 +2952,7 @@ const App = ()=>{
                                                         children: "先行研究との関係"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1500,
+                                                        lineNumber: 1630,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2675,13 +2960,13 @@ const App = ()=>{
                                                         children: viewingPaper.formData.priorWork
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1501,
+                                                        lineNumber: 1631,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1499,
+                                                lineNumber: 1629,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             viewingPaper.formData.novelty && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2691,7 +2976,7 @@ const App = ()=>{
                                                         children: "新規性"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1507,
+                                                        lineNumber: 1637,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2699,13 +2984,13 @@ const App = ()=>{
                                                         children: viewingPaper.formData.novelty
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1508,
+                                                        lineNumber: 1638,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1506,
+                                                lineNumber: 1636,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             viewingPaper.formData.unknownQuestions && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2715,7 +3000,7 @@ const App = ()=>{
                                                         children: "未解明の課題"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1514,
+                                                        lineNumber: 1644,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2723,13 +3008,13 @@ const App = ()=>{
                                                         children: viewingPaper.formData.unknownQuestions
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1515,
+                                                        lineNumber: 1645,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1513,
+                                                lineNumber: 1643,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             viewingPaper.failedApproach && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2739,7 +3024,7 @@ const App = ()=>{
                                                         children: "失敗したアプローチ"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1521,
+                                                        lineNumber: 1651,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2747,13 +3032,13 @@ const App = ()=>{
                                                         children: viewingPaper.failedApproach
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1522,
+                                                        lineNumber: 1652,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1520,
+                                                lineNumber: 1650,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             viewingPaper.crossDomain && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2763,7 +3048,7 @@ const App = ()=>{
                                                         children: "異分野翻訳レイヤー"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1528,
+                                                        lineNumber: 1658,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2771,13 +3056,13 @@ const App = ()=>{
                                                         children: viewingPaper.crossDomain
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1529,
+                                                        lineNumber: 1659,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1527,
+                                                lineNumber: 1657,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             viewingPaper.industrialApplication && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2787,7 +3072,7 @@ const App = ()=>{
                                                         children: "産業応用可能性"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1535,
+                                                        lineNumber: 1665,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2795,13 +3080,13 @@ const App = ()=>{
                                                         children: viewingPaper.industrialApplication
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1536,
+                                                        lineNumber: 1666,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1534,
+                                                lineNumber: 1664,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             viewingPaper.formData.abstractPrinciple && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2811,7 +3096,7 @@ const App = ()=>{
                                                         children: "抽象化された原理（小学5年生レベル）"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1542,
+                                                        lineNumber: 1672,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2819,13 +3104,13 @@ const App = ()=>{
                                                         children: viewingPaper.formData.abstractPrinciple
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1543,
+                                                        lineNumber: 1673,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1541,
+                                                lineNumber: 1671,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             viewingPaper.formData.experimentalReason && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2835,7 +3120,7 @@ const App = ()=>{
                                                         children: "実験設計の理由"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1549,
+                                                        lineNumber: 1679,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2843,13 +3128,13 @@ const App = ()=>{
                                                         children: viewingPaper.formData.experimentalReason
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1550,
+                                                        lineNumber: 1680,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1548,
+                                                lineNumber: 1678,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             viewingPaper.formData.scalingPossibility && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2859,7 +3144,7 @@ const App = ()=>{
                                                         children: "スケーリング可能性"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1556,
+                                                        lineNumber: 1686,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2867,13 +3152,13 @@ const App = ()=>{
                                                         children: viewingPaper.formData.scalingPossibility
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1557,
+                                                        lineNumber: 1687,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1555,
+                                                lineNumber: 1685,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             viewingPaper.formData.combinationPotential && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2883,7 +3168,7 @@ const App = ()=>{
                                                         children: "組み合わせ可能性"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1563,
+                                                        lineNumber: 1693,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2891,19 +3176,19 @@ const App = ()=>{
                                                         children: viewingPaper.formData.combinationPotential
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1564,
+                                                        lineNumber: 1694,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1562,
+                                                lineNumber: 1692,
                                                 columnNumber: 21
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1488,
+                                        lineNumber: 1618,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     viewingPaper.relatedPapers && viewingPaper.relatedPapers.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2916,14 +3201,14 @@ const App = ()=>{
                                                         className: "w-6 h-6 text-blue-600"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1574,
+                                                        lineNumber: 1704,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     "関連論文 (Related Papers)"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1573,
+                                                lineNumber: 1703,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -2943,7 +3228,7 @@ const App = ()=>{
                                                                             children: relatedPaper.title
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/App.js",
-                                                                            lineNumber: 1584,
+                                                                            lineNumber: 1714,
                                                                             columnNumber: 31
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -2956,13 +3241,13 @@ const App = ()=>{
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/App.js",
-                                                                            lineNumber: 1585,
+                                                                            lineNumber: 1715,
                                                                             columnNumber: 31
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1583,
+                                                                    lineNumber: 1713,
                                                                     columnNumber: 29
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
@@ -2970,36 +3255,36 @@ const App = ()=>{
                                                                     children: relation.relationshipType
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1587,
+                                                                    lineNumber: 1717,
                                                                     columnNumber: 29
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/App.js",
-                                                            lineNumber: 1582,
+                                                            lineNumber: 1712,
                                                             columnNumber: 27
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     }, relation.paperId, false, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1581,
+                                                        lineNumber: 1711,
                                                         columnNumber: 25
                                                     }, ("TURBOPACK compile-time value", void 0)) : null;
                                                 })
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1577,
+                                                lineNumber: 1707,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/App.js",
-                                        lineNumber: 1572,
+                                        lineNumber: 1702,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1429,
+                                lineNumber: 1559,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -3010,454 +3295,419 @@ const App = ()=>{
                                     children: "← 検索結果に戻る"
                                 }, void 0, false, {
                                     fileName: "[project]/components/App.js",
-                                    lineNumber: 1601,
+                                    lineNumber: 1731,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/components/App.js",
-                                lineNumber: 1600,
+                                lineNumber: 1730,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/App.js",
-                        lineNumber: 1428,
+                        lineNumber: 1558,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/App.js",
-                lineNumber: 1406,
+                lineNumber: 1521,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         }, void 0, false, {
             fileName: "[project]/components/App.js",
-            lineNumber: 1405,
+            lineNumber: 1520,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0));
     }
     // 検索ビュー (Search View)
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
         className: "min-h-screen bg-white",
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-            className: "max-w-full mx-auto",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                    className: "bg-white border-b border-gray-200 px-8 py-4",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                            className: "flex items-center justify-between mb-6",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
-                                    className: "text-2xl font-bold text-gray-900",
-                                    children: "SPring-8 Research Database"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1621,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "flex gap-3",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            onClick: ()=>setCurrentView('upload'),
-                                            className: "px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium",
-                                            children: "論文登録 (Upload)"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1625,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0)),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            className: "px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium",
-                                            children: "Log in"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1631,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0))
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1624,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/App.js",
-                            lineNumber: 1620,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0)),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                            className: "max-w-3xl",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "relative",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
-                                            type: "text",
-                                            value: searchQuery,
-                                            onChange: (e)=>setSearchQuery(e.target.value),
-                                            placeholder: "キーワード、産業応用、異分野応用などで検索...",
-                                            className: "w-full px-4 py-3 pr-12 border-2 border-gray-300 rounded focus:border-gray-400 focus:outline-none text-base"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1639,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0)),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            className: "absolute right-3 top-3 text-gray-600 hover:text-gray-900",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {
-                                                className: "w-5 h-5"
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 1647,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0))
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1646,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0))
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1638,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                    onClick: ()=>setCurrentView('advancedSearch'),
-                                    className: "mt-2 text-sm text-blue-700 hover:text-blue-900 underline",
-                                    children: "高度検索"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1650,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/App.js",
-                            lineNumber: 1637,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0))
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/components/App.js",
-                    lineNumber: 1619,
-                    columnNumber: 9
-                }, ("TURBOPACK compile-time value", void 0)),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                    className: "flex",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                            className: "w-64 border-r border-gray-200 bg-gray-50 p-6 min-h-screen",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
-                                    className: "text-lg font-bold text-gray-900 mb-4",
-                                    children: "Refine Results"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1663,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                showAdvancedSearch && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                        className: "bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden",
+        children: [
+            loginModal,
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                className: "max-w-full mx-auto",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                        className: "bg-white border-b border-gray-200 px-8 py-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                className: "flex items-center justify-between mb-6",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
+                                        className: "text-2xl font-bold text-gray-900",
+                                        children: "SPring-8 Research Database"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1752,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "flex gap-3",
                                         children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                className: "bg-gradient-to-r from-purple-600 to-blue-600 p-6 text-white",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                    className: "flex justify-between items-center",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                            children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
-                                                                    className: "text-2xl font-bold",
-                                                                    children: "高度検索 (Advanced Search)"
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1672,
-                                                                    columnNumber: 23
-                                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                    className: "text-sm mt-1",
-                                                                    children: "階層的なナレッジツリーで探索 (Explore through hierarchical knowledge tree)"
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1673,
-                                                                    columnNumber: 23
-                                                                }, ("TURBOPACK compile-time value", void 0))
-                                                            ]
-                                                        }, void 0, true, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1671,
-                                                            columnNumber: 21
-                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                                            onClick: ()=>{
-                                                                setShowAdvancedSearch(false);
-                                                                setAdvancedSearchQuery('');
-                                                                setSelectedPath([]);
-                                                                setCurrentBranch(null);
-                                                            },
-                                                            className: "text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2",
-                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__X$3e$__["X"], {
-                                                                className: "w-6 h-6"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 1684,
-                                                                columnNumber: 23
-                                                            }, ("TURBOPACK compile-time value", void 0))
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1675,
-                                                            columnNumber: 21
-                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                    ]
-                                                }, void 0, true, {
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                onClick: ()=>setCurrentView('upload'),
+                                                className: "px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium flex items-center gap-1",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$home$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Home$3e$__["Home"], {
+                                                    className: "w-4 h-4"
+                                                }, void 0, false, {
                                                     fileName: "[project]/components/App.js",
-                                                    lineNumber: 1670,
-                                                    columnNumber: 19
+                                                    lineNumber: 1760,
+                                                    columnNumber: 17
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             }, void 0, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1669,
-                                                columnNumber: 17
+                                                lineNumber: 1756,
+                                                columnNumber: 15
                                             }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                className: "p-6",
+                                            isLoggedIn ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                className: "flex items-center gap-3",
                                                 children: [
-                                                    selectedPath.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                        className: "mb-4 flex items-center gap-2 text-sm text-gray-600",
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                        className: "text-sm text-gray-700 font-medium",
+                                                        children: "ようこそ、Spring-8さん 👋"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1764,
+                                                        columnNumber: 19
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                        onClick: ()=>setIsLoggedIn(false),
+                                                        className: "px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium",
+                                                        children: "ログアウト"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 1765,
+                                                        columnNumber: 19
+                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1763,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                onClick: ()=>setShowLoginModal(true),
+                                                className: "px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium",
+                                                children: "Log in"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1773,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1755,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/App.js",
+                                lineNumber: 1751,
+                                columnNumber: 11
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                className: "max-w-3xl",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "relative",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                                                type: "text",
+                                                value: searchQuery,
+                                                onChange: (e)=>setSearchQuery(e.target.value),
+                                                placeholder: "キーワード、産業応用、異分野応用などで検索...",
+                                                className: "w-full px-4 py-3 pr-12 border-2 border-gray-300 rounded focus:border-gray-400 focus:outline-none text-base"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1785,
+                                                columnNumber: 15
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                className: "absolute right-3 top-3 text-gray-600 hover:text-gray-900",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {
+                                                    className: "w-5 h-5"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/App.js",
+                                                    lineNumber: 1793,
+                                                    columnNumber: 17
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 1792,
+                                                columnNumber: 15
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1784,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                        onClick: ()=>setCurrentView('advancedSearch'),
+                                        className: "mt-2 text-sm text-blue-700 hover:text-blue-900 underline",
+                                        children: "高度検索"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1796,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/App.js",
+                                lineNumber: 1783,
+                                columnNumber: 11
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/App.js",
+                        lineNumber: 1750,
+                        columnNumber: 9
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                        className: "flex",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                className: "w-64 border-r border-gray-200 bg-gray-50 p-6 min-h-screen",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
+                                        className: "text-lg font-bold text-gray-900 mb-4",
+                                        children: "Refine Results"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1809,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    showAdvancedSearch && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                            className: "bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                    className: "bg-gradient-to-r from-purple-600 to-blue-600 p-6 text-white",
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                        className: "flex justify-between items-center",
                                                         children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
+                                                                        className: "text-2xl font-bold",
+                                                                        children: "高度検索 (Advanced Search)"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/components/App.js",
+                                                                        lineNumber: 1818,
+                                                                        columnNumber: 23
+                                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                        className: "text-sm mt-1",
+                                                                        children: "階層的なナレッジツリーで探索 (Explore through hierarchical knowledge tree)"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/components/App.js",
+                                                                        lineNumber: 1819,
+                                                                        columnNumber: 23
+                                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 1817,
+                                                                columnNumber: 21
+                                                            }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
                                                                 onClick: ()=>{
+                                                                    setShowAdvancedSearch(false);
+                                                                    setAdvancedSearchQuery('');
                                                                     setSelectedPath([]);
                                                                     setCurrentBranch(null);
                                                                 },
-                                                                className: "hover:text-blue-600",
-                                                                children: "ホーム (Home)"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 1693,
-                                                                columnNumber: 23
-                                                            }, ("TURBOPACK compile-time value", void 0)),
-                                                            selectedPath.map((pathItem, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["default"].Fragment, {
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                                            children: "→"
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/components/App.js",
-                                                                            lineNumber: 1704,
-                                                                            columnNumber: 27
-                                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                                                            onClick: ()=>{
-                                                                                setSelectedPath(selectedPath.slice(0, index + 1));
-                                                                                // Navigate to this level
-                                                                                let branch = searchKnowledgeTree;
-                                                                                for(let i = 0; i <= index; i++){
-                                                                                    branch = branch[selectedPath[i]];
-                                                                                }
-                                                                                setCurrentBranch(branch);
-                                                                            },
-                                                                            className: "hover:text-blue-600 font-semibold",
-                                                                            children: pathItem
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/components/App.js",
-                                                                            lineNumber: 1705,
-                                                                            columnNumber: 27
-                                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                                    ]
-                                                                }, index, true, {
+                                                                className: "text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__X$3e$__["X"], {
+                                                                    className: "w-6 h-6"
+                                                                }, void 0, false, {
                                                                     fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1703,
-                                                                    columnNumber: 25
-                                                                }, ("TURBOPACK compile-time value", void 0)))
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 1692,
-                                                        columnNumber: 21
-                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                        className: "relative mb-6",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {
-                                                                className: "absolute left-4 top-4 text-gray-400 w-5 h-5"
+                                                                    lineNumber: 1830,
+                                                                    columnNumber: 23
+                                                                }, ("TURBOPACK compile-time value", void 0))
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1726,
-                                                                columnNumber: 21
-                                                            }, ("TURBOPACK compile-time value", void 0)),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
-                                                                type: "text",
-                                                                value: advancedSearchQuery,
-                                                                onChange: (e)=>setAdvancedSearchQuery(e.target.value),
-                                                                placeholder: "キーワードを入力... (Enter keywords...)",
-                                                                className: "w-full pl-12 pr-4 py-4 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none text-lg",
-                                                                autoFocus: true
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 1727,
+                                                                lineNumber: 1821,
                                                                 columnNumber: 21
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/App.js",
-                                                        lineNumber: 1725,
+                                                        lineNumber: 1816,
                                                         columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                        className: "max-h-[400px] overflow-y-auto",
-                                                        children: advancedSearchQuery === '' && selectedPath.length === 0 ? // Show top level categories
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                            className: "space-y-3",
+                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/App.js",
+                                                    lineNumber: 1815,
+                                                    columnNumber: 17
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                    className: "p-6",
+                                                    children: [
+                                                        selectedPath.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                            className: "mb-4 flex items-center gap-2 text-sm text-gray-600",
                                                             children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                    className: "text-sm text-gray-600 mb-4",
-                                                                    children: "カテゴリーを選択するか、キーワードを入力してください (Select a category or enter keywords)"
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                                    onClick: ()=>{
+                                                                        setSelectedPath([]);
+                                                                        setCurrentBranch(null);
+                                                                    },
+                                                                    className: "hover:text-blue-600",
+                                                                    children: "ホーム (Home)"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1742,
-                                                                    columnNumber: 25
+                                                                    lineNumber: 1839,
+                                                                    columnNumber: 23
                                                                 }, ("TURBOPACK compile-time value", void 0)),
-                                                                Object.keys(searchKnowledgeTree).map((key)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                                        onClick: ()=>{
-                                                                            setSelectedPath([
-                                                                                key
-                                                                            ]);
-                                                                            setCurrentBranch(searchKnowledgeTree[key]);
-                                                                        },
-                                                                        className: "p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 cursor-pointer transition-all",
-                                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                                            className: "flex items-center justify-between",
-                                                                            children: [
-                                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                                                    children: [
-                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
-                                                                                            className: "font-bold text-gray-800",
-                                                                                            children: searchKnowledgeTree[key].label
-                                                                                        }, void 0, false, {
-                                                                                            fileName: "[project]/components/App.js",
-                                                                                            lineNumber: 1754,
-                                                                                            columnNumber: 33
-                                                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                                            className: "text-xs text-gray-500 mt-1",
-                                                                                            children: searchKnowledgeTree[key].branches ? `${Object.keys(searchKnowledgeTree[key].branches).length} サブカテゴリー` : '論文を表示'
-                                                                                        }, void 0, false, {
-                                                                                            fileName: "[project]/components/App.js",
-                                                                                            lineNumber: 1755,
-                                                                                            columnNumber: 33
-                                                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                                                    ]
-                                                                                }, void 0, true, {
-                                                                                    fileName: "[project]/components/App.js",
-                                                                                    lineNumber: 1753,
-                                                                                    columnNumber: 31
-                                                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
-                                                                                    className: "w-5 h-5 text-gray-400 transform -rotate-90"
-                                                                                }, void 0, false, {
-                                                                                    fileName: "[project]/components/App.js",
-                                                                                    lineNumber: 1761,
-                                                                                    columnNumber: 31
-                                                                                }, ("TURBOPACK compile-time value", void 0))
-                                                                            ]
-                                                                        }, void 0, true, {
-                                                                            fileName: "[project]/components/App.js",
-                                                                            lineNumber: 1752,
-                                                                            columnNumber: 29
-                                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                                    }, key, false, {
+                                                                selectedPath.map((pathItem, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["default"].Fragment, {
+                                                                        children: [
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                                                children: "→"
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/components/App.js",
+                                                                                lineNumber: 1850,
+                                                                                columnNumber: 27
+                                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                                                onClick: ()=>{
+                                                                                    setSelectedPath(selectedPath.slice(0, index + 1));
+                                                                                    // Navigate to this level
+                                                                                    let branch = searchKnowledgeTree;
+                                                                                    for(let i = 0; i <= index; i++){
+                                                                                        branch = branch[selectedPath[i]];
+                                                                                    }
+                                                                                    setCurrentBranch(branch);
+                                                                                },
+                                                                                className: "hover:text-blue-600 font-semibold",
+                                                                                children: pathItem
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/components/App.js",
+                                                                                lineNumber: 1851,
+                                                                                columnNumber: 27
+                                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                                        ]
+                                                                    }, index, true, {
                                                                         fileName: "[project]/components/App.js",
-                                                                        lineNumber: 1744,
-                                                                        columnNumber: 27
+                                                                        lineNumber: 1849,
+                                                                        columnNumber: 25
                                                                     }, ("TURBOPACK compile-time value", void 0)))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/App.js",
-                                                            lineNumber: 1741,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0)) : advancedSearchQuery !== '' ? // Show search suggestions
+                                                            lineNumber: 1838,
+                                                            columnNumber: 21
+                                                        }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                            className: "space-y-3",
-                                                            children: getAdvancedSearchSuggestions(advancedSearchQuery)?.length > 0 ? getAdvancedSearchSuggestions(advancedSearchQuery).map((match, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                                    onClick: ()=>{
-                                                                        setSelectedPath(match.path);
-                                                                        setCurrentBranch(match.data);
-                                                                        setAdvancedSearchQuery('');
-                                                                    },
-                                                                    className: "p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 cursor-pointer transition-all",
-                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                                        className: "flex items-center justify-between",
-                                                                        children: [
-                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                            className: "relative mb-6",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Search$3e$__["Search"], {
+                                                                    className: "absolute left-4 top-4 text-gray-400 w-5 h-5"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/App.js",
+                                                                    lineNumber: 1872,
+                                                                    columnNumber: 21
+                                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                                                                    type: "text",
+                                                                    value: advancedSearchQuery,
+                                                                    onChange: (e)=>setAdvancedSearchQuery(e.target.value),
+                                                                    placeholder: "キーワードを入力... (Enter keywords...)",
+                                                                    className: "w-full pl-12 pr-4 py-4 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none text-lg",
+                                                                    autoFocus: true
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/App.js",
+                                                                    lineNumber: 1873,
+                                                                    columnNumber: 21
+                                                                }, ("TURBOPACK compile-time value", void 0))
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/components/App.js",
+                                                            lineNumber: 1871,
+                                                            columnNumber: 19
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                            className: "max-h-[400px] overflow-y-auto",
+                                                            children: advancedSearchQuery === '' && selectedPath.length === 0 ? // Show top level categories
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                className: "space-y-3",
+                                                                children: [
+                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                        className: "text-sm text-gray-600 mb-4",
+                                                                        children: "カテゴリーを選択するか、キーワードを入力してください (Select a category or enter keywords)"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/components/App.js",
+                                                                        lineNumber: 1888,
+                                                                        columnNumber: 25
+                                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                                    Object.keys(searchKnowledgeTree).map((key)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                            onClick: ()=>{
+                                                                                setSelectedPath([
+                                                                                    key
+                                                                                ]);
+                                                                                setCurrentBranch(searchKnowledgeTree[key]);
+                                                                            },
+                                                                            className: "p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 cursor-pointer transition-all",
+                                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                                className: "flex items-center justify-between",
                                                                                 children: [
-                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
-                                                                                        className: "font-bold text-gray-800",
-                                                                                        children: match.data.label
-                                                                                    }, void 0, false, {
+                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                                        children: [
+                                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
+                                                                                                className: "font-bold text-gray-800",
+                                                                                                children: searchKnowledgeTree[key].label
+                                                                                            }, void 0, false, {
+                                                                                                fileName: "[project]/components/App.js",
+                                                                                                lineNumber: 1900,
+                                                                                                columnNumber: 33
+                                                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                                                className: "text-xs text-gray-500 mt-1",
+                                                                                                children: searchKnowledgeTree[key].branches ? `${Object.keys(searchKnowledgeTree[key].branches).length} サブカテゴリー` : '論文を表示'
+                                                                                            }, void 0, false, {
+                                                                                                fileName: "[project]/components/App.js",
+                                                                                                lineNumber: 1901,
+                                                                                                columnNumber: 33
+                                                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                                                        ]
+                                                                                    }, void 0, true, {
                                                                                         fileName: "[project]/components/App.js",
-                                                                                        lineNumber: 1782,
-                                                                                        columnNumber: 35
+                                                                                        lineNumber: 1899,
+                                                                                        columnNumber: 31
                                                                                     }, ("TURBOPACK compile-time value", void 0)),
-                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                                        className: "text-xs text-gray-500 mt-1",
-                                                                                        children: match.data.branches ? `${Object.keys(match.data.branches).length} サブカテゴリー` : `${match.data.papers?.length || 0} 件の論文`
+                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
+                                                                                        className: "w-5 h-5 text-gray-400 transform -rotate-90"
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/components/App.js",
-                                                                                        lineNumber: 1783,
-                                                                                        columnNumber: 35
+                                                                                        lineNumber: 1907,
+                                                                                        columnNumber: 31
                                                                                     }, ("TURBOPACK compile-time value", void 0))
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/components/App.js",
-                                                                                lineNumber: 1781,
-                                                                                columnNumber: 33
-                                                                            }, ("TURBOPACK compile-time value", void 0)),
-                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
-                                                                                className: "w-5 h-5 text-gray-400 transform -rotate-90"
-                                                                            }, void 0, false, {
-                                                                                fileName: "[project]/components/App.js",
-                                                                                lineNumber: 1789,
-                                                                                columnNumber: 33
+                                                                                lineNumber: 1898,
+                                                                                columnNumber: 29
                                                                             }, ("TURBOPACK compile-time value", void 0))
-                                                                        ]
-                                                                    }, void 0, true, {
-                                                                        fileName: "[project]/components/App.js",
-                                                                        lineNumber: 1780,
-                                                                        columnNumber: 31
-                                                                    }, ("TURBOPACK compile-time value", void 0))
-                                                                }, index, false, {
-                                                                    fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1771,
-                                                                    columnNumber: 29
-                                                                }, ("TURBOPACK compile-time value", void 0))) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                className: "text-center text-gray-500 py-8",
-                                                                children: "該当する結果が見つかりませんでした (No results found)"
-                                                            }, void 0, false, {
+                                                                        }, key, false, {
+                                                                            fileName: "[project]/components/App.js",
+                                                                            lineNumber: 1890,
+                                                                            columnNumber: 27
+                                                                        }, ("TURBOPACK compile-time value", void 0)))
+                                                                ]
+                                                            }, void 0, true, {
                                                                 fileName: "[project]/components/App.js",
-                                                                lineNumber: 1794,
-                                                                columnNumber: 27
-                                                            }, ("TURBOPACK compile-time value", void 0))
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1768,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0)) : currentBranch ? // Show current branch contents
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                            className: "space-y-3",
-                                                            children: [
-                                                                currentBranch.branches && Object.keys(currentBranch.branches).map((key)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                lineNumber: 1887,
+                                                                columnNumber: 23
+                                                            }, ("TURBOPACK compile-time value", void 0)) : advancedSearchQuery !== '' ? // Show search suggestions
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                className: "space-y-3",
+                                                                children: getAdvancedSearchSuggestions(advancedSearchQuery)?.length > 0 ? getAdvancedSearchSuggestions(advancedSearchQuery).map((match, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
                                                                         onClick: ()=>{
-                                                                            setSelectedPath([
-                                                                                ...selectedPath,
-                                                                                key
-                                                                            ]);
-                                                                            setCurrentBranch(currentBranch.branches[key]);
+                                                                            setSelectedPath(match.path);
+                                                                            setCurrentBranch(match.data);
+                                                                            setAdvancedSearchQuery('');
                                                                         },
                                                                         className: "p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 cursor-pointer transition-all",
                                                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -3467,684 +3717,754 @@ const App = ()=>{
                                                                                     children: [
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
                                                                                             className: "font-bold text-gray-800",
-                                                                                            children: currentBranch.branches[key].label
+                                                                                            children: match.data.label
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/App.js",
-                                                                                            lineNumber: 1811,
-                                                                                            columnNumber: 33
+                                                                                            lineNumber: 1928,
+                                                                                            columnNumber: 35
                                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
                                                                                             className: "text-xs text-gray-500 mt-1",
-                                                                                            children: currentBranch.branches[key].branches ? `${Object.keys(currentBranch.branches[key].branches).length} サブカテゴリー` : `${currentBranch.branches[key].papers?.length || 0} 件の論文`
+                                                                                            children: match.data.branches ? `${Object.keys(match.data.branches).length} サブカテゴリー` : `${match.data.papers?.length || 0} 件の論文`
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/App.js",
-                                                                                            lineNumber: 1812,
-                                                                                            columnNumber: 33
+                                                                                            lineNumber: 1929,
+                                                                                            columnNumber: 35
                                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/components/App.js",
-                                                                                    lineNumber: 1810,
-                                                                                    columnNumber: 31
+                                                                                    lineNumber: 1927,
+                                                                                    columnNumber: 33
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
                                                                                     className: "w-5 h-5 text-gray-400 transform -rotate-90"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/App.js",
-                                                                                    lineNumber: 1818,
-                                                                                    columnNumber: 31
+                                                                                    lineNumber: 1935,
+                                                                                    columnNumber: 33
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/App.js",
-                                                                            lineNumber: 1809,
-                                                                            columnNumber: 29
+                                                                            lineNumber: 1926,
+                                                                            columnNumber: 31
                                                                         }, ("TURBOPACK compile-time value", void 0))
-                                                                    }, key, false, {
+                                                                    }, index, false, {
                                                                         fileName: "[project]/components/App.js",
-                                                                        lineNumber: 1801,
-                                                                        columnNumber: 27
-                                                                    }, ("TURBOPACK compile-time value", void 0))),
-                                                                currentBranch.papers && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                                    className: "space-y-3 mt-4",
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
-                                                                            className: "font-bold text-gray-700 border-t pt-4",
-                                                                            children: "関連論文 (Related Papers)"
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/components/App.js",
-                                                                            lineNumber: 1824,
-                                                                            columnNumber: 29
-                                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                                        currentBranch.papers.map((paperId)=>{
-                                                                            const paper = papers.find((p)=>p.id === paperId);
-                                                                            return paper ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                                                onClick: ()=>{
-                                                                                    setShowAdvancedSearch(false);
-                                                                                    // Scroll to paper in main view
-                                                                                    document.getElementById(`paper-${paper.id}`)?.scrollIntoView({
-                                                                                        behavior: 'smooth'
-                                                                                    });
-                                                                                },
-                                                                                className: "p-4 border-2 border-blue-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 cursor-pointer transition-all",
+                                                                        lineNumber: 1917,
+                                                                        columnNumber: 29
+                                                                    }, ("TURBOPACK compile-time value", void 0))) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                    className: "text-center text-gray-500 py-8",
+                                                                    children: "該当する結果が見つかりませんでした (No results found)"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/App.js",
+                                                                    lineNumber: 1940,
+                                                                    columnNumber: 27
+                                                                }, ("TURBOPACK compile-time value", void 0))
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 1914,
+                                                                columnNumber: 23
+                                                            }, ("TURBOPACK compile-time value", void 0)) : currentBranch ? // Show current branch contents
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                className: "space-y-3",
+                                                                children: [
+                                                                    currentBranch.branches && Object.keys(currentBranch.branches).map((key)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                            onClick: ()=>{
+                                                                                setSelectedPath([
+                                                                                    ...selectedPath,
+                                                                                    key
+                                                                                ]);
+                                                                                setCurrentBranch(currentBranch.branches[key]);
+                                                                            },
+                                                                            className: "p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 cursor-pointer transition-all",
+                                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                                className: "flex items-center justify-between",
                                                                                 children: [
-                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h4", {
-                                                                                        className: "font-bold text-gray-800",
-                                                                                        children: paper.title
-                                                                                    }, void 0, false, {
-                                                                                        fileName: "[project]/components/App.js",
-                                                                                        lineNumber: 1837,
-                                                                                        columnNumber: 35
-                                                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                                        className: "text-sm text-gray-600 mt-1",
-                                                                                        children: paper.titleEn
-                                                                                    }, void 0, false, {
-                                                                                        fileName: "[project]/components/App.js",
-                                                                                        lineNumber: 1838,
-                                                                                        columnNumber: 35
-                                                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                                        className: "text-xs text-gray-500 mt-2",
+                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
                                                                                         children: [
-                                                                                            paper.authors,
-                                                                                            " (",
-                                                                                            paper.year,
-                                                                                            ")"
+                                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
+                                                                                                className: "font-bold text-gray-800",
+                                                                                                children: currentBranch.branches[key].label
+                                                                                            }, void 0, false, {
+                                                                                                fileName: "[project]/components/App.js",
+                                                                                                lineNumber: 1957,
+                                                                                                columnNumber: 33
+                                                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                                                className: "text-xs text-gray-500 mt-1",
+                                                                                                children: currentBranch.branches[key].branches ? `${Object.keys(currentBranch.branches[key].branches).length} サブカテゴリー` : `${currentBranch.branches[key].papers?.length || 0} 件の論文`
+                                                                                            }, void 0, false, {
+                                                                                                fileName: "[project]/components/App.js",
+                                                                                                lineNumber: 1958,
+                                                                                                columnNumber: 33
+                                                                                            }, ("TURBOPACK compile-time value", void 0))
                                                                                         ]
                                                                                     }, void 0, true, {
                                                                                         fileName: "[project]/components/App.js",
-                                                                                        lineNumber: 1839,
-                                                                                        columnNumber: 35
+                                                                                        lineNumber: 1956,
+                                                                                        columnNumber: 31
+                                                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
+                                                                                        className: "w-5 h-5 text-gray-400 transform -rotate-90"
+                                                                                    }, void 0, false, {
+                                                                                        fileName: "[project]/components/App.js",
+                                                                                        lineNumber: 1964,
+                                                                                        columnNumber: 31
                                                                                     }, ("TURBOPACK compile-time value", void 0))
                                                                                 ]
-                                                                            }, paper.id, true, {
+                                                                            }, void 0, true, {
                                                                                 fileName: "[project]/components/App.js",
-                                                                                lineNumber: 1828,
-                                                                                columnNumber: 33
-                                                                            }, ("TURBOPACK compile-time value", void 0)) : null;
-                                                                        })
+                                                                                lineNumber: 1955,
+                                                                                columnNumber: 29
+                                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                                        }, key, false, {
+                                                                            fileName: "[project]/components/App.js",
+                                                                            lineNumber: 1947,
+                                                                            columnNumber: 27
+                                                                        }, ("TURBOPACK compile-time value", void 0))),
+                                                                    currentBranch.papers && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                        className: "space-y-3 mt-4",
+                                                                        children: [
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
+                                                                                className: "font-bold text-gray-700 border-t pt-4",
+                                                                                children: "関連論文 (Related Papers)"
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/components/App.js",
+                                                                                lineNumber: 1970,
+                                                                                columnNumber: 29
+                                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                                            currentBranch.papers.map((paperId)=>{
+                                                                                const paper = papers.find((p)=>p.id === paperId);
+                                                                                return paper ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                                    onClick: ()=>{
+                                                                                        setShowAdvancedSearch(false);
+                                                                                        // Scroll to paper in main view
+                                                                                        document.getElementById(`paper-${paper.id}`)?.scrollIntoView({
+                                                                                            behavior: 'smooth'
+                                                                                        });
+                                                                                    },
+                                                                                    className: "p-4 border-2 border-blue-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 cursor-pointer transition-all",
+                                                                                    children: [
+                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h4", {
+                                                                                            className: "font-bold text-gray-800",
+                                                                                            children: paper.title
+                                                                                        }, void 0, false, {
+                                                                                            fileName: "[project]/components/App.js",
+                                                                                            lineNumber: 1983,
+                                                                                            columnNumber: 35
+                                                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                                            className: "text-sm text-gray-600 mt-1",
+                                                                                            children: paper.titleEn
+                                                                                        }, void 0, false, {
+                                                                                            fileName: "[project]/components/App.js",
+                                                                                            lineNumber: 1984,
+                                                                                            columnNumber: 35
+                                                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                                            className: "text-xs text-gray-500 mt-2",
+                                                                                            children: [
+                                                                                                paper.authors,
+                                                                                                " (",
+                                                                                                paper.year,
+                                                                                                ")"
+                                                                                            ]
+                                                                                        }, void 0, true, {
+                                                                                            fileName: "[project]/components/App.js",
+                                                                                            lineNumber: 1985,
+                                                                                            columnNumber: 35
+                                                                                        }, ("TURBOPACK compile-time value", void 0))
+                                                                                    ]
+                                                                                }, paper.id, true, {
+                                                                                    fileName: "[project]/components/App.js",
+                                                                                    lineNumber: 1974,
+                                                                                    columnNumber: 33
+                                                                                }, ("TURBOPACK compile-time value", void 0)) : null;
+                                                                            })
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "[project]/components/App.js",
+                                                                        lineNumber: 1969,
+                                                                        columnNumber: 27
+                                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                                ]
+                                                            }, void 0, true, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 1945,
+                                                                columnNumber: 23
+                                                            }, ("TURBOPACK compile-time value", void 0)) : null
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/components/App.js",
+                                                            lineNumber: 1884,
+                                                            columnNumber: 19
+                                                        }, ("TURBOPACK compile-time value", void 0))
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/components/App.js",
+                                                    lineNumber: 1835,
+                                                    columnNumber: 17
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/App.js",
+                                            lineNumber: 1814,
+                                            columnNumber: 15
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 1813,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "mb-6",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                onClick: ()=>setShowFilters({
+                                                        ...showFilters,
+                                                        field: !showFilters.field
+                                                    }),
+                                                className: "flex items-center justify-between w-full text-left font-semibold text-gray-900 mb-2",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                        children: "研究分野 (Research Field)"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2005,
+                                                        columnNumber: 17
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    showFilters.field ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$up$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronUp$3e$__["ChevronUp"], {
+                                                        className: "w-4 h-4"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2006,
+                                                        columnNumber: 38
+                                                    }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
+                                                        className: "w-4 h-4"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2006,
+                                                        columnNumber: 74
+                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 2001,
+                                                columnNumber: 15
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            showFilters.field && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                className: "space-y-1",
+                                                children: [
+                                                    '材料科学 (Materials Science)',
+                                                    '生命科学 (Life Sciences)',
+                                                    'ナノサイエンス (Nanoscience)',
+                                                    '高分子科学 (Polymer Science)',
+                                                    '物性物理学 (Condensed Matter Physics)'
+                                                ].map((field)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
+                                                        className: "flex items-start gap-2 text-sm cursor-pointer hover:bg-gray-100 p-1 rounded",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                                                                type: "checkbox",
+                                                                checked: selectedFilters.field.includes(field),
+                                                                onChange: ()=>toggleFilter('field', field),
+                                                                className: "mt-0.5 w-4 h-4 accent-red-800"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 2012,
+                                                                columnNumber: 23
+                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                                className: "text-gray-700",
+                                                                children: field.split(' (')[0]
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 2018,
+                                                                columnNumber: 23
+                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                        ]
+                                                    }, field, true, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2011,
+                                                        columnNumber: 21
+                                                    }, ("TURBOPACK compile-time value", void 0)))
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 2009,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 2000,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "mb-6",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                onClick: ()=>setShowFilters({
+                                                        ...showFilters,
+                                                        method: !showFilters.method
+                                                    }),
+                                                className: "flex items-center justify-between w-full text-left font-semibold text-gray-900 mb-2",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                        children: "測定手法 (Method)"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2031,
+                                                        columnNumber: 17
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    showFilters.method ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$up$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronUp$3e$__["ChevronUp"], {
+                                                        className: "w-4 h-4"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2032,
+                                                        columnNumber: 39
+                                                    }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
+                                                        className: "w-4 h-4"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2032,
+                                                        columnNumber: 75
+                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 2027,
+                                                columnNumber: 15
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            showFilters.method && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                className: "space-y-1",
+                                                children: [
+                                                    'X線回折 (X-ray Diffraction)',
+                                                    'X線結晶構造解析 (X-ray Crystallography)',
+                                                    '時間分解分光 (Time-Resolved Spectroscopy)',
+                                                    '小角X線散乱 (SAXS)'
+                                                ].map((method)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
+                                                        className: "flex items-start gap-2 text-sm cursor-pointer hover:bg-gray-100 p-1 rounded",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                                                                type: "checkbox",
+                                                                checked: selectedFilters.method.includes(method),
+                                                                onChange: ()=>toggleFilter('method', method),
+                                                                className: "mt-0.5 w-4 h-4 accent-red-800"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 2038,
+                                                                columnNumber: 23
+                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                                className: "text-gray-700",
+                                                                children: method.split(' (')[0]
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 2044,
+                                                                columnNumber: 23
+                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                        ]
+                                                    }, method, true, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2037,
+                                                        columnNumber: 21
+                                                    }, ("TURBOPACK compile-time value", void 0)))
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 2035,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 2026,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "mb-6",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                onClick: ()=>setShowFilters({
+                                                        ...showFilters,
+                                                        application: !showFilters.application
+                                                    }),
+                                                className: "flex items-center justify-between w-full text-left font-semibold text-gray-900 mb-2",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                        children: "産業応用 (Application)"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2057,
+                                                        columnNumber: 17
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    showFilters.application ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$up$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronUp$3e$__["ChevronUp"], {
+                                                        className: "w-4 h-4"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2058,
+                                                        columnNumber: 44
+                                                    }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
+                                                        className: "w-4 h-4"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2058,
+                                                        columnNumber: 80
+                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 2053,
+                                                columnNumber: 15
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            showFilters.application && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                className: "space-y-1",
+                                                children: [
+                                                    '自動車産業 (Automotive)',
+                                                    '製薬・医療 (Pharmaceutical)',
+                                                    'エネルギー産業 (Energy)',
+                                                    '化学産業 (Chemical)'
+                                                ].map((app)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
+                                                        className: "flex items-start gap-2 text-sm cursor-pointer hover:bg-gray-100 p-1 rounded",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                                                                type: "checkbox",
+                                                                checked: selectedFilters.application.includes(app),
+                                                                onChange: ()=>toggleFilter('application', app),
+                                                                className: "mt-0.5 w-4 h-4 accent-red-800"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 2064,
+                                                                columnNumber: 23
+                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                                className: "text-gray-700",
+                                                                children: app.split(' (')[0]
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 2070,
+                                                                columnNumber: 23
+                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                        ]
+                                                    }, app, true, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2063,
+                                                        columnNumber: 21
+                                                    }, ("TURBOPACK compile-time value", void 0)))
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 2061,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 2052,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "mb-6",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                onClick: ()=>setShowFilters({
+                                                        ...showFilters,
+                                                        year: !showFilters.year
+                                                    }),
+                                                className: "flex items-center justify-between w-full text-left font-semibold text-gray-900 mb-2",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                        children: "年度 (Year)"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2083,
+                                                        columnNumber: 17
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    showFilters.year ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$up$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronUp$3e$__["ChevronUp"], {
+                                                        className: "w-4 h-4"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2084,
+                                                        columnNumber: 37
+                                                    }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
+                                                        className: "w-4 h-4"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2084,
+                                                        columnNumber: 73
+                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 2079,
+                                                columnNumber: 15
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            showFilters.year && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                className: "space-y-1",
+                                                children: [
+                                                    2024,
+                                                    2023,
+                                                    2022
+                                                ].map((year)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
+                                                        className: "flex items-start gap-2 text-sm cursor-pointer hover:bg-gray-100 p-1 rounded",
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                                                                type: "checkbox",
+                                                                checked: selectedFilters.year.includes(year),
+                                                                onChange: ()=>toggleFilter('year', year),
+                                                                className: "mt-0.5 w-4 h-4 accent-red-800"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 2090,
+                                                                columnNumber: 23
+                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                                className: "text-gray-700",
+                                                                children: year
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 2096,
+                                                                columnNumber: 23
+                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                        ]
+                                                    }, year, true, {
+                                                        fileName: "[project]/components/App.js",
+                                                        lineNumber: 2089,
+                                                        columnNumber: 21
+                                                    }, ("TURBOPACK compile-time value", void 0)))
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/App.js",
+                                                lineNumber: 2087,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 2078,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/App.js",
+                                lineNumber: 1808,
+                                columnNumber: 11
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                className: "flex-1 p-8",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "mb-4 flex items-center justify-between",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                            className: "text-sm text-gray-600",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("strong", {
+                                                    children: filteredPapers.length
+                                                }, void 0, false, {
+                                                    fileName: "[project]/components/App.js",
+                                                    lineNumber: 2108,
+                                                    columnNumber: 17
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                " 件の結果"
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/components/App.js",
+                                            lineNumber: 2107,
+                                            columnNumber: 15
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 2106,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                        className: "space-y-6",
+                                        children: filteredPapers.map((paper)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                id: `paper-${paper.id}`,
+                                                className: "border-b border-gray-200 pb-6 mb-6",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                    className: "flex gap-4",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                            className: "flex-shrink-0",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
+                                                                type: "checkbox",
+                                                                className: "w-4 h-4 mt-1 accent-red-800"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/components/App.js",
+                                                                lineNumber: 2117,
+                                                                columnNumber: 21
+                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/components/App.js",
+                                                            lineNumber: 2116,
+                                                            columnNumber: 19
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                            className: "flex-1",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                                    className: "mb-2",
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                                                        className: "text-xs text-gray-600 uppercase tracking-wide",
+                                                                        children: "学術論文"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/components/App.js",
+                                                                        lineNumber: 2122,
+                                                                        columnNumber: 23
+                                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/App.js",
+                                                                    lineNumber: 2121,
+                                                                    columnNumber: 21
+                                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
+                                                                    onClick: ()=>setViewingPaper(paper),
+                                                                    className: "text-xl font-serif text-gray-900 mb-2 hover:underline cursor-pointer",
+                                                                    children: paper.title
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/App.js",
+                                                                    lineNumber: 2125,
+                                                                    columnNumber: 21
+                                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                    className: "text-sm text-gray-700 mb-2",
+                                                                    children: paper.authors
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/App.js",
+                                                                    lineNumber: 2132,
+                                                                    columnNumber: 21
+                                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                    className: "text-sm italic text-gray-600 mb-3",
+                                                                    children: [
+                                                                        "SPring-8 Research Journal, Vol. ",
+                                                                        paper.id,
+                                                                        ", No. 1 (",
+                                                                        paper.year,
+                                                                        "), pp. 1-20"
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1823,
-                                                                    columnNumber: 27
+                                                                    lineNumber: 2134,
+                                                                    columnNumber: 21
+                                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                                                    className: "text-sm text-gray-800 leading-relaxed mb-3",
+                                                                    children: [
+                                                                        "...",
+                                                                        paper.mainConclusion.substring(0, 150),
+                                                                        "..."
+                                                                    ]
+                                                                }, void 0, true, {
+                                                                    fileName: "[project]/components/App.js",
+                                                                    lineNumber: 2138,
+                                                                    columnNumber: 21
+                                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                                    onClick: ()=>setViewingPaper(paper),
+                                                                    className: "text-sm text-blue-700 hover:underline font-medium",
+                                                                    children: "詳細を表示"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/App.js",
+                                                                    lineNumber: 2142,
+                                                                    columnNumber: 21
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/App.js",
-                                                            lineNumber: 1799,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0)) : null
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 1738,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0))
-                                                ]
-                                            }, void 0, true, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 1689,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0))
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/App.js",
-                                        lineNumber: 1668,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0))
-                                }, void 0, false, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1667,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "mb-6",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            onClick: ()=>setShowFilters({
-                                                    ...showFilters,
-                                                    field: !showFilters.field
-                                                }),
-                                            className: "flex items-center justify-between w-full text-left font-semibold text-gray-900 mb-2",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                    children: "研究分野 (Research Field)"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1859,
-                                                    columnNumber: 17
-                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                showFilters.field ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$up$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronUp$3e$__["ChevronUp"], {
-                                                    className: "w-4 h-4"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1860,
-                                                    columnNumber: 38
-                                                }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
-                                                    className: "w-4 h-4"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1860,
-                                                    columnNumber: 74
-                                                }, ("TURBOPACK compile-time value", void 0))
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1855,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0)),
-                                        showFilters.field && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                            className: "space-y-1",
-                                            children: [
-                                                '材料科学 (Materials Science)',
-                                                '生命科学 (Life Sciences)',
-                                                'ナノサイエンス (Nanoscience)',
-                                                '高分子科学 (Polymer Science)',
-                                                '物性物理学 (Condensed Matter Physics)'
-                                            ].map((field)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
-                                                    className: "flex items-start gap-2 text-sm cursor-pointer hover:bg-gray-100 p-1 rounded",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
-                                                            type: "checkbox",
-                                                            checked: selectedFilters.field.includes(field),
-                                                            onChange: ()=>toggleFilter('field', field),
-                                                            className: "mt-0.5 w-4 h-4 accent-red-800"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1866,
-                                                            columnNumber: 23
+                                                            lineNumber: 2120,
+                                                            columnNumber: 19
                                                         }, ("TURBOPACK compile-time value", void 0)),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                            className: "text-gray-700",
-                                                            children: field.split(' (')[0]
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1872,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                    ]
-                                                }, field, true, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1865,
-                                                    columnNumber: 21
-                                                }, ("TURBOPACK compile-time value", void 0)))
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1863,
-                                            columnNumber: 17
-                                        }, ("TURBOPACK compile-time value", void 0))
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1854,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "mb-6",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            onClick: ()=>setShowFilters({
-                                                    ...showFilters,
-                                                    method: !showFilters.method
-                                                }),
-                                            className: "flex items-center justify-between w-full text-left font-semibold text-gray-900 mb-2",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                    children: "測定手法 (Method)"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1885,
-                                                    columnNumber: 17
-                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                showFilters.method ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$up$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronUp$3e$__["ChevronUp"], {
-                                                    className: "w-4 h-4"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1886,
-                                                    columnNumber: 39
-                                                }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
-                                                    className: "w-4 h-4"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1886,
-                                                    columnNumber: 75
-                                                }, ("TURBOPACK compile-time value", void 0))
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1881,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0)),
-                                        showFilters.method && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                            className: "space-y-1",
-                                            children: [
-                                                'X線回折 (X-ray Diffraction)',
-                                                'X線結晶構造解析 (X-ray Crystallography)',
-                                                '時間分解分光 (Time-Resolved Spectroscopy)',
-                                                '小角X線散乱 (SAXS)'
-                                            ].map((method)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
-                                                    className: "flex items-start gap-2 text-sm cursor-pointer hover:bg-gray-100 p-1 rounded",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
-                                                            type: "checkbox",
-                                                            checked: selectedFilters.method.includes(method),
-                                                            onChange: ()=>toggleFilter('method', method),
-                                                            className: "mt-0.5 w-4 h-4 accent-red-800"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1892,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                            className: "text-gray-700",
-                                                            children: method.split(' (')[0]
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1898,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                    ]
-                                                }, method, true, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1891,
-                                                    columnNumber: 21
-                                                }, ("TURBOPACK compile-time value", void 0)))
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1889,
-                                            columnNumber: 17
-                                        }, ("TURBOPACK compile-time value", void 0))
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1880,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "mb-6",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            onClick: ()=>setShowFilters({
-                                                    ...showFilters,
-                                                    application: !showFilters.application
-                                                }),
-                                            className: "flex items-center justify-between w-full text-left font-semibold text-gray-900 mb-2",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                    children: "産業応用 (Application)"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1911,
-                                                    columnNumber: 17
-                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                showFilters.application ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$up$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronUp$3e$__["ChevronUp"], {
-                                                    className: "w-4 h-4"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1912,
-                                                    columnNumber: 44
-                                                }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
-                                                    className: "w-4 h-4"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1912,
-                                                    columnNumber: 80
-                                                }, ("TURBOPACK compile-time value", void 0))
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1907,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0)),
-                                        showFilters.application && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                            className: "space-y-1",
-                                            children: [
-                                                '自動車産業 (Automotive)',
-                                                '製薬・医療 (Pharmaceutical)',
-                                                'エネルギー産業 (Energy)',
-                                                '化学産業 (Chemical)'
-                                            ].map((app)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
-                                                    className: "flex items-start gap-2 text-sm cursor-pointer hover:bg-gray-100 p-1 rounded",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
-                                                            type: "checkbox",
-                                                            checked: selectedFilters.application.includes(app),
-                                                            onChange: ()=>toggleFilter('application', app),
-                                                            className: "mt-0.5 w-4 h-4 accent-red-800"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1918,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                            className: "text-gray-700",
-                                                            children: app.split(' (')[0]
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1924,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                    ]
-                                                }, app, true, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1917,
-                                                    columnNumber: 21
-                                                }, ("TURBOPACK compile-time value", void 0)))
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1915,
-                                            columnNumber: 17
-                                        }, ("TURBOPACK compile-time value", void 0))
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1906,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "mb-6",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                            onClick: ()=>setShowFilters({
-                                                    ...showFilters,
-                                                    year: !showFilters.year
-                                                }),
-                                            className: "flex items-center justify-between w-full text-left font-semibold text-gray-900 mb-2",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                    children: "年度 (Year)"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1937,
-                                                    columnNumber: 17
-                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                showFilters.year ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$up$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronUp$3e$__["ChevronUp"], {
-                                                    className: "w-4 h-4"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1938,
-                                                    columnNumber: 37
-                                                }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$mjs__$5b$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
-                                                    className: "w-4 h-4"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1938,
-                                                    columnNumber: 73
-                                                }, ("TURBOPACK compile-time value", void 0))
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1933,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0)),
-                                        showFilters.year && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                            className: "space-y-1",
-                                            children: [
-                                                2024,
-                                                2023,
-                                                2022
-                                            ].map((year)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("label", {
-                                                    className: "flex items-start gap-2 text-sm cursor-pointer hover:bg-gray-100 p-1 rounded",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
-                                                            type: "checkbox",
-                                                            checked: selectedFilters.year.includes(year),
-                                                            onChange: ()=>toggleFilter('year', year),
-                                                            className: "mt-0.5 w-4 h-4 accent-red-800"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1944,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                            className: "text-gray-700",
-                                                            children: year
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1950,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                    ]
-                                                }, year, true, {
-                                                    fileName: "[project]/components/App.js",
-                                                    lineNumber: 1943,
-                                                    columnNumber: 21
-                                                }, ("TURBOPACK compile-time value", void 0)))
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1941,
-                                            columnNumber: 17
-                                        }, ("TURBOPACK compile-time value", void 0))
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1932,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/App.js",
-                            lineNumber: 1662,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0)),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                            className: "flex-1 p-8",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "mb-4 flex items-center justify-between",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                        className: "text-sm text-gray-600",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("strong", {
-                                                children: filteredPapers.length
-                                            }, void 0, false, {
-                                                fileName: "[project]/components/App.js",
-                                                lineNumber: 1962,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            " 件の結果"
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/components/App.js",
-                                        lineNumber: 1961,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0))
-                                }, void 0, false, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1960,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                    className: "space-y-6",
-                                    children: filteredPapers.map((paper)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                            id: `paper-${paper.id}`,
-                                            className: "border-b border-gray-200 pb-6 mb-6",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                className: "flex gap-4",
-                                                children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                        className: "flex-shrink-0",
-                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("input", {
-                                                            type: "checkbox",
-                                                            className: "w-4 h-4 mt-1 accent-red-800"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/components/App.js",
-                                                            lineNumber: 1971,
-                                                            columnNumber: 21
-                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                    }, void 0, false, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 1970,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                        className: "flex-1",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                                className: "mb-2",
-                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
-                                                                    className: "text-xs text-gray-600 uppercase tracking-wide",
-                                                                    children: "学術論文"
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                                                            className: "flex-shrink-0 flex flex-col gap-2 w-32",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                                    onClick: ()=>{
+                                                                        if (paper.uploadedFile) {
+                                                                            const fileURL = URL.createObjectURL(paper.uploadedFile);
+                                                                            window.open(fileURL, '_blank');
+                                                                        } else {
+                                                                            alert('この論文のPDFファイルは利用できません');
+                                                                        }
+                                                                    },
+                                                                    className: "px-4 py-2 bg-red-800 text-white text-sm rounded hover:bg-red-900 font-medium",
+                                                                    children: "オンライン閲覧"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/App.js",
-                                                                    lineNumber: 1976,
+                                                                    lineNumber: 2151,
+                                                                    columnNumber: 21
+                                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                                    className: "px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-50 font-medium",
+                                                                    children: "保存"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/App.js",
+                                                                    lineNumber: 2164,
+                                                                    columnNumber: 21
+                                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                                    className: "px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-50 font-medium",
+                                                                    children: "引用"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/App.js",
+                                                                    lineNumber: 2167,
+                                                                    columnNumber: 21
+                                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                                paper.uploadedFile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                                    onClick: ()=>{
+                                                                        if (window.confirm('この論文を削除しますか？')) {
+                                                                            setPapers((prevPapers)=>prevPapers.filter((p)=>p.id !== paper.id));
+                                                                        }
+                                                                    },
+                                                                    className: "px-4 py-2 border border-red-300 text-red-700 text-sm rounded hover:bg-red-50 font-medium",
+                                                                    children: "削除"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/components/App.js",
+                                                                    lineNumber: 2171,
                                                                     columnNumber: 23
                                                                 }, ("TURBOPACK compile-time value", void 0))
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 1975,
-                                                                columnNumber: 21
-                                                            }, ("TURBOPACK compile-time value", void 0)),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
-                                                                onClick: ()=>setViewingPaper(paper),
-                                                                className: "text-xl font-serif text-gray-900 mb-2 hover:underline cursor-pointer",
-                                                                children: paper.title
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 1979,
-                                                                columnNumber: 21
-                                                            }, ("TURBOPACK compile-time value", void 0)),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                className: "text-sm text-gray-700 mb-2",
-                                                                children: paper.authors
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 1986,
-                                                                columnNumber: 21
-                                                            }, ("TURBOPACK compile-time value", void 0)),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                className: "text-sm italic text-gray-600 mb-3",
-                                                                children: [
-                                                                    "SPring-8 Research Journal, Vol. ",
-                                                                    paper.id,
-                                                                    ", No. 1 (",
-                                                                    paper.year,
-                                                                    "), pp. 1-20"
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 1988,
-                                                                columnNumber: 21
-                                                            }, ("TURBOPACK compile-time value", void 0)),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
-                                                                className: "text-sm text-gray-800 leading-relaxed mb-3",
-                                                                children: [
-                                                                    "...",
-                                                                    paper.mainConclusion.substring(0, 150),
-                                                                    "..."
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 1992,
-                                                                columnNumber: 21
-                                                            }, ("TURBOPACK compile-time value", void 0)),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                                                onClick: ()=>setViewingPaper(paper),
-                                                                className: "text-sm text-blue-700 hover:underline font-medium",
-                                                                children: "詳細を表示"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 1996,
-                                                                columnNumber: 21
-                                                            }, ("TURBOPACK compile-time value", void 0))
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 1974,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
-                                                        className: "flex-shrink-0 flex flex-col gap-2 w-32",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                                                onClick: ()=>{
-                                                                    if (paper.uploadedFile) {
-                                                                        const fileURL = URL.createObjectURL(paper.uploadedFile);
-                                                                        window.open(fileURL, '_blank');
-                                                                    } else {
-                                                                        alert('この論文のPDFファイルは利用できません');
-                                                                    }
-                                                                },
-                                                                className: "px-4 py-2 bg-red-800 text-white text-sm rounded hover:bg-red-900 font-medium",
-                                                                children: "オンライン閲覧"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 2005,
-                                                                columnNumber: 21
-                                                            }, ("TURBOPACK compile-time value", void 0)),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                                                className: "px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-50 font-medium",
-                                                                children: "保存"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 2018,
-                                                                columnNumber: 21
-                                                            }, ("TURBOPACK compile-time value", void 0)),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                                                className: "px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-50 font-medium",
-                                                                children: "引用"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 2021,
-                                                                columnNumber: 21
-                                                            }, ("TURBOPACK compile-time value", void 0)),
-                                                            paper.uploadedFile && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
-                                                                onClick: ()=>{
-                                                                    if (window.confirm('この論文を削除しますか？')) {
-                                                                        setPapers((prevPapers)=>prevPapers.filter((p)=>p.id !== paper.id));
-                                                                    }
-                                                                },
-                                                                className: "px-4 py-2 border border-red-300 text-red-700 text-sm rounded hover:bg-red-50 font-medium",
-                                                                children: "削除"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/components/App.js",
-                                                                lineNumber: 2025,
-                                                                columnNumber: 23
-                                                            }, ("TURBOPACK compile-time value", void 0))
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/components/App.js",
-                                                        lineNumber: 2004,
-                                                        columnNumber: 19
-                                                    }, ("TURBOPACK compile-time value", void 0))
-                                                ]
-                                            }, void 0, true, {
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/components/App.js",
+                                                            lineNumber: 2150,
+                                                            columnNumber: 19
+                                                        }, ("TURBOPACK compile-time value", void 0))
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/components/App.js",
+                                                    lineNumber: 2115,
+                                                    columnNumber: 17
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            }, paper.id, false, {
                                                 fileName: "[project]/components/App.js",
-                                                lineNumber: 1969,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0))
-                                        }, paper.id, false, {
-                                            fileName: "[project]/components/App.js",
-                                            lineNumber: 1968,
-                                            columnNumber: 15
-                                        }, ("TURBOPACK compile-time value", void 0)))
-                                }, void 0, false, {
-                                    fileName: "[project]/components/App.js",
-                                    lineNumber: 1966,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/components/App.js",
-                            lineNumber: 1959,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0))
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/components/App.js",
-                    lineNumber: 1660,
-                    columnNumber: 9
-                }, ("TURBOPACK compile-time value", void 0))
-            ]
-        }, void 0, true, {
-            fileName: "[project]/components/App.js",
-            lineNumber: 1617,
-            columnNumber: 7
-        }, ("TURBOPACK compile-time value", void 0))
-    }, void 0, false, {
+                                                lineNumber: 2114,
+                                                columnNumber: 15
+                                            }, ("TURBOPACK compile-time value", void 0)))
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/App.js",
+                                        lineNumber: 2112,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/App.js",
+                                lineNumber: 2105,
+                                columnNumber: 11
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/App.js",
+                        lineNumber: 1806,
+                        columnNumber: 9
+                    }, ("TURBOPACK compile-time value", void 0))
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/App.js",
+                lineNumber: 1748,
+                columnNumber: 7
+            }, ("TURBOPACK compile-time value", void 0))
+        ]
+    }, void 0, true, {
         fileName: "[project]/components/App.js",
-        lineNumber: 1616,
+        lineNumber: 1746,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };

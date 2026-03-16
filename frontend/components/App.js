@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, Search, FileText, Brain, Loader, ChevronDown, ChevronUp, Filter, X, Link2 } from 'lucide-react';
+import { Upload, Search, FileText, Brain, Loader, ChevronDown, ChevronUp, Filter, X, Link2, Home } from 'lucide-react';
 
 const App = () => {
   const [currentView, setCurrentView] = useState('upload'); // 'upload', 'form', 'search'
@@ -36,6 +36,11 @@ const [viewingPaper, setViewingPaper] = useState(null);
   const [papers, setPapers] = useState([]);
   const [selectedRelatedPapers, setSelectedRelatedPapers] = useState([]);
   const [pdfText, setPdfText] = useState('');
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+const [showLoginModal, setShowLoginModal] = useState(false);
+const [loginUsername, setLoginUsername] = useState('');
+const [loginPassword, setLoginPassword] = useState('');
+const [loginError, setLoginError] = useState('');
 
   // AI Analysis Function
   const analyzePDF = async (base64Data, filename) => {
@@ -44,6 +49,7 @@ const [viewingPaper, setViewingPaper] = useState(null);
       console.log('PDF filename:', filename);
       
       const response = await fetch('http://localhost:8000/api/analyze-pdf', {
+
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -70,7 +76,19 @@ const [viewingPaper, setViewingPaper] = useState(null);
     }
   };
 
-  const relationshipTypes = [
+  const handleLogin = () => {
+  if (loginUsername === 'spring8' && loginPassword === 'article') {
+    setIsLoggedIn(true);
+    setShowLoginModal(false);
+    setLoginError('');
+    setLoginUsername('');
+    setLoginPassword('');
+  } else {
+    setLoginError('ユーザー名またはパスワードが違います (Invalid credentials)');
+  }
+};
+
+const relationshipTypes = [
     'Cited',
     'Builds upon',
     'Contradicts',
@@ -236,6 +254,17 @@ const [viewingPaper, setViewingPaper] = useState(null);
           industrialApplication: p.industrial_application,
           crossDomain: p.cross_domain,
           failedApproach: p.failed_approach,
+          formData: p.form_data ? {
+            priorWork: p.form_data.prior_work,
+            novelty: p.form_data.novelty,
+            unknownQuestions: p.form_data.unknown_questions,
+            failedApproach: p.form_data.failed_approach,
+            crossDomain: p.form_data.cross_domain,
+            abstractPrinciple: p.form_data.abstract_principle,
+            experimentalReason: p.form_data.experimental_reason,
+            scalingPossibility: p.form_data.scaling_possibility,
+            combinationPotential: p.form_data.combination_potential,
+          } : null,
         }));
         setPapers(normalized);
       } catch (error) {
@@ -799,6 +828,10 @@ const [viewingPaper, setViewingPaper] = useState(null);
     e.stopPropagation();
     setIsDragging(false);
     
+    if (!isLoggedIn) {
+      setShowLoginModal(true);
+      return;
+    }
     const file = e.dataTransfer.files[0];
     processFile(file);
   };
@@ -813,14 +846,14 @@ const [viewingPaper, setViewingPaper] = useState(null);
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          title: uploadedFile ? uploadedFile.name.replace('.pdf', '') : '新規論文',
-          title_en: 'New Research Paper',
-          authors: 'Kitagawa, H.',
-          year: new Date().getFullYear(),
-          field: '材料科学 (Materials Science)',
-          method: 'X線回折 (X-ray Diffraction)',
-          beamline: 'BL19B2',
-          application: '自動車産業 (Automotive)',
+          title: formData.title || (uploadedFile ? uploadedFile.name.replace('.pdf', '') : '新規論文'),
+          title_en: formData.title_en || formData.titleEn || '',
+          authors: formData.authors || '',
+          year: formData.year || new Date().getFullYear(),
+          field: formData.field || '材料科学 (Materials Science)',
+          method: formData.method || 'X線回折 (X-ray Diffraction)',
+          beamline: formData.beamline || 'BL19B2',
+          application: formData.application || '自動車産業 (Automotive)',
           main_conclusion: formData.mainConclusion || '',
           industrial_application: formData.industrialPain || '',
           cross_domain: formData.crossDomain || '',
@@ -853,6 +886,17 @@ const [viewingPaper, setViewingPaper] = useState(null);
         industrialApplication: newPaper.industrial_application,
         crossDomain: newPaper.cross_domain,
         failedApproach: newPaper.failed_approach,
+        formData: newPaper.form_data ? {
+          priorWork: newPaper.form_data.prior_work,
+          novelty: newPaper.form_data.novelty,
+          unknownQuestions: newPaper.form_data.unknown_questions,
+          failedApproach: newPaper.form_data.failed_approach,
+          crossDomain: newPaper.form_data.cross_domain,
+          abstractPrinciple: newPaper.form_data.abstract_principle,
+          experimentalReason: newPaper.form_data.experimental_reason,
+          scalingPossibility: newPaper.form_data.scaling_possibility,
+          combinationPotential: newPaper.form_data.combination_potential,
+        } : null,
       };
       setPapers(prevPapers => [normalized, ...prevPapers]);
     } catch (error) {
@@ -895,11 +939,66 @@ const [viewingPaper, setViewingPaper] = useState(null);
     
     return matchesSearch && matchesField && matchesMethod && matchesApplication && matchesBeamline && matchesYear;
   });
+  // Login Modal (variable, not component, to prevent focus loss)
+  const loginModal = showLoginModal ? (
+    <div className="fixed inset-0 z-50 flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.25)', backdropFilter: 'blur(4px)'}}>
+      <div className="bg-white rounded-2xl shadow-xl p-6" style={{width: '320px'}}>
+        <h2 className="text-xl font-bold text-gray-900 mb-1">ログイン</h2>
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 mb-4 text-xs text-gray-500">
+          <span className="font-semibold text-gray-700">Demo credentials</span><br/>
+          Username: <span className="font-mono text-gray-800">spring8</span> &nbsp;|&nbsp; Password: <span className="font-mono text-gray-800">article</span>
+        </div>
+        {loginError && (
+          <div className="mb-3 p-2 bg-red-50 border border-red-200 text-red-600 text-xs rounded">
+            {loginError}
+          </div>
+        )}
+        <div className="mb-3">
+          <label className="block text-xs font-semibold text-gray-600 mb-1">ユーザー名</label>
+          <input
+            type="text"
+            value={loginUsername}
+            onChange={(e) => setLoginUsername(e.target.value)}
+            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:border-red-800 focus:outline-none"
+            placeholder="username"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-xs font-semibold text-gray-600 mb-1">パスワード</label>
+          <input
+            type="password"
+            value={loginPassword}
+            onChange={(e) => setLoginPassword(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:border-red-800 focus:outline-none"
+            placeholder="password"
+          />
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={() => { setShowLoginModal(false); setLoginError(''); }}
+            className="flex-1 px-3 py-2 text-sm border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50"
+          >
+            キャンセル
+          </button>
+          <button
+            onClick={handleLogin}
+            className="flex-1 px-3 py-2 text-sm bg-red-800 text-white rounded-lg hover:bg-red-900 font-semibold"
+          >
+            ログイン
+          </button>
+        </div>
+      </div>
+    </div>
+  ) : null;
+
+
 
   // アップロードビュー (Upload View)
   if (currentView === 'upload') {
     return (
       <div className="min-h-screen bg-white">
+        {loginModal}
         <div className="max-w-full mx-auto">
           {/* Header */}
           <div className="bg-white border-b border-gray-200 px-8 py-4">
@@ -909,108 +1008,147 @@ const [viewingPaper, setViewingPaper] = useState(null);
               </h1>
               <div className="flex gap-3">
                 <button
-                  onClick={() => setCurrentView('search')}
+                  onClick={() => setCurrentView('upload')}
                   className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
                 >
-                  検索
+                  <Home className="w-4 h-4" />
                 </button>
-                <button className="px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium">
-                  ログイン
-                </button>
+                {isLoggedIn ? (
+  <div className="flex items-center gap-3">
+    <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
+    <button
+      onClick={() => setIsLoggedIn(false)}
+      className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium"
+    >
+      ログアウト
+    </button>
+  </div>
+) : (
+  <button
+    onClick={() => setShowLoginModal(true)}
+    className="px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium"
+  >
+    ログイン
+  </button>
+)}
               </div>
             </div>
           </div>
 
           {/* Main Content */}
-          <div className="max-w-4xl mx-auto p-8">
-            <div className="mb-8">
-              <h2 className="text-4xl font-serif text-gray-900 mb-2">研究論文アップロード</h2>
-              <p className="text-gray-600">多次元研究コンテキストグラフシステム</p>
+          <div className="mx-auto p-12">
+            <div className="text-center mb-16">
+              <h2 className="font-serif text-gray-900 mb-5" style={{fontSize: '52px'}}>多次元研究コンテキストグラフシステム</h2>
+              <p className="text-gray-400 tracking-wide" style={{fontSize: '19px'}}>Multi-Dimensional Research Context Graph System</p>
+              <div style={{marginBottom: '48px'}} />
             </div>
 
-            <div className="bg-white border-2 border-gray-300 rounded-lg p-12">
-              <div 
+            <div style={{display: 'flex', flexDirection: 'row', gap: '24px', margin: '0 auto', justifyContent: 'center', alignItems: 'stretch'}}>
+              {/* Search Card */}
+              <div
+                onClick={() => setCurrentView('search')}
+                style={{
+                  background: 'white',
+                  border: '1.5px solid #d1d5db',
+                  borderRadius: '20px',
+                  minHeight: '320px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  padding: '40px 24px',
+                  transition: 'box-shadow 0.2s',
+                  flex: '1',
+                  maxWidth: '320px',
+                }}
+                onMouseEnter={e => e.currentTarget.style.boxShadow='0 8px 32px rgba(0,0,0,0.10)'}
+                onMouseLeave={e => e.currentTarget.style.boxShadow='none'}
+              >
+                <Search style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />                <div style={{fontWeight: '700', fontSize: '20px', color: '#111', marginBottom: '8px'}}>
+研究を検索</div>
+                <div style={{color: '#9ca3af', fontSize: '15px', marginBottom: '14px'}}>Search Research</div>
+                <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>論文、産業応用、異分野応用を<br/>キーワードで検索できます</div>
+              </div>
+
+              {/* Upload Card */}
+              <div
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
-                className={`border-4 border-dashed rounded-lg p-16 text-center transition-all ${
-                  isDragging 
-                    ? 'border-blue-500 bg-blue-50' 
-                    : 'border-gray-300 bg-gray-50 hover:bg-gray-100'
-                }`}
+                style={{
+                  background: 'white',
+                  border: isDragging ? '1.5px solid #60a5fa' : '1.5px solid #d1d5db',
+                  borderRadius: '20px',
+                  minHeight: '320px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  padding: '40px 24px',
+                  transition: 'box-shadow 0.2s',
+                  flex: '1',
+                  maxWidth: '320px',
+                }}
+                onMouseEnter={e => e.currentTarget.style.boxShadow='0 8px 32px rgba(0,0,0,0.10)'}
+                onMouseLeave={e => e.currentTarget.style.boxShadow='none'}
               >
-                <Upload className={`w-20 h-20 mx-auto mb-6 transition-colors ${
-                  isDragging ? 'text-blue-500' : 'text-gray-400'
-                }`} />
-                <h3 className="text-2xl font-semibold text-gray-800 mb-3">
-                  {isDragging ? 'ここにドロップしてください' : '研究論文をアップロード'}
-                </h3>
-                <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-                  {isDragging ? (
-                    <span className="text-blue-600 font-semibold">ファイルをドロップ</span>
-                  ) : (
-                    <>
-                      PDFファイルをドラッグ&ドロップ、またはクリックしてアップロード<br/>
-                      <span className="text-sm">(Drag & drop or click to upload PDF)</span>
-                    </>
-                  )}
-                </p>
-                
-                <label className="inline-block">
+                <label style={{display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', width: '100%'}}>
                   <input
                     type="file"
                     accept=".pdf"
-                    onChange={handleFileUpload}
-                    className="hidden"
+                    onChange={isLoggedIn ? handleFileUpload : (e) => { e.preventDefault(); setShowLoginModal(true); }}
+                    style={{display: 'none'}}
+                    onClick={!isLoggedIn ? (e) => { e.preventDefault(); setShowLoginModal(true); } : undefined}
                   />
-                  <span className="px-8 py-3 bg-red-800 text-white rounded hover:bg-red-900 font-semibold cursor-pointer inline-block">
-                    PDFファイルを選択
-                  </span>
+                  {isProcessing
+                    ? <Loader style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} className="animate-spin" />
+                    : <Upload style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />
+                  }
+                  <div style={{fontWeight: '700', fontSize: '20px', color: '#111', marginBottom: '8px'}}>
+論文をアップロード</div>
+                  <div style={{color: '#9ca3af', fontSize: '15px', marginBottom: '14px'}}>Upload Paper</div>
+                  {isProcessing
+                    ? <div style={{color: '#9ca3af', fontSize: '13px'}}>AIが解析中...</div>
+                    : <>
+                        <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>研究論文をアップロードして<br/>データベースに登録</div>
+                        {!isLoggedIn && <div style={{color: '#f59e0b', fontSize: '13px', marginTop: '16px'}}>🔒 ログインが必要です</div>}
+                      </>
+                  }
                 </label>
-
-                {uploadedFile && (
-                  <div className="mt-8 inline-flex items-center gap-3 bg-white p-4 rounded-lg border border-gray-300">
-                    <FileText className="w-6 h-6 text-red-800" />
-                    <span className="font-semibold text-gray-800">{uploadedFile.name}</span>
-                  </div>
-                )}
               </div>
 
-              {isProcessing && (
-                <div className="mt-12 text-center">
-                  <Loader className="w-16 h-16 mx-auto animate-spin text-red-800 mb-6" />
-                  <p className="text-xl font-semibold text-gray-800 mb-2">
-                    AIが論文を解析中...
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    MDRCG情報を自動生成しています
-                  </p>
-                </div>
-              )}
+              {/* Press Release Card */}
+              <div
+                onClick={() => window.open('https://pressrelease-seven.vercel.app/', '_blank')}
+                style={{
+                  background: 'white',
+                  border: '1.5px solid #d1d5db',
+                  borderRadius: '20px',
+                  minHeight: '320px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  padding: '40px 24px',
+                  transition: 'box-shadow 0.2s',
+                  flex: '1',
+                  maxWidth: '320px',
+                }}
+                onMouseEnter={e => e.currentTarget.style.boxShadow='0 8px 32px rgba(0,0,0,0.10)'}
+                onMouseLeave={e => e.currentTarget.style.boxShadow='none'}
+              >
+                <FileText style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />
+                <div style={{fontWeight: '700', fontSize: '20px', color: '#111', marginBottom: '8px'}}>
+プレスリリース</div>
+                <div style={{color: '#9ca3af', fontSize: '15px', marginBottom: '14px'}}>Press Releases</div>
+                <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>SPring-8の最新<br/>プレスリリースを閲覧</div>
+              </div>
+
             </div>
 
-            {/* Instructions */}
-            <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-              <h4 className="font-semibold text-gray-900 mb-3">アップロード後の流れ</h4>
-              <ul className="space-y-2 text-sm text-gray-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-1">•</span>
-                  <span>AIが研究論文を分析し、重要な情報を抽出します</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-1">•</span>
-                  <span>自動生成されたMDRCGフォームを確認・編集できます</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-1">•</span>
-                  <span>あなたの研究が多次元で検索可能になります</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-1">•</span>
-                  <span>異分野との関連性が自動的に特定されます</span>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
@@ -1018,9 +1156,12 @@ const [viewingPaper, setViewingPaper] = useState(null);
   }
 
   // フォームビュー (Form View)
+
+  // フォームビュー (Form View)
   if (currentView === 'form') {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen" style={{backgroundColor: '#f0f0f0'}}>
+        {loginModal}
         <div className="max-w-full mx-auto">
           {/* Header */}
           <div className="bg-white border-b border-gray-200 px-8 py-4">
@@ -1029,15 +1170,25 @@ const [viewingPaper, setViewingPaper] = useState(null);
                 SPring-8 研究データベース
               </h1>
               <div className="flex gap-3">
-                <button
-                  onClick={() => setCurrentView('search')}
-                  className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
-                >
-                  検索
-                </button>
-                <button className="px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium">
-                  ログイン
-                </button>
+                
+                {isLoggedIn ? (
+  <div className="flex items-center gap-3">
+    <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
+    <button
+      onClick={() => setIsLoggedIn(false)}
+      className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium"
+    >
+      ログアウト
+    </button>
+  </div>
+) : (
+  <button
+    onClick={() => setShowLoginModal(true)}
+    className="px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium"
+  >
+    ログイン
+  </button>
+)}
               </div>
             </div>
           </div>
@@ -1417,9 +1568,24 @@ const [viewingPaper, setViewingPaper] = useState(null);
                 >
                   ← 検索結果に戻る
                 </button>
-                <button className="px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium">
-                  ログイン
-                </button>
+                {isLoggedIn ? (
+  <div className="flex items-center gap-3">
+    <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
+    <button
+      onClick={() => setIsLoggedIn(false)}
+      className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium"
+    >
+      ログアウト
+    </button>
+  </div>
+) : (
+  <button
+    onClick={() => setShowLoginModal(true)}
+    className="px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium"
+  >
+    ログイン
+  </button>
+)}
               </div>
             </div>
           </div>
@@ -1614,6 +1780,7 @@ const [viewingPaper, setViewingPaper] = useState(null);
   // 検索ビュー (Search View)
   return (
     <div className="min-h-screen bg-white">
+      {loginModal}
       <div className="max-w-full mx-auto">
         {/* Header */}
         <div className="bg-white border-b border-gray-200 px-8 py-4">
@@ -1624,13 +1791,28 @@ const [viewingPaper, setViewingPaper] = useState(null);
             <div className="flex gap-3">
               <button
                 onClick={() => setCurrentView('upload')}
-                className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
+                className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium flex items-center gap-1"
               >
-                論文登録 (Upload)
+                <Home className="w-4 h-4" />
               </button>
-              <button className="px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium">
-                Log in
-              </button>
+              {isLoggedIn ? (
+                <div className="flex items-center gap-3">
+                  <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
+                  <button
+                    onClick={() => setIsLoggedIn(false)}
+                    className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium"
+                  >
+                    ログアウト
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowLoginModal(true)}
+                  className="px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium"
+                >
+                  Log in
+                </button>
+              )}
             </div>
           </div>
 

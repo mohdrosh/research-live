@@ -1,6 +1,6 @@
 {
   "name": "spring8-mdrcg-system",
-  "homepage": "https://mohdrosh.github.io/research",
+  "homepage": "/research",
   "version": "1.0.0",
   "description": "SPring-8 Multi-Dimensional Research Context Graph System",
   "private": true,

@@ -48,7 +48,7 @@ const [loginError, setLoginError] = useState('');
       console.log('Starting PDF analysis...');
       console.log('PDF filename:', filename);
       
-      const response = await fetch('http://localhost:8000/api/analyze-pdf', {
+      const response = await fetch('https://spring8-backend.onrender.com/api/analyze-pdf', {
 
   method: 'POST',
   headers: {
@@ -241,7 +241,7 @@ const relationshipTypes = [
   React.useEffect(() => {
     const fetchPapers = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/search', {
+        const response = await fetch('https://spring8-backend.onrender.com/api/search', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ query: '', filters: {}, page: 1, page_size: 100 })
@@ -842,7 +842,7 @@ const relationshipTypes = [
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/papers', {
+      const response = await fetch('https://spring8-backend.onrender.com/api/papers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

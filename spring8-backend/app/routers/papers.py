@@ -77,3 +77,41 @@ async def delete_existing_paper(paper_id: str):
     deleted = await delete_paper(paper_id)
     if not deleted:
         raise HTTPException(status_code=404, detail=f"Paper {paper_id} not found")
+
+
+@router.patch("/{paper_id}/press-release-status")
+async def update_press_release_status(paper_id: str, payload: dict):
+    """Update press release status (reviewer only)."""
+    from app.database import get_db
+    from bson import ObjectId
+    from datetime import datetime, timezone
+    db = get_db()
+    status_value = payload.get("status")
+    if status_value not in ["none", "pending", "approved", "rejected"]:
+        raise HTTPException(status_code=400, detail="Invalid status")
+    try:
+        await db["papers"].update_one(
+            {"_id": ObjectId(paper_id)},
+            {"$set": {"press_release_status": status_value, "updated_at": datetime.now(timezone.utc)}}
+        )
+        return {"success": True}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.patch("/{paper_id}/press-release-url")
+async def update_press_release_url(paper_id: str, payload: dict):
+    """Save press release URL to paper."""
+    from app.database import get_db
+    from bson import ObjectId
+    from datetime import datetime, timezone
+    db = get_db()
+    url = payload.get("url")
+    try:
+        await db["papers"].update_one(
+            {"_id": ObjectId(paper_id)},
+            {"$set": {"press_release_url": url, "updated_at": datetime.now(timezone.utc)}}
+        )
+        return {"success": True}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

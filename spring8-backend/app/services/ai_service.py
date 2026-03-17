@@ -46,10 +46,16 @@ async def analyze_pdf(base64_data: str) -> dict:
         )
 
         text = response.text.strip()
-        if text.startswith("```"):
-            text = text.split("```")[1]
-            if text.startswith("json"):
-                text = text[4:]
+        # Remove markdown code blocks if present
+        if "```json" in text:
+            text = text.split("```json")[1].split("```")[0]
+        elif "```" in text:
+            text = text.split("```")[1].split("```")[0]
+        # Find JSON object boundaries
+        start = text.find('{')
+        end = text.rfind('}')
+        if start != -1 and end != -1:
+            text = text[start:end+1]
         text = text.strip()
         result = json.loads(text)
         # Convert any list fields to strings

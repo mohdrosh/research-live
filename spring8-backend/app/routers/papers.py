@@ -12,6 +12,7 @@ router = APIRouter()
 @router.post("/", response_model=PaperResponse, status_code=status.HTTP_201_CREATED)
 async def create_new_paper(paper: PaperCreate):
     """Register a new research paper in the database."""
+    print(f"PDF data received: {bool(paper.pdf_data)}, length: {len(paper.pdf_data) if paper.pdf_data else 0}")
     return await create_paper(paper)
 
 
@@ -41,6 +42,24 @@ async def get_paper_by_id(paper_id: str):
     if not paper:
         raise HTTPException(status_code=404, detail=f"Paper {paper_id} not found")
     return paper
+
+
+@router.get("/{paper_id}/pdf")
+async def get_paper_pdf(paper_id: str):
+    """Get the PDF data for a paper."""
+    from app.database import get_db
+    from bson import ObjectId
+    from fastapi.responses import Response
+    import base64
+    db = get_db()
+    try:
+        doc = await db["papers"].find_one({"_id": ObjectId(paper_id)}, {"pdf_data": 1})
+        if not doc or not doc.get("pdf_data"):
+            raise HTTPException(status_code=404, detail="PDF not found")
+        pdf_bytes = base64.b64decode(doc["pdf_data"])
+        return Response(content=pdf_bytes, media_type="application/pdf")
+    except Exception as e:
+        raise HTTPException(status_code=404, detail="PDF not found")
 
 
 @router.put("/{paper_id}", response_model=PaperResponse)

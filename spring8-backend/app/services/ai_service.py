@@ -53,7 +53,9 @@ async def analyze_pdf(base64_data: str) -> dict:
         text = text.strip()
         result = json.loads(text)
         # Convert any list fields to strings
-        for key in ['priorWork', 'unknownQuestions', 'failedApproach', 'crossDomain']:
+        for key in ['priorWork', 'unknownQuestions', 'failedApproach', 'crossDomain',
+                    'industrialPain', 'experimentalReason', 'combinationPotential',
+                    'novelty', 'abstractPrinciple', 'scalingPossibility', 'mainConclusion']:
             if key in result and isinstance(result[key], list):
                 result[key] = '\n'.join(result[key])
         return result

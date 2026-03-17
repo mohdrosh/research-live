@@ -36,6 +36,7 @@ const [viewingPaper, setViewingPaper] = useState(null);
   const [papers, setPapers] = useState([]);
   const [selectedRelatedPapers, setSelectedRelatedPapers] = useState([]);
   const [pdfText, setPdfText] = useState('');
+  const [pdfDataUrl, setPdfDataUrl] = useState('');
 const [isLoggedIn, setIsLoggedIn] = useState(false);
 const [showLoginModal, setShowLoginModal] = useState(false);
 const [loginUsername, setLoginUsername] = useState('');
@@ -48,7 +49,7 @@ const [loginError, setLoginError] = useState('');
       console.log('Starting PDF analysis...');
       console.log('PDF filename:', filename);
       
-      const response = await fetch('https://spring8-backend.onrender.com/api/analyze-pdf', {
+      const response = await fetch('https://spring8-backend.onrender.com/api/analyze-pdf/', {
 
   method: 'POST',
   headers: {
@@ -790,8 +791,13 @@ const relationshipTypes = [
           reader.readAsDataURL(file);
         });
         
-        // Call Claude API to analyze PDF
+                // Call Claude API to analyze PDF
         const analysis = await analyzePDF(base64Data, file.name);
+        
+        // Store PDF data URL for viewing later
+        const pdfUrl = 'data:application/pdf;base64,' + base64Data;
+        setPdfDataUrl(pdfUrl);
+        console.log('PDF URL stored in state, length:', pdfUrl.length);
         
         setFormData(analysis);
         setIsProcessing(false);
@@ -841,8 +847,9 @@ const relationshipTypes = [
   };
 
   const handleSubmit = async () => {
+    console.log('Submitting, has pdf:', !!pdfDataUrl, 'length:', pdfDataUrl.length);
     try {
-      const response = await fetch('https://spring8-backend.onrender.com/api/papers', {
+      const response = await fetch('https://spring8-backend.onrender.com/api/papers/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -858,6 +865,8 @@ const relationshipTypes = [
           industrial_application: formData.industrialPain || '',
           cross_domain: formData.crossDomain || '',
           failed_approach: formData.failedApproach || '',
+          pdf_data: pdfDataUrl ? pdfDataUrl.split(',')[1] : null,
+          _debug_has_pdf: !!formData._pdfDataUrl,
           form_data: {
             main_conclusion: formData.mainConclusion,
             prior_work: formData.priorWork,
@@ -886,6 +895,7 @@ const relationshipTypes = [
         industrialApplication: newPaper.industrial_application,
         crossDomain: newPaper.cross_domain,
         failedApproach: newPaper.failed_approach,
+        _pdfDataUrl: formData._pdfDataUrl || null,
         formData: newPaper.form_data ? {
           priorWork: newPaper.form_data.prior_work,
           novelty: newPaper.form_data.novelty,
@@ -907,6 +917,7 @@ const relationshipTypes = [
     setUploadedFile(null);
     setSelectedRelatedPapers([]);
     setPdfText('');
+    setPdfDataUrl('');
     setCurrentView('search');
   };
 
@@ -1144,7 +1155,7 @@ const relationshipTypes = [
                 <div style={{fontWeight: '700', fontSize: '20px', color: '#111', marginBottom: '8px'}}>
 プレスリリース</div>
                 <div style={{color: '#9ca3af', fontSize: '15px', marginBottom: '14px'}}>Press Releases</div>
-                <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>SPring-8の最新<br/>プレスリリースを閲覧</div>
+                <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>SPring-8の最新<br/>プレスリリースを作成・閲覧</div>
               </div>
 
             </div>
@@ -1609,11 +1620,14 @@ const relationshipTypes = [
               {/* Action Buttons */}
               <div className="flex gap-3 mb-8 pb-8 border-b border-gray-300">
                 <button
-                  onClick={() => {
-                    if (viewingPaper.uploadedFile) {
-                      const fileURL = URL.createObjectURL(viewingPaper.uploadedFile);
-                      window.open(fileURL, '_blank');
-                    } else {
+                  onClick={async () => {
+                    try {
+                      const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/pdf`);
+                      if (!res.ok) throw new Error('not found');
+                      const blob = await res.blob();
+                      const url = URL.createObjectURL(blob);
+                      window.open(url, '_blank');
+                    } catch {
                       alert('この論文のPDFファイルは利用できません');
                     }
                   }}
@@ -2185,11 +2199,14 @@ const relationshipTypes = [
                   
                   <div className="flex-shrink-0 flex flex-col gap-2 w-32">
                     <button 
-                      onClick={() => {
-                        if (paper.uploadedFile) {
-                          const fileURL = URL.createObjectURL(paper.uploadedFile);
-                          window.open(fileURL, '_blank');
-                        } else {
+                      onClick={async () => {
+                        try {
+                          const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                          if (!res.ok) throw new Error('not found');
+                          const blob = await res.blob();
+                          const url = URL.createObjectURL(blob);
+                          window.open(url, '_blank');
+                        } catch {
                           alert('この論文のPDFファイルは利用できません');
                         }
                       }}
@@ -2203,11 +2220,22 @@ const relationshipTypes = [
                     <button className="px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-50 font-medium">
                       引用
                     </button>
-                    {paper.uploadedFile && (
+                    {isLoggedIn && (
                       <button 
-                        onClick={() => {
+                        onClick={async () => {
                           if (window.confirm('この論文を削除しますか？')) {
-                            setPapers(prevPapers => prevPapers.filter(p => p.id !== paper.id));
+                            try {
+                              const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}`, {
+                                method: 'DELETE',
+                              });
+                              if (res.ok) {
+                                setPapers(prevPapers => prevPapers.filter(p => p.id !== paper.id));
+                              } else {
+                                alert('削除に失敗しました');
+                              }
+                            } catch {
+                              alert('削除に失敗しました');
+                            }
                           }
                         }}
                         className="px-4 py-2 border border-red-300 text-red-700 text-sm rounded hover:bg-red-50 font-medium"

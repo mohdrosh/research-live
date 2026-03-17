@@ -70,7 +70,7 @@ async def search_papers(request: SearchRequest) -> SearchResponse:
 
     cursor = (
         db[COLLECTION]
-        .find(query)
+        .find(query, {"pdf_data": 0})
         .sort("created_at", -1)
         .skip(skip)
         .limit(request.page_size)

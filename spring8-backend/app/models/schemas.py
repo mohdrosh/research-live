@@ -62,6 +62,7 @@ class PaperCreate(BaseModel):
     failed_approach: Optional[str] = ""
     form_data: Optional[MDRCGFormData] = None
     related_papers: Optional[List[RelatedPaper]] = []
+    pdf_data: Optional[str] = None
 
 
 # ---------- Paper Update ----------
@@ -101,6 +102,7 @@ class PaperResponse(BaseModel):
     failed_approach: Optional[str] = ""
     form_data: Optional[MDRCGFormData] = None
     related_papers: Optional[List[RelatedPaper]] = []
+    pdf_data: Optional[str] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 

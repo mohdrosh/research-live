@@ -90,9 +90,12 @@ async def update_press_release_status(paper_id: str, payload: dict):
     if status_value not in ["none", "pending", "approved", "rejected"]:
         raise HTTPException(status_code=400, detail="Invalid status")
     try:
+        update_fields = {"press_release_status": status_value, "updated_at": datetime.now(timezone.utc)}
+        if payload.get("note") is not None:
+            update_fields["press_release_note"] = payload.get("note")
         await db["papers"].update_one(
             {"_id": ObjectId(paper_id)},
-            {"$set": {"press_release_status": status_value, "updated_at": datetime.now(timezone.utc)}}
+            {"$set": update_fields}
         )
         return {"success": True}
     except Exception as e:

@@ -39,6 +39,7 @@ const [viewingPaper, setViewingPaper] = useState(null);
   const [pdfDataUrl, setPdfDataUrl] = useState('');
 const [isLoggedIn, setIsLoggedIn] = useState(false);
 const [isReviewer, setIsReviewer] = useState(false);
+const [prRequestNote, setPrRequestNote] = useState('');
 const [showLoginModal, setShowLoginModal] = useState(false);
 const [loginUsername, setLoginUsername] = useState('');
 const [loginPassword, setLoginPassword] = useState('');
@@ -266,6 +267,7 @@ const relationshipTypes = [
           failedApproach: p.failed_approach,
           press_release_status: p.press_release_status || 'none',
           press_release_url: p.press_release_url || null,
+          press_release_note: p.press_release_note || null,
           formData: p.form_data ? {
             priorWork: p.form_data.prior_work,
             novelty: p.form_data.novelty,
@@ -1793,23 +1795,32 @@ const relationshipTypes = [
 
               {/* No request yet */}
               {(!viewingPaper.press_release_status || viewingPaper.press_release_status === 'none') && (
-                <div className="flex items-center gap-4">
-                  <p className="text-sm text-gray-600">プレスリリースの申請がまだありません。</p>
+                <div>
+                  <p className="text-sm text-gray-600 mb-3">プレスリリースの申請がまだありません。</p>
                   {isLoggedIn && !isReviewer && (
-                    <button
-                      onClick={async () => {
-                        await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
-                          method: 'PATCH',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({ status: 'pending' })
-                        });
-                        setViewingPaper({ ...viewingPaper, press_release_status: 'pending' });
-                        setPapers(papers.map(p => p.id === viewingPaper.id ? { ...p, press_release_status: 'pending' } : p));
-                      }}
-                      className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 font-medium"
-                    >
-                      申請する
-                    </button>
+                    <div className="space-y-3">
+                      <textarea
+                        value={prRequestNote}
+                        onChange={(e) => setPrRequestNote(e.target.value)}
+                        placeholder="審査担当者へのメッセージを入力してください（任意）例：この研究は一般向けに発信する価値があります..."
+                        className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 min-h-[80px] bg-white"
+                      />
+                      <button
+                        onClick={async () => {
+                          await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ status: 'pending', note: prRequestNote })
+                          });
+                          setViewingPaper({ ...viewingPaper, press_release_status: 'pending', press_release_note: prRequestNote });
+                          setPapers(papers.map(p => p.id === viewingPaper.id ? { ...p, press_release_status: 'pending', press_release_note: prRequestNote } : p));
+                          setPrRequestNote('');
+                        }}
+                        className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 font-medium"
+                      >
+                        申請する
+                      </button>
+                    </div>
                   )}
                 </div>
               )}
@@ -1817,9 +1828,20 @@ const relationshipTypes = [
               {/* Pending */}
               {viewingPaper.press_release_status === 'pending' && (
                 <div>
-                  <p className="text-sm text-yellow-700 font-semibold mb-3">⏳ 審査中です...</p>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-100 border border-yellow-300 text-yellow-800 text-sm font-semibold rounded-full">
+                      ⏳ 申請済み・審査中
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-500 mb-3">審査担当者が確認次第、結果をお知らせします。</p>
+                  {viewingPaper.press_release_note && (
+                    <div className="mb-4 p-3 bg-white border border-gray-200 rounded text-sm text-gray-700">
+                      <span className="font-semibold text-gray-500 text-xs block mb-1">申請メッセージ:</span>
+                      {viewingPaper.press_release_note}
+                    </div>
+                  )}
                   {isReviewer && (
-                    <div className="flex gap-3 mt-2">
+                    <div className="flex gap-3 mt-3">
                       <button
                         onClick={async () => {
                           await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
@@ -1830,9 +1852,9 @@ const relationshipTypes = [
                           setViewingPaper({ ...viewingPaper, press_release_status: 'approved' });
                           setPapers(papers.map(p => p.id === viewingPaper.id ? { ...p, press_release_status: 'approved' } : p));
                         }}
-                        className="px-4 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 font-medium"
+                        className="px-5 py-2.5 bg-green-500 text-white text-sm font-bold rounded-lg hover:bg-green-600 border-2 border-green-600 shadow-sm flex items-center gap-2"
                       >
-                        ✅ 承認する
+                        ✓ 承認する
                       </button>
                       <button
                         onClick={async () => {
@@ -1844,9 +1866,9 @@ const relationshipTypes = [
                           setViewingPaper({ ...viewingPaper, press_release_status: 'rejected' });
                           setPapers(papers.map(p => p.id === viewingPaper.id ? { ...p, press_release_status: 'rejected' } : p));
                         }}
-                        className="px-4 py-2 bg-red-600 text-white text-sm rounded hover:bg-red-700 font-medium"
+                        className="px-5 py-2.5 bg-white text-red-600 text-sm font-bold rounded-lg hover:bg-red-50 border-2 border-red-500 shadow-sm flex items-center gap-2"
                       >
-                        ❌ 却下する
+                        ✕ 却下する
                       </button>
                     </div>
                   )}
@@ -1855,23 +1877,36 @@ const relationshipTypes = [
 
               {/* Rejected */}
               {viewingPaper.press_release_status === 'rejected' && (
-                <div className="flex items-center gap-4">
-                  <p className="text-sm text-red-600 font-semibold">❌ 申請が却下されました。</p>
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-100 border border-red-300 text-red-700 text-sm font-semibold rounded-full">
+                      ✕ 申請が却下されました
+                    </span>
+                  </div>
                   {isLoggedIn && !isReviewer && (
-                    <button
-                      onClick={async () => {
-                        await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
-                          method: 'PATCH',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({ status: 'pending' })
-                        });
-                        setViewingPaper({ ...viewingPaper, press_release_status: 'pending' });
-                        setPapers(papers.map(p => p.id === viewingPaper.id ? { ...p, press_release_status: 'pending' } : p));
-                      }}
-                      className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 font-medium"
-                    >
-                      再申請する
-                    </button>
+                    <div className="space-y-3 mt-3">
+                      <textarea
+                        value={prRequestNote}
+                        onChange={(e) => setPrRequestNote(e.target.value)}
+                        placeholder="再申請のメッセージを入力してください（任意）"
+                        className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 min-h-[80px] bg-white"
+                      />
+                      <button
+                        onClick={async () => {
+                          await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ status: 'pending', note: prRequestNote })
+                          });
+                          setViewingPaper({ ...viewingPaper, press_release_status: 'pending', press_release_note: prRequestNote });
+                          setPapers(papers.map(p => p.id === viewingPaper.id ? { ...p, press_release_status: 'pending', press_release_note: prRequestNote } : p));
+                          setPrRequestNote('');
+                        }}
+                        className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 font-medium"
+                      >
+                        再申請する
+                      </button>
+                    </div>
                   )}
                 </div>
               )}
@@ -1879,36 +1914,43 @@ const relationshipTypes = [
               {/* Approved */}
               {viewingPaper.press_release_status === 'approved' && (
                 <div>
-                  <p className="text-sm text-green-700 font-semibold mb-3">✅ 承認されました！</p>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 border border-green-300 text-green-700 text-sm font-semibold rounded-full">
+                      ✓ 承認されました
+                    </span>
+                  </div>
                   {viewingPaper.press_release_url ? (
                     <a href={viewingPaper.press_release_url} target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 font-medium">
                       📰 プレスリリースを見る
                     </a>
                   ) : (
                     isLoggedIn && !isReviewer && (
-                      <div className="flex gap-2 items-center mt-2">
-                        <input
-                          type="text"
-                          placeholder="プレスリリースのURLを貼り付け..."
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500"
-                          id="pr-url-input"
-                        />
-                        <button
-                          onClick={async () => {
-                            const url = document.getElementById('pr-url-input').value.trim();
-                            if (!url) return;
-                            await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-url`, {
-                              method: 'PATCH',
-                              headers: { 'Content-Type': 'application/json' },
-                              body: JSON.stringify({ url })
-                            });
-                            setViewingPaper({ ...viewingPaper, press_release_url: url });
-                            setPapers(papers.map(p => p.id === viewingPaper.id ? { ...p, press_release_url: url } : p));
-                          }}
-                          className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 font-medium"
-                        >
-                          保存
-                        </button>
+                      <div className="space-y-2 mt-2">
+                        <p className="text-xs text-gray-500">プレスリリースを作成後、URLをこちらに登録してください。</p>
+                        <div className="flex gap-2 items-center">
+                          <input
+                            type="text"
+                            placeholder="プレスリリースのURLを貼り付け..."
+                            className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500"
+                            id="pr-url-input"
+                          />
+                          <button
+                            onClick={async () => {
+                              const url = document.getElementById('pr-url-input').value.trim();
+                              if (!url) return;
+                              await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-url`, {
+                                method: 'PATCH',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ url })
+                              });
+                              setViewingPaper({ ...viewingPaper, press_release_url: url });
+                              setPapers(papers.map(p => p.id === viewingPaper.id ? { ...p, press_release_url: url } : p));
+                            }}
+                            className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 font-medium"
+                          >
+                            保存
+                          </button>
+                        </div>
                       </div>
                     )
                   )}
@@ -2329,12 +2371,24 @@ const relationshipTypes = [
                       ...{paper.mainConclusion.substring(0, 150)}...
                     </p>
                     
-                    <button
-                      onClick={() => setViewingPaper(paper)}
-                      className="text-sm text-blue-700 hover:underline font-medium"
-                    >
-                      詳細を表示
-                    </button>
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <button
+                        onClick={() => setViewingPaper(paper)}
+                        className="text-sm text-blue-700 hover:underline font-medium"
+                      >
+                        詳細を表示
+                      </button>
+                      {paper.press_release_url && (
+                        <a href={paper.press_release_url} target="_blank" rel="noopener noreferrer" className="text-sm text-white bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 font-medium">
+                          📰 プレスリリース
+                        </a>
+                      )}
+                      {paper.press_release_status === 'pending' && (
+                        <span className="text-xs text-yellow-700 bg-yellow-100 border border-yellow-300 px-2 py-1 rounded-full font-medium">
+                          ⏳ 審査中
+                        </span>
+                      )}
+                    </div>
                   </div>
                   
                   <div className="flex-shrink-0 flex flex-col gap-2 w-32">

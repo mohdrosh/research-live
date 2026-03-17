@@ -65,6 +65,7 @@ class PaperCreate(BaseModel):
     pdf_data: Optional[str] = None
     press_release_status: Optional[str] = "none"
     press_release_url: Optional[str] = None
+    press_release_note: Optional[str] = None
 
 
 # ---------- Paper Update ----------
@@ -107,6 +108,7 @@ class PaperResponse(BaseModel):
     pdf_data: Optional[str] = None
     press_release_status: Optional[str] = "none"
     press_release_url: Optional[str] = None
+    press_release_note: Optional[str] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 

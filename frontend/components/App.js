@@ -1062,7 +1062,7 @@ const relationshipTypes = [
           {/* Main Content */}
           <div className="mx-auto p-12">
             <div className="text-center mb-16">
-              <h2 className="font-serif text-gray-900 mb-5" style={{fontSize: '52px'}}>多次元研究コンテキストグラフシステム</h2>
+              <h2 className="font-serif text-gray-900 mb-5" style={{fontSize: '52px'}}>SPring-8 研究データベース</h2>
               <p className="text-gray-400 tracking-wide" style={{fontSize: '19px'}}>Multi-Dimensional Research Context Graph System</p>
               <div style={{marginBottom: '48px'}} />
             </div>
@@ -1165,7 +1165,7 @@ const relationshipTypes = [
                 onMouseEnter={e => e.currentTarget.style.boxShadow='0 8px 32px rgba(0,0,0,0.10)'}
                 onMouseLeave={e => e.currentTarget.style.boxShadow='none'}
               >
-                <FileText style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />
+                <User style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />
                 <div style={{fontWeight: '700', fontSize: '20px', color: '#111', marginBottom: '8px'}}>マイページ</div>
                 <div style={{color: '#9ca3af', fontSize: '15px', marginBottom: '14px'}}>My Page</div>
                 <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>投稿した論文と<br/>プレスリリースの状態</div>
@@ -1193,9 +1193,8 @@ const relationshipTypes = [
                 onMouseEnter={e => e.currentTarget.style.boxShadow='0 8px 32px rgba(0,0,0,0.10)'}
                 onMouseLeave={e => e.currentTarget.style.boxShadow='none'}
               >
-                <User style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />
-                <div style={{fontWeight: '700', fontSize: '20px', color: '#111', marginBottom: '8px'}}>
-マイページ</div>
+                <FileText style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />
+                <div style={{fontWeight: '700', fontSize: '20px', color: '#111', marginBottom: '8px'}}>プレスリリースを見る</div>
                 <div style={{color: '#9ca3af', fontSize: '15px', marginBottom: '14px'}}>View Press Releases</div>
                 <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>SPring-8の最新<br/>プレスリリースを閲覧</div>
               </div>

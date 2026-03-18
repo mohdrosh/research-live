@@ -1028,7 +1028,7 @@ const relationshipTypes = [
           <div className="bg-white border-b border-gray-200 px-8 py-4">
             <div className="flex items-center justify-between mb-6">
               <h1 className="text-2xl font-bold text-gray-900">
-                SPring-8 研究データベース
+                SPring-8-II　特設サイト
               </h1>
               <div className="flex gap-3">
                 <button

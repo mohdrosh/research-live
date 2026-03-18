@@ -1028,7 +1028,7 @@ const relationshipTypes = [
           <div className="bg-white border-b border-gray-200 px-8 py-4">
             <div className="flex items-center justify-between mb-6">
               <h1 className="text-2xl font-bold text-gray-900">
-                SPring-8-II 特設サイト
+                SPring-8 研究データベース
               </h1>
               <div className="flex gap-3">
                 <button
@@ -1062,7 +1062,7 @@ const relationshipTypes = [
           {/* Main Content */}
           <div className="mx-auto p-12">
             <div className="text-center mb-16">
-              <h2 className="font-serif text-gray-900 mb-5" style={{fontSize: '52px'}}>SPring-8-II 特設サイト</h2>
+              <h2 className="font-serif text-gray-900 mb-5" style={{fontSize: '52px'}}>SPring-8 研究データベース</h2>
               <p className="text-gray-400 tracking-wide" style={{fontSize: '19px'}}>Multi-Dimensional Research Context Graph System</p>
               <div style={{marginBottom: '48px'}} />
             </div>
@@ -1216,7 +1216,7 @@ const relationshipTypes = [
         <div className="max-w-full mx-auto">
           <div className="bg-white border-b border-gray-200 px-8 py-4">
             <div className="flex items-center justify-between mb-6">
-              <h1 className="text-2xl font-bold text-gray-900">SPring-8-II 特設サイト</h1>
+              <h1 className="text-2xl font-bold text-gray-900">SPring-8 研究データベース</h1>
               <div className="flex gap-3">
                 <button onClick={() => setCurrentView('upload')} className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium flex items-center gap-1">
                   <Home className="w-4 h-4" />
@@ -1302,7 +1302,7 @@ const relationshipTypes = [
           <div className="bg-white border-b border-gray-200 px-8 py-4">
             <div className="flex items-center justify-between mb-6">
               <h1 className="text-2xl font-bold text-gray-900">
-                SPring-8-II 特設サイト
+                SPring-8 研究データベース
               </h1>
               <div className="flex gap-3">
                 
@@ -1694,7 +1694,7 @@ const relationshipTypes = [
           <div className="bg-white border-b border-gray-200 px-8 py-4">
             <div className="flex items-center justify-between mb-6">
               <h1 className="text-2xl font-bold text-gray-900">
-                SPring-8-II 特設サイト
+                SPring-8 研究データベース
               </h1>
               <div className="flex gap-3">
                 <button

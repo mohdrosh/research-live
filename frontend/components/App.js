@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Upload, Search, FileText, Brain, Loader, ChevronDown, ChevronUp, Filter, X, Link2, Home } from 'lucide-react';
 
 const App = () => {
-  const [currentView, setCurrentView] = useState('upload'); // 'upload', 'form', 'search'
+  const [currentView, setCurrentView] = useState('upload'); // 'upload', 'form', 'search', 'mypage'
   const [uploadedFile, setUploadedFile] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [formData, setFormData] = useState({});
@@ -1143,9 +1143,38 @@ const relationshipTypes = [
                 </label>
               </div>
 
+              {/* My Page Card */}
+              {isLoggedIn && (
+              <div
+                onClick={() => setCurrentView('mypage')}
+                style={{
+                  background: 'white',
+                  border: '1.5px solid #d1d5db',
+                  borderRadius: '20px',
+                  minHeight: '320px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  padding: '40px 24px',
+                  transition: 'box-shadow 0.2s',
+                  flex: '1',
+                  maxWidth: '320px',
+                }}
+                onMouseEnter={e => e.currentTarget.style.boxShadow='0 8px 32px rgba(0,0,0,0.10)'}
+                onMouseLeave={e => e.currentTarget.style.boxShadow='none'}
+              >
+                <FileText style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />
+                <div style={{fontWeight: '700', fontSize: '20px', color: '#111', marginBottom: '8px'}}>マイページ</div>
+                <div style={{color: '#9ca3af', fontSize: '15px', marginBottom: '14px'}}>My Page</div>
+                <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>投稿した論文と<br/>プレスリリースの状態</div>
+              </div>
+              )}
+
               {/* Press Release Card */}
               <div
-                onClick={() => window.open('https://pressrelease-seven.vercel.app/', '_blank')}
+                onClick={() => window.open('https://pressrelease-seven.vercel.app/?view=releases', '_blank')}
                 style={{
                   background: 'white',
                   border: '1.5px solid #d1d5db',
@@ -1166,13 +1195,96 @@ const relationshipTypes = [
               >
                 <FileText style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />
                 <div style={{fontWeight: '700', fontSize: '20px', color: '#111', marginBottom: '8px'}}>
-プレスリリース</div>
-                <div style={{color: '#9ca3af', fontSize: '15px', marginBottom: '14px'}}>Press Releases</div>
-                <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>SPring-8の最新<br/>プレスリリースを作成・閲覧</div>
+プレスリリースを見る</div>
+                <div style={{color: '#9ca3af', fontSize: '15px', marginBottom: '14px'}}>View Press Releases</div>
+                <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>SPring-8の最新<br/>プレスリリースを閲覧</div>
               </div>
 
             </div>
 
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // マイページビュー (My Page View)
+  if (currentView === 'mypage') {
+    const myPapers = papers; // all papers since we don't have per-user tracking yet
+    return (
+      <div className="min-h-screen bg-white">
+        {loginModal}
+        <div className="max-w-full mx-auto">
+          <div className="bg-white border-b border-gray-200 px-8 py-4">
+            <div className="flex items-center justify-between mb-6">
+              <h1 className="text-2xl font-bold text-gray-900">SPring-8 研究データベース</h1>
+              <div className="flex gap-3">
+                <button onClick={() => setCurrentView('upload')} className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium flex items-center gap-1">
+                  <Home className="w-4 h-4" />
+                </button>
+                {isLoggedIn ? (
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
+                    <button onClick={() => { setIsLoggedIn(false); setIsReviewer(false); }} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">ログアウト</button>
+                  </div>
+                ) : (
+                  <button onClick={() => setShowLoginModal(true)} className="px-4 py-2 text-sm bg-red-800 text-white rounded hover:bg-red-900 font-medium">ログイン</button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-4xl mx-auto p-8">
+            <div className="mb-8">
+              <h2 className="text-3xl font-serif text-gray-900 mb-2">マイページ</h2>
+              <p className="text-gray-500 text-sm">投稿した論文とプレスリリース申請の状態一覧</p>
+            </div>
+
+            <div className="space-y-4">
+              {myPapers.length === 0 ? (
+                <div className="text-center py-16 text-gray-400">まだ論文が登録されていません</div>
+              ) : (
+                myPapers.map(paper => {
+                  const status = paper.press_release_status || 'none';
+                  const statusConfig = {
+                    none: { label: '未申請', color: 'bg-gray-100 text-gray-600 border-gray-200' },
+                    pending: { label: '⏳ 審査中', color: 'bg-yellow-100 text-yellow-700 border-yellow-300' },
+                    approved: { label: '✅ 承認済み', color: 'bg-green-100 text-green-700 border-green-300' },
+                    rejected: { label: '❌ 却下', color: 'bg-red-100 text-red-700 border-red-300' },
+                  };
+                  const s = statusConfig[status] || statusConfig.none;
+                  return (
+                    <div key={paper.id} className="bg-white border border-gray-200 rounded-lg p-5 flex items-start justify-between gap-4 hover:shadow-sm transition-shadow">
+                      <div className="flex-1">
+                        <h3
+                          onClick={() => { setViewingPaper(paper); setCurrentView('search'); }}
+                          className="text-base font-serif text-gray-900 hover:underline cursor-pointer mb-1"
+                        >
+                          {paper.title}
+                        </h3>
+                        <p className="text-xs text-gray-500 mb-3">{paper.authors} · {paper.year}</p>
+                        <div className="flex items-center gap-3 flex-wrap">
+                          <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${s.color}`}>
+                            プレスリリース: {s.label}
+                          </span>
+                          {status === 'approved' && paper.press_release_url && (
+                            <a href={paper.press_release_url} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">
+                              📰 リリースを見る
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => { setViewingPaper(paper); setCurrentView('search'); }}
+                        className="px-3 py-1.5 text-xs border border-gray-300 text-gray-600 rounded hover:bg-gray-50 font-medium flex-shrink-0"
+                      >
+                        詳細
+                      </button>
+                    </div>
+                  );
+                })
+              )}
+            </div>
           </div>
         </div>
       </div>

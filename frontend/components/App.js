@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, Search, FileText, Brain, Loader, ChevronDown, ChevronUp, Filter, X, Link2, Home } from 'lucide-react';
+import { Upload, Search, FileText, Brain, Loader, ChevronDown, ChevronUp, Filter, X, Link2, Home, User } from 'lucide-react';
 
 const App = () => {
   const [currentView, setCurrentView] = useState('upload'); // 'upload', 'form', 'search', 'mypage'
@@ -1193,9 +1193,9 @@ const relationshipTypes = [
                 onMouseEnter={e => e.currentTarget.style.boxShadow='0 8px 32px rgba(0,0,0,0.10)'}
                 onMouseLeave={e => e.currentTarget.style.boxShadow='none'}
               >
-                <FileText style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />
+                <User style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />
                 <div style={{fontWeight: '700', fontSize: '20px', color: '#111', marginBottom: '8px'}}>
-プレスリリースを見る</div>
+マイページ</div>
                 <div style={{color: '#9ca3af', fontSize: '15px', marginBottom: '14px'}}>View Press Releases</div>
                 <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>SPring-8の最新<br/>プレスリリースを閲覧</div>
               </div>

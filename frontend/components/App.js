@@ -51,7 +51,7 @@ const [loginError, setLoginError] = useState('');
       console.log('Starting PDF analysis...');
       console.log('PDF filename:', filename);
       
-      const response = await fetch('https://spring8-backend.onrender.com/api/analyze-pdf/', {
+      const response = await fetch('https://publicchemical.spring8.or.jp/research/api/analyze-pdf/', {
 
   method: 'POST',
   headers: {
@@ -252,7 +252,7 @@ const relationshipTypes = [
   React.useEffect(() => {
     const fetchPapers = async () => {
       try {
-        const response = await fetch('https://spring8-backend.onrender.com/api/search', {
+        const response = await fetch('https://publicchemical.spring8.or.jp/research/api/search', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ query: '', filters: {}, page: 1, page_size: 100 })
@@ -862,7 +862,7 @@ const relationshipTypes = [
   const handleSubmit = async () => {
     console.log('Submitting, has pdf:', !!pdfDataUrl, 'length:', pdfDataUrl.length);
     try {
-      const response = await fetch('https://spring8-backend.onrender.com/api/papers/', {
+      const response = await fetch('https://publicchemical.spring8.or.jp/research/api/papers/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1174,7 +1174,7 @@ const relationshipTypes = [
 
               {/* Press Release Card */}
               <div
-                onClick={() => window.open('https://pressrelease-seven.vercel.app/?view=releases', '_blank')}
+                onClick={() => window.open('https://publicchemical.spring8.or.jp/pressrelease', '_blank')}
                 style={{
                   background: 'white',
                   border: '1.5px solid #d1d5db',
@@ -1746,7 +1746,7 @@ const relationshipTypes = [
                 <button
                   onClick={async () => {
                     try {
-                      const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/pdf`);
+                      const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/pdf`);
                       if (!res.ok) throw new Error('not found');
                       const blob = await res.blob();
                       const url = URL.createObjectURL(blob);
@@ -1918,7 +1918,7 @@ const relationshipTypes = [
                       />
                       <button
                         onClick={async () => {
-                          await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'pending', note: prRequestNote })
@@ -1955,7 +1955,7 @@ const relationshipTypes = [
                     <div className="flex gap-3 mt-3">
                       <button
                         onClick={async () => {
-                          await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'approved' })
@@ -1969,7 +1969,7 @@ const relationshipTypes = [
                       </button>
                       <button
                         onClick={async () => {
-                          await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'rejected' })
@@ -2004,7 +2004,7 @@ const relationshipTypes = [
                       />
                       <button
                         onClick={async () => {
-                          await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'pending', note: prRequestNote })
@@ -2049,7 +2049,7 @@ const relationshipTypes = [
                             onClick={async () => {
                               const url = document.getElementById('pr-url-input').value.trim();
                               if (!url) return;
-                              await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-url`, {
+                              await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-url`, {
                                 method: 'PATCH',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ url })
@@ -2506,7 +2506,7 @@ const relationshipTypes = [
                     <button 
                       onClick={async () => {
                         try {
-                          const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                          const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}/pdf`);
                           if (!res.ok) throw new Error('not found');
                           const blob = await res.blob();
                           const url = URL.createObjectURL(blob);
@@ -2530,7 +2530,7 @@ const relationshipTypes = [
                         onClick={async () => {
                           if (window.confirm('この論文を削除しますか？')) {
                             try {
-                              const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}`, {
+                              const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}`, {
                                 method: 'DELETE',
                               });
                               if (res.ok) {

@@ -1282,75 +1282,10 @@ const relationshipTypes = [
                         {/* Create press release button if not yet applied */}
                         {(status === 'none' || status === 'rejected') && (
                           <button
-                            onClick={async () => {
-                              try {
-                                // Show loading state
-                                setPapers(prev => prev.map(p => p.id === paper.id ? {...p, _prLoading: true} : p));
-                                
-                                // Fetch PDF from spring8 backend
-                                const pdfRes = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
-                                if (!pdfRes.ok) throw new Error('PDFが見つかりません');
-                                const pdfBlob = await pdfRes.blob();
-                                
-                                // Convert to base64
-                                const base64 = await new Promise((resolve, reject) => {
-                                  const reader = new FileReader();
-                                  reader.onload = () => resolve(reader.result.split(',')[1]);
-                                  reader.onerror = reject;
-                                  reader.readAsDataURL(pdfBlob);
-                                });
-
-                                // Call press release backend to generate PR
-                                const sys = `あなたはSPring-8・SACLAの研究成果を一般市民・報道機関向けに伝える、日本語サイエンスコミュニケーションの専門家です。実際のSPring-8公式プレスリリースと同じ形式・水準で、学術論文をもとに完全な日本語プレスリリース原稿を生成してください。【絶対に守るルール】1. 必ず有効なJSONのみを返してください。コードブロック・前置き・説明文は一切不要です。2. background・results・futureは各セクション必ず4〜6段落。3. glossaryの各用語は必ず本文中に登場させること。4. summaryは5〜6文で。出力するJSONの構造: {"title":"一般向けの魅力的な見出し","date":"発表日","institution":"研究機関名","summary":"5〜6文の詳細要約","background":"研究背景（4〜6段落、\\n区切り）","results":"研究内容と成果（4〜6段落、\\n区切り）","future":"今後の展開（2〜3段落、\\n区切り）","significance":[{"icon":"🏥","text":"意義"}],"glossary":[{"term":"用語","definition":"説明"}],"figureConcepts":[{"title":"図タイトル","description":"説明"}],"paperInfo":{"title":"論文タイトル","authors":"著者","journal":"掲載誌","doi":"DOI"},"quote":{"text":"研究者コメント","author":"氏名・所属"}}`;
-
-                                const prRes = await fetch('https://pressrelease-tmo5.onrender.com', {
-                                  method: 'POST',
-                                  headers: { 'Content-Type': 'application/json' },
-                                  body: JSON.stringify({
-                                    model: 'claude-sonnet-4-20250514',
-                                    max_tokens: 2000,
-                                    system: sys,
-                                    messages: [{
-                                      role: 'user',
-                                      content: [
-                                        { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: base64 } },
-                                        { type: 'text', text: '以下の論文内容をもとに、SPring-8公式プレスリリースと同じ水準の詳細な原稿を生成してください。' }
-                                      ]
-                                    }]
-                                  })
-                                });
-
-                                const prData = await prRes.json();
-                                if (!prData.content) throw new Error('生成に失敗しました');
-                                
-                                // Parse the generated PR
-                                let raw = prData.content.map(x => x.text || '').join('').trim();
-                                raw = raw.replace(/^```json\s*/, '').replace(/^```\s*/, '').replace(/\s*```$/, '').trim();
-                                const start = raw.indexOf('{');
-                                const end = raw.lastIndexOf('}');
-                                if (start !== -1 && end !== -1) raw = raw.slice(start, end + 1);
-                                const prJson = JSON.parse(raw);
-
-                                // Store in localStorage and open press release site
-                                localStorage.setItem('autoload_pr', JSON.stringify(prJson));
-                                window.open('https://pressrelease-seven.vercel.app?autoload=1', '_blank');
-
-                                // Clear loading state
-                                setPapers(prev => prev.map(p => p.id === paper.id ? {...p, _prLoading: false} : p));
-
-                              } catch (err) {
-                                alert('プレスリリース生成に失敗しました: ' + err.message);
-                                setPapers(prev => prev.map(p => p.id === paper.id ? {...p, _prLoading: false} : p));
-                              }
-                            }}
-                            className={`px-3 py-1.5 text-xs rounded font-medium flex items-center gap-1 ${paper._prLoading ? 'bg-gray-400 cursor-not-allowed text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
-                            disabled={paper._prLoading}
+                            onClick={() => { setViewingPaper(paper); setPaperSource('mypage'); setCurrentView('search'); }}
+                            className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 font-medium flex items-center gap-1"
                           >
-                            {paper._prLoading ? (
-                              <><Loader className="w-3 h-3 animate-spin" /> 生成中...</>
-                            ) : (
-                              <>✏️ プレスリリース申請</>
-                            )}
+                            ✏️ プレスリリース申請
                           </button>
                         )}
 

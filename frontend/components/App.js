@@ -40,7 +40,8 @@ const [viewingPaper, setViewingPaper] = useState(null);
 const [isLoggedIn, setIsLoggedIn] = useState(false);
 const [isReviewer, setIsReviewer] = useState(false);
 const [prRequestNote, setPrRequestNote] = useState('');
-const [paperSource, setPaperSource] = useState('search'); // 'search' or 'mypage'
+const [paperSource, setPaperSource] = useState('search');
+const [prLoadingId, setPrLoadingId] = useState(null); // 'search' or 'mypage'
 const [showLoginModal, setShowLoginModal] = useState(false);
 const [loginUsername, setLoginUsername] = useState('');
 const [loginPassword, setLoginPassword] = useState('');
@@ -1225,10 +1226,10 @@ const relationshipTypes = [
                 myPapers.map(paper => {
                   const status = paper.press_release_status || 'none';
                   const statusConfig = {
-                    none: { label: '未申請', color: 'bg-gray-100 text-gray-600 border-gray-200' },
-                    pending: { label: '⏳ 審査中', color: 'bg-yellow-100 text-yellow-700 border-yellow-300' },
-                    approved: { label: '✅ 承認済み', color: 'bg-green-100 text-green-700 border-green-300' },
-                    rejected: { label: '❌ 却下', color: 'bg-red-100 text-red-700 border-red-300' },
+                    none: { label: '未申請', color: 'bg-gray-100 text-gray-600 border-gray-200', dot: 'bg-gray-400' },
+                    pending: { label: '審査中', color: 'bg-yellow-100 text-yellow-700 border-yellow-300', dot: 'bg-yellow-400' },
+                    approved: { label: '承認済み', color: 'bg-green-100 text-green-700 border-green-300', dot: 'bg-green-500' },
+                    rejected: { label: '却下', color: 'bg-red-100 text-red-700 border-red-300', dot: 'bg-red-500' },
                   };
                   const s = statusConfig[status] || statusConfig.none;
                   return (
@@ -1244,7 +1245,8 @@ const relationshipTypes = [
                           </h3>
                           <p className="text-xs text-gray-500">{paper.authors} · {paper.year}</p>
                         </div>
-                        <span className={`text-xs font-semibold px-3 py-1 rounded-full border flex-shrink-0 ${s.color}`}>
+                        <span className={`text-xs font-semibold px-3 py-1 rounded-full border flex-shrink-0 flex items-center gap-1.5 ${s.color}`}>
+                          <span className={`w-2 h-2 rounded-full ${s.dot}`}></span>
                           {s.label}
                         </span>
                       </div>
@@ -1286,7 +1288,7 @@ const relationshipTypes = [
                           <button
                             onClick={async () => {
                               try {
-                                setPapers(prev => prev.map(p => p.id === paper.id ? {...p, _prLoading: true} : p));
+                                setPrLoadingId(paper.id);
 
                                 // Step 1: Fetch PDF
                                 const pdfRes = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
@@ -1352,17 +1354,17 @@ const relationshipTypes = [
                                 // Step 6: Open release.html with the draft ID
                                 window.open(`https://pressrelease-seven.vercel.app/release.html?id=${saveData._id}`, '_blank');
 
-                                setPapers(prev => prev.map(p => p.id === paper.id ? {...p, _prLoading: false} : p));
+                                setPrLoadingId(null);
 
                               } catch (err) {
                                 alert('プレスリリース生成に失敗しました: ' + err.message);
-                                setPapers(prev => prev.map(p => p.id === paper.id ? {...p, _prLoading: false} : p));
+                                setPrLoadingId(null);
                               }
                             }}
-                            className={`px-3 py-1.5 text-xs rounded font-medium flex items-center gap-1 ${paper._prLoading ? 'bg-gray-400 cursor-not-allowed text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
-                            disabled={paper._prLoading}
+                            className={`px-3 py-1.5 text-xs rounded font-medium flex items-center gap-1 ${prLoadingId === paper.id ? 'bg-gray-400 cursor-not-allowed text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
+                            disabled={prLoadingId === paper.id}
                           >
-                            {paper._prLoading ? (
+                            {prLoadingId === paper.id ? (
                               <><Loader className="w-3 h-3 animate-spin" /> 生成中...</>
                             ) : (
                               <>✏️ プレスリリース申請</>

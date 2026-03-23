@@ -1042,6 +1042,7 @@ const relationshipTypes = [
                 </button>
                 {isLoggedIn ? (
   <div className="flex items-center gap-3">
+    <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
     <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
     <button
       onClick={() => { setIsLoggedIn(false); setIsReviewer(false); }}
@@ -1801,7 +1802,7 @@ const relationshipTypes = [
                   }}
                   className="px-6 py-3 bg-red-800 text-white rounded hover:bg-red-900 font-semibold"
                 >
-                  📄 論文PDF
+                  論文PDF
                 </button>
                 <button
                   onClick={() => {
@@ -1842,13 +1843,21 @@ const relationshipTypes = [
                       'SPring-8 研究データベース',
                     ].filter(l => l !== undefined).join('\n');
 
-                    const printWindow = window.open('', '_blank');
-                    printWindow.document.write(`
+                    const printFrame = document.createElement('iframe');
+                    printFrame.style.position = 'fixed';
+                    printFrame.style.top = '-10000px';
+                    printFrame.style.left = '-10000px';
+                    printFrame.style.width = '800px';
+                    printFrame.style.height = '600px';
+                    document.body.appendChild(printFrame);
+                    const doc = printFrame.contentDocument;
+                    doc.open();
+                    doc.write(`
                       <html>
                         <head>
                           <title>${p.title} — MDRCG分析</title>
                           <style>
-                            body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #111; font-size: 13px; line-height: 1.8; }
+                            body { font-family: 'Hiragino Sans', sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #111; font-size: 13px; line-height: 1.8; }
                             h1 { font-size: 20px; font-weight: bold; border-bottom: 2px solid #111; padding-bottom: 8px; margin-bottom: 4px; }
                             .meta { color: #555; font-size: 12px; margin-bottom: 24px; }
                             .meta span { margin-right: 16px; }
@@ -1857,7 +1866,6 @@ const relationshipTypes = [
                             .section-title { font-weight: bold; font-size: 13px; background: #f5f5f5; padding: 4px 10px; border-left: 3px solid #7f1d1d; margin-bottom: 8px; }
                             .section-body { white-space: pre-wrap; color: #333; padding: 0 10px; }
                             .footer { margin-top: 40px; padding-top: 12px; border-top: 1px solid #ccc; font-size: 11px; color: #888; }
-                            @media print { body { padding: 20px; } }
                           </style>
                         </head>
                         <body>
@@ -1889,15 +1897,18 @@ const relationshipTypes = [
                             </div>
                           `).join('')}
                           <div class="footer">生成日時: ${new Date().toLocaleString('ja-JP')} — SPring-8 研究データベース</div>
-                          <script>window.onload = () => { window.print(); }<\/script>
                         </body>
                       </html>
                     `);
-                    printWindow.document.close();
+                    doc.close();
+                    setTimeout(() => {
+                      printFrame.contentWindow.print();
+                      setTimeout(() => document.body.removeChild(printFrame), 1000);
+                    }, 500);
                   }}
-                  className="px-6 py-3 bg-gray-800 text-white rounded hover:bg-gray-900 font-semibold"
+                  className="px-6 py-3 bg-red-800 text-white rounded hover:bg-red-900 font-semibold"
                 >
-                  🧠 AI分析をPDF保存
+                  AI分析をPDF保存
                 </button>
                 <button className="px-6 py-3 border border-gray-400 text-gray-700 rounded hover:bg-gray-50 font-semibold">
                   保存
@@ -2244,7 +2255,6 @@ const relationshipTypes = [
               </button>
               {isLoggedIn ? (
                 <div className="flex items-center gap-3">
-                  <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
                   <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
                   <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
                   <button

@@ -87,6 +87,7 @@ const [loginError, setLoginError] = useState('');
     setLoginError('');
     setLoginUsername('');
     setLoginPassword('');
+    setCurrentView('mypage');
   } else if (loginUsername === 'reviewer' && loginPassword === 'review123') {
     setIsLoggedIn(true);
     setIsReviewer(true);
@@ -94,6 +95,7 @@ const [loginError, setLoginError] = useState('');
     setLoginError('');
     setLoginUsername('');
     setLoginPassword('');
+    setCurrentView('mypage');
   } else {
     setLoginError('ユーザー名またはパスワードが違います (Invalid credentials)');
   }
@@ -1095,54 +1097,6 @@ const relationshipTypes = [
                 <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>論文、産業応用、異分野応用を<br/>キーワードで検索できます</div>
               </div>
 
-              {/* Upload Card */}
-              <div
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-                style={{
-                  background: 'white',
-                  border: isDragging ? '1.5px solid #60a5fa' : '1.5px solid #d1d5db',
-                  borderRadius: '20px',
-                  minHeight: '320px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  padding: '40px 24px',
-                  transition: 'box-shadow 0.2s',
-                  flex: '1',
-                  maxWidth: '320px',
-                }}
-                onMouseEnter={e => e.currentTarget.style.boxShadow='0 8px 32px rgba(0,0,0,0.10)'}
-                onMouseLeave={e => e.currentTarget.style.boxShadow='none'}
-              >
-                <label style={{display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', width: '100%'}}>
-                  <input
-                    type="file"
-                    accept=".pdf"
-                    onChange={isLoggedIn ? handleFileUpload : (e) => { e.preventDefault(); setShowLoginModal(true); }}
-                    style={{display: 'none'}}
-                    onClick={!isLoggedIn ? (e) => { e.preventDefault(); setShowLoginModal(true); } : undefined}
-                  />
-                  {isProcessing
-                    ? <Loader style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} className="animate-spin" />
-                    : <Upload style={{width: '56px', height: '56px', color: '#7f1d1d', marginBottom: '20px', strokeWidth: 1.5}} />
-                  }
-                  <div style={{fontWeight: '700', fontSize: '20px', color: '#111', marginBottom: '8px'}}>
-論文をアップロード</div>
-                  <div style={{color: '#9ca3af', fontSize: '15px', marginBottom: '14px'}}>Upload Paper</div>
-                  {isProcessing
-                    ? <div style={{color: '#9ca3af', fontSize: '13px'}}>AIが解析中...</div>
-                    : <>
-                        <div style={{color: '#9ca3af', fontSize: '13px', lineHeight: '1.7', textAlign: 'center'}}>研究論文をアップロードして<br/>データベースに登録</div>
-                        {!isLoggedIn && <div style={{color: '#f59e0b', fontSize: '13px', marginTop: '16px'}}>🔒 ログインが必要です</div>}
-                      </>
-                  }
-                </label>
-              </div>
-
               {/* My Page Card */}
               {isLoggedIn && (
               <div
@@ -1234,9 +1188,21 @@ const relationshipTypes = [
           </div>
 
           <div className="max-w-4xl mx-auto p-8">
-            <div className="mb-8">
-              <h2 className="text-3xl font-serif text-gray-900 mb-2">マイページ</h2>
-              <p className="text-gray-500 text-sm">投稿した論文とプレスリリース申請の状態一覧</p>
+            <div className="mb-8 flex items-center justify-between">
+              <div>
+                <h2 className="text-3xl font-serif text-gray-900 mb-2">マイページ</h2>
+                <p className="text-gray-500 text-sm">投稿した論文とプレスリリース申請の状態一覧</p>
+              </div>
+              <label className="flex items-center gap-2 px-4 py-2 bg-red-800 text-white rounded-lg hover:bg-red-900 cursor-pointer font-medium text-sm">
+                <input
+                  type="file"
+                  accept=".pdf"
+                  onChange={handleFileUpload}
+                  style={{display: 'none'}}
+                />
+                <Upload className="w-4 h-4" />
+                論文をアップロード
+              </label>
             </div>
 
             <div className="space-y-4">
@@ -1430,7 +1396,7 @@ const relationshipTypes = [
                 onClick={handleSubmit}
                 className="flex-1 px-6 py-3 bg-red-800 text-white rounded hover:bg-red-900 font-semibold"
               >
-                登録して公開
+                登録
               </button>
             </div>
             </div>

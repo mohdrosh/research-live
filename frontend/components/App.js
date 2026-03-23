@@ -1178,6 +1178,7 @@ const relationshipTypes = [
                 </button>
                 {isLoggedIn ? (
                   <div className="flex items-center gap-3">
+                    <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
                     <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
                     <button onClick={() => { setIsLoggedIn(false); setIsReviewer(false); }} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">ログアウト</button>
                   </div>
@@ -1783,7 +1784,7 @@ const relationshipTypes = [
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-3 mb-8 pb-8 border-b border-gray-300">
+              <div className="flex gap-3 mb-8 pb-8 border-b border-gray-300 flex-wrap">
                 <button
                   onClick={async () => {
                     try {
@@ -1798,7 +1799,103 @@ const relationshipTypes = [
                   }}
                   className="px-6 py-3 bg-red-800 text-white rounded hover:bg-red-900 font-semibold"
                 >
-                  PDFを開く
+                  📄 論文PDF
+                </button>
+                <button
+                  onClick={() => {
+                    const p = viewingPaper;
+                    const fd = p.formData || {};
+                    const lines = [
+                      'SPring-8 研究データベース — MDRCG 分析レポート',
+                      '═══════════════════════════════════════════════════════',
+                      '',
+                      `タイトル: ${p.title}`,
+                      `英語タイトル: ${p.titleEn || ''}`,
+                      `著者: ${p.authors}`,
+                      `年度: ${p.year}`,
+                      `研究分野: ${p.field}`,
+                      `測定手法: ${p.method}`,
+                      `ビームライン: ${p.beamline}`,
+                      `産業応用: ${p.application}`,
+                      '',
+                      '───────────────────────────────────────────────────────',
+                      'MDRCG 詳細情報',
+                      '───────────────────────────────────────────────────────',
+                      '',
+                      '【主な結論】',
+                      p.mainConclusion || '',
+                      '',
+                      fd.priorWork ? `【先行研究との関係】\n${fd.priorWork}\n` : '',
+                      fd.novelty ? `【新規性】\n${fd.novelty}\n` : '',
+                      fd.unknownQuestions ? `【未解明の課題】\n${fd.unknownQuestions}\n` : '',
+                      p.failedApproach ? `【失敗したアプローチ】\n${p.failedApproach}\n` : '',
+                      p.crossDomain ? `【異分野翻訳レイヤー】\n${p.crossDomain}\n` : '',
+                      p.industrialApplication ? `【産業応用可能性】\n${p.industrialApplication}\n` : '',
+                      fd.abstractPrinciple ? `【抽象化された原理（小学5年生レベル）】\n${fd.abstractPrinciple}\n` : '',
+                      fd.experimentalReason ? `【実験設計の理由】\n${fd.experimentalReason}\n` : '',
+                      fd.scalingPossibility ? `【スケーリング可能性】\n${fd.scalingPossibility}\n` : '',
+                      fd.combinationPotential ? `【組み合わせ可能性】\n${fd.combinationPotential}\n` : '',
+                      '───────────────────────────────────────────────────────',
+                      `生成日時: ${new Date().toLocaleString('ja-JP')}`,
+                      'SPring-8 研究データベース',
+                    ].filter(l => l !== undefined).join('\n');
+
+                    const printWindow = window.open('', '_blank');
+                    printWindow.document.write(`
+                      <html>
+                        <head>
+                          <title>${p.title} — MDRCG分析</title>
+                          <style>
+                            body { font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #111; font-size: 13px; line-height: 1.8; }
+                            h1 { font-size: 20px; font-weight: bold; border-bottom: 2px solid #111; padding-bottom: 8px; margin-bottom: 4px; }
+                            .meta { color: #555; font-size: 12px; margin-bottom: 24px; }
+                            .meta span { margin-right: 16px; }
+                            .divider { border-top: 1px solid #ccc; margin: 20px 0; }
+                            .section { margin-bottom: 20px; }
+                            .section-title { font-weight: bold; font-size: 13px; background: #f5f5f5; padding: 4px 10px; border-left: 3px solid #7f1d1d; margin-bottom: 8px; }
+                            .section-body { white-space: pre-wrap; color: #333; padding: 0 10px; }
+                            .footer { margin-top: 40px; padding-top: 12px; border-top: 1px solid #ccc; font-size: 11px; color: #888; }
+                            @media print { body { padding: 20px; } }
+                          </style>
+                        </head>
+                        <body>
+                          <h1>${p.title}</h1>
+                          <div class="meta">
+                            <span>著者: ${p.authors}</span>
+                            <span>年度: ${p.year}</span>
+                            <span>分野: ${p.field}</span>
+                            <span>手法: ${p.method}</span>
+                            <span>ビームライン: ${p.beamline}</span>
+                          </div>
+                          <div class="divider"></div>
+                          ${[
+                            ['主な結論', p.mainConclusion],
+                            ['先行研究との関係', fd.priorWork],
+                            ['新規性', fd.novelty],
+                            ['未解明の課題', fd.unknownQuestions],
+                            ['失敗したアプローチ', p.failedApproach],
+                            ['異分野翻訳レイヤー', p.crossDomain],
+                            ['産業応用可能性', p.industrialApplication],
+                            ['抽象化された原理', fd.abstractPrinciple],
+                            ['実験設計の理由', fd.experimentalReason],
+                            ['スケーリング可能性', fd.scalingPossibility],
+                            ['組み合わせ可能性', fd.combinationPotential],
+                          ].filter(([_, v]) => v).map(([title, body]) => `
+                            <div class="section">
+                              <div class="section-title">【${title}】</div>
+                              <div class="section-body">${body}</div>
+                            </div>
+                          `).join('')}
+                          <div class="footer">生成日時: ${new Date().toLocaleString('ja-JP')} — SPring-8 研究データベース</div>
+                          <script>window.onload = () => { window.print(); }<\/script>
+                        </body>
+                      </html>
+                    `);
+                    printWindow.document.close();
+                  }}
+                  className="px-6 py-3 bg-gray-800 text-white rounded hover:bg-gray-900 font-semibold"
+                >
+                  🧠 AI分析をPDF保存
                 </button>
                 <button className="px-6 py-3 border border-gray-400 text-gray-700 rounded hover:bg-gray-50 font-semibold">
                   保存

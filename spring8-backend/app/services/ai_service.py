@@ -57,7 +57,27 @@ async def analyze_pdf(base64_data: str) -> dict:
         if start != -1 and end != -1:
             text = text[start:end+1]
         text = text.strip()
-        result = json.loads(text)
+
+        # Try parsing, and if it fails use Gemini to fix the JSON
+        try:
+            result = json.loads(text)
+        except json.JSONDecodeError:
+            fix_response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=[
+                    types.Part.from_text(text=f"The following is broken JSON. Fix it and return only valid JSON, no explanation, no markdown:\n\n{text}")
+                ]
+            )
+            fixed = fix_response.text.strip()
+            if "```json" in fixed:
+                fixed = fixed.split("```json")[1].split("```")[0]
+            elif "```" in fixed:
+                fixed = fixed.split("```")[1].split("```")[0]
+            start = fixed.find('{')
+            end = fixed.rfind('}')
+            if start != -1 and end != -1:
+                fixed = fixed[start:end+1]
+            result = json.loads(fixed)
         # Convert any list fields to strings
         for key in ['priorWork', 'unknownQuestions', 'failedApproach', 'crossDomain',
                     'industrialPain', 'experimentalReason', 'combinationPotential',

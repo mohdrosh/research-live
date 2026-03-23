@@ -1193,15 +1193,25 @@ const relationshipTypes = [
                 <h2 className="text-3xl font-serif text-gray-900 mb-2">マイページ</h2>
                 <p className="text-gray-500 text-sm">投稿した論文とプレスリリース申請の状態一覧</p>
               </div>
-              <label className="flex items-center gap-2 px-4 py-2 bg-red-800 text-white rounded-lg hover:bg-red-900 cursor-pointer font-medium text-sm">
+              <label className={`flex items-center gap-2 px-4 py-2 bg-red-800 text-white rounded-lg font-medium text-sm ${isProcessing ? 'opacity-70 cursor-not-allowed' : 'hover:bg-red-900 cursor-pointer'}`}>
                 <input
                   type="file"
                   accept=".pdf"
                   onChange={handleFileUpload}
                   style={{display: 'none'}}
+                  disabled={isProcessing}
                 />
-                <Upload className="w-4 h-4" />
-                論文をアップロード
+                {isProcessing ? (
+                  <>
+                    <Loader className="w-4 h-4 animate-spin" />
+                    AI解析中...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="w-4 h-4" />
+                    論文をアップロード
+                  </>
+                )}
               </label>
             </div>
 
@@ -1219,32 +1229,96 @@ const relationshipTypes = [
                   };
                   const s = statusConfig[status] || statusConfig.none;
                   return (
-                    <div key={paper.id} className="bg-white border border-gray-200 rounded-lg p-5 flex items-start justify-between gap-4 hover:shadow-sm transition-shadow">
-                      <div className="flex-1">
-                        <h3
-                          onClick={() => { setViewingPaper(paper); setCurrentView('search'); }}
-                          className="text-base font-serif text-gray-900 hover:underline cursor-pointer mb-1"
-                        >
-                          {paper.title}
-                        </h3>
-                        <p className="text-xs text-gray-500 mb-3">{paper.authors} · {paper.year}</p>
-                        <div className="flex items-center gap-3 flex-wrap">
-                          <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${s.color}`}>
-                            プレスリリース: {s.label}
-                          </span>
-                          {status === 'approved' && paper.press_release_url && (
-                            <a href={paper.press_release_url} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">
-                              📰 リリースを見る
-                            </a>
-                          )}
+                    <div key={paper.id} className="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-sm transition-shadow">
+                      {/* Top row: title + status badge */}
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <div className="flex-1">
+                          <h3
+                            onClick={() => { setViewingPaper(paper); setCurrentView('search'); }}
+                            className="text-base font-serif text-gray-900 hover:underline cursor-pointer mb-1"
+                          >
+                            {paper.title}
+                          </h3>
+                          <p className="text-xs text-gray-500">{paper.authors} · {paper.year}</p>
                         </div>
+                        <span className={`text-xs font-semibold px-3 py-1 rounded-full border flex-shrink-0 ${s.color}`}>
+                          {s.label}
+                        </span>
                       </div>
-                      <button
-                        onClick={() => { setViewingPaper(paper); setCurrentView('search'); }}
-                        className="px-3 py-1.5 text-xs border border-gray-300 text-gray-600 rounded hover:bg-gray-50 font-medium flex-shrink-0"
-                      >
-                        詳細
-                      </button>
+
+                      {/* Bottom row: action buttons */}
+                      <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-gray-100">
+                        {/* View original PDF */}
+                        <button
+                          onClick={async () => {
+                            try {
+                              const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                              if (!res.ok) throw new Error('not found');
+                              const blob = await res.blob();
+                              const url = URL.createObjectURL(blob);
+                              window.open(url, '_blank');
+                            } catch {
+                              alert('この論文のPDFファイルは利用できません');
+                            }
+                          }}
+                          className="px-3 py-1.5 text-xs bg-gray-800 text-white rounded hover:bg-gray-900 font-medium flex items-center gap-1"
+                        >
+                          📄 論文を見る
+                        </button>
+
+                        {/* Press release link if approved */}
+                        {status === 'approved' && paper.press_release_url && (
+                          <a
+                            href={paper.press_release_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 font-medium flex items-center gap-1"
+                          >
+                            📰 プレスリリースを見る
+                          </a>
+                        )}
+
+                        {/* Create press release button if not yet applied */}
+                        {(status === 'none' || status === 'rejected') && (
+                          <button
+                            onClick={() => { setViewingPaper(paper); setCurrentView('search'); }}
+                            className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 font-medium flex items-center gap-1"
+                          >
+                            ✏️ プレスリリース申請
+                          </button>
+                        )}
+
+                        {/* Detail button */}
+                        <button
+                          onClick={() => { setViewingPaper(paper); setCurrentView('search'); }}
+                          className="px-3 py-1.5 text-xs border border-gray-300 text-gray-600 rounded hover:bg-gray-50 font-medium"
+                        >
+                          詳細
+                        </button>
+
+                        {/* Delete button */}
+                        <button
+                          onClick={async () => {
+                            if (window.confirm('この論文を削除しますか？')) {
+                              try {
+                                const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}`, {
+                                  method: 'DELETE',
+                                });
+                                if (res.ok) {
+                                  setPapers(prevPapers => prevPapers.filter(p => p.id !== paper.id));
+                                } else {
+                                  alert('削除に失敗しました');
+                                }
+                              } catch {
+                                alert('削除に失敗しました');
+                              }
+                            }
+                          }}
+                          className="px-3 py-1.5 text-xs border border-red-300 text-red-600 rounded hover:bg-red-50 font-medium ml-auto"
+                        >
+                          削除
+                        </button>
+                      </div>
                     </div>
                   );
                 })

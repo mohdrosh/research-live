@@ -1350,6 +1350,7 @@ const relationshipTypes = [
                 
                 {isLoggedIn ? (
   <div className="flex items-center gap-3">
+    <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
     <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
     <button
       onClick={() => setIsLoggedIn(false)}
@@ -1747,6 +1748,7 @@ const relationshipTypes = [
                 </button>
                 {isLoggedIn ? (
   <div className="flex items-center gap-3">
+    <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
     <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
     <button
       onClick={() => setIsLoggedIn(false)}
@@ -2242,6 +2244,8 @@ const relationshipTypes = [
               </button>
               {isLoggedIn ? (
                 <div className="flex items-center gap-3">
+                  <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
+                  <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
                   <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
                   <button
                     onClick={() => setIsLoggedIn(false)}

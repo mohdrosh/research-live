@@ -1332,8 +1332,8 @@ const relationshipTypes = [
                                 if (s2 !== -1 && e2 !== -1) raw = raw.slice(s2, e2 + 1);
                                 const prJson = JSON.parse(raw);
 
-                                // Step 5: Save to press release backend
-                                await fetch('https://pressrelease-tmo5.onrender.com/saves', {
+                                // Step 5: Save as draft to press release backend
+                                const saveRes = await fetch('https://pressrelease-tmo5.onrender.com/saves', {
                                   method: 'POST',
                                   headers: { 'Content-Type': 'application/json' },
                                   body: JSON.stringify({
@@ -1342,17 +1342,15 @@ const relationshipTypes = [
                                     date: prJson.date || '',
                                     category: '',
                                     subcategory: '',
+                                    status: 'draft',
                                     pr: prJson
                                   })
                                 });
+                                const saveData = await saveRes.json();
+                                if (!saveData._id) throw new Error('IDの取得に失敗しました');
 
-                                // Step 6: Get the saved _id (most recent)
-                                const allSaves = await fetch('https://pressrelease-tmo5.onrender.com/saves').then(r => r.json());
-                                const saved = allSaves[0];
-                                if (!saved || !saved._id) throw new Error('IDの取得に失敗しました');
-
-                                // Step 7: Open release.html
-                                window.open(`https://pressrelease-seven.vercel.app/release.html?id=${saved._id}`, '_blank');
+                                // Step 6: Open release.html with the draft ID
+                                window.open(`https://pressrelease-seven.vercel.app/release.html?id=${saveData._id}`, '_blank');
 
                                 setPapers(prev => prev.map(p => p.id === paper.id ? {...p, _prLoading: false} : p));
 

@@ -40,6 +40,7 @@ const [viewingPaper, setViewingPaper] = useState(null);
 const [isLoggedIn, setIsLoggedIn] = useState(false);
 const [isReviewer, setIsReviewer] = useState(false);
 const [prRequestNote, setPrRequestNote] = useState('');
+const [paperSource, setPaperSource] = useState('search'); // 'search' or 'mypage'
 const [showLoginModal, setShowLoginModal] = useState(false);
 const [loginUsername, setLoginUsername] = useState('');
 const [loginPassword, setLoginPassword] = useState('');
@@ -933,7 +934,7 @@ const relationshipTypes = [
     setSelectedRelatedPapers([]);
     setPdfText('');
     setPdfDataUrl('');
-    setCurrentView('search');
+    setCurrentView('mypage');
   };
 
   const toggleFilter = (category, value) => {
@@ -1234,7 +1235,7 @@ const relationshipTypes = [
                       <div className="flex items-start justify-between gap-4 mb-3">
                         <div className="flex-1">
                           <h3
-                            onClick={() => { setViewingPaper(paper); setCurrentView('search'); }}
+                            onClick={() => { setViewingPaper(paper); setPaperSource('mypage'); setCurrentView('search'); }}
                             className="text-base font-serif text-gray-900 hover:underline cursor-pointer mb-1"
                           >
                             {paper.title}
@@ -1281,7 +1282,7 @@ const relationshipTypes = [
                         {/* Create press release button if not yet applied */}
                         {(status === 'none' || status === 'rejected') && (
                           <button
-                            onClick={() => { setViewingPaper(paper); setCurrentView('search'); }}
+                            onClick={() => { setViewingPaper(paper); setPaperSource('mypage'); setCurrentView('search'); }}
                             className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 font-medium flex items-center gap-1"
                           >
                             ✏️ プレスリリース申請
@@ -1290,7 +1291,7 @@ const relationshipTypes = [
 
                         {/* Detail button */}
                         <button
-                          onClick={() => { setViewingPaper(paper); setCurrentView('search'); }}
+                          onClick={() => { setViewingPaper(paper); setPaperSource('mypage'); setCurrentView('search'); }}
                           className="px-3 py-1.5 text-xs border border-gray-300 text-gray-600 rounded hover:bg-gray-50 font-medium"
                         >
                           詳細
@@ -1738,10 +1739,10 @@ const relationshipTypes = [
               </h1>
               <div className="flex gap-3">
                 <button
-                  onClick={() => setViewingPaper(null)}
+                  onClick={() => { setViewingPaper(null); setCurrentView(paperSource); }}
                   className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
                 >
-                  ← 検索結果に戻る
+                  {paperSource === 'mypage' ? '← マイページに戻る' : '← 検索結果に戻る'}
                 </button>
                 {isLoggedIn ? (
   <div className="flex items-center gap-3">
@@ -2112,10 +2113,10 @@ const relationshipTypes = [
             {/* Back Button */}
             <div className="mt-6">
               <button
-                onClick={() => setViewingPaper(null)}
+                onClick={() => { setViewingPaper(null); setCurrentView(paperSource); }}
                 className="px-6 py-3 border border-gray-400 text-gray-700 rounded hover:bg-gray-50 font-semibold"
               >
-                ← 検索結果に戻る
+                {paperSource === 'mypage' ? '← マイページに戻る' : '← 検索結果に戻る'}
               </button>
             </div>
           </div>
@@ -2565,28 +2566,15 @@ const relationshipTypes = [
                     <button className="px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-50 font-medium">
                       引用
                     </button>
-                    {isLoggedIn && (
-                      <button 
-                        onClick={async () => {
-                          if (window.confirm('この論文を削除しますか？')) {
-                            try {
-                              const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}`, {
-                                method: 'DELETE',
-                              });
-                              if (res.ok) {
-                                setPapers(prevPapers => prevPapers.filter(p => p.id !== paper.id));
-                              } else {
-                                alert('削除に失敗しました');
-                              }
-                            } catch {
-                              alert('削除に失敗しました');
-                            }
-                          }
-                        }}
-                        className="px-4 py-2 border border-red-300 text-red-700 text-sm rounded hover:bg-red-50 font-medium"
+                    {paper.press_release_url && (
+                      <a
+                        href={paper.press_release_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 font-medium text-center"
                       >
-                        削除
-                      </button>
+                        📰 プレスリリース
+                      </a>
                     )}
                   </div>
                 </div>

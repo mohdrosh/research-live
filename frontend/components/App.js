@@ -1223,7 +1223,7 @@ const relationshipTypes = [
               {myPapers.length === 0 ? (
                 <div className="text-center py-16 text-gray-400">まだ論文が登録されていません</div>
               ) : (
-                myPapers.map(paper => {
+                myPapers.map((paper, index) => {
                   const status = paper.press_release_status || 'none';
                   const statusConfig = {
                     none: { label: '未申請', color: 'bg-gray-100 text-gray-600 border-gray-200', dot: 'bg-gray-400' },
@@ -1241,7 +1241,7 @@ const relationshipTypes = [
                             onClick={() => { setViewingPaper(paper); setPaperSource('mypage'); setCurrentView('search'); }}
                             className="text-base font-serif text-gray-900 hover:underline cursor-pointer mb-1"
                           >
-                            {paper.title}
+                            {index + 1}. {paper.title}
                           </h3>
                           <p className="text-xs text-gray-500">{paper.authors} · {paper.year}</p>
                         </div>
@@ -1266,7 +1266,7 @@ const relationshipTypes = [
                               alert('この論文のPDFファイルは利用できません');
                             }
                           }}
-                          className="px-3 py-1.5 text-xs bg-gray-800 text-white rounded hover:bg-gray-900 font-medium flex items-center gap-1"
+                          className="px-3 py-1.5 text-xs bg-white text-gray-900 border border-gray-300 rounded hover:bg-gray-50 font-medium flex items-center gap-1"
                         >
                           📄 論文を見る
                         </button>
@@ -1361,7 +1361,7 @@ const relationshipTypes = [
                                 setPrLoadingId(null);
                               }
                             }}
-                            className={`px-3 py-1.5 text-xs rounded font-medium flex items-center gap-1 ${prLoadingId === paper.id ? 'bg-gray-400 cursor-not-allowed text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
+                            className={`px-3 py-1.5 text-xs rounded font-medium flex items-center gap-1 border ${prLoadingId === paper.id ? 'bg-gray-100 text-gray-500 border-gray-300 cursor-not-allowed' : 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700'}`}
                             disabled={prLoadingId === paper.id}
                           >
                             {prLoadingId === paper.id ? (
@@ -1375,7 +1375,7 @@ const relationshipTypes = [
                         {/* Detail button */}
                         <button
                           onClick={() => { setViewingPaper(paper); setPaperSource('mypage'); setCurrentView('search'); }}
-                          className="px-3 py-1.5 text-xs border border-gray-300 text-gray-600 rounded hover:bg-gray-50 font-medium"
+                          className="px-3 py-1.5 text-xs border border-gray-300 text-gray-900 bg-white rounded hover:bg-gray-50 font-medium"
                         >
                           詳細
                         </button>

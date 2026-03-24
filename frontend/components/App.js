@@ -1319,11 +1319,11 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                 myPapers.map((paper, index) => {
                   const status = paper.press_release_status || 'none';
                   const statusConfig = {
-                    none: { label: '未申請', color: 'bg-gray-100 text-gray-600 border-gray-200', dot: 'bg-gray-400' },
-                    pending: { label: '審査中', color: 'bg-yellow-100 text-yellow-700 border-yellow-300', dot: 'bg-yellow-400' },
-                    approved: { label: '承認済み', color: 'bg-green-100 text-green-700 border-green-300', dot: 'bg-green-500' },
-                    rejected: { label: '却下', color: 'bg-red-100 text-red-700 border-red-300', dot: 'bg-red-500' },
-                  };
+  none: { label: '未申請', color: 'bg-gray-100 text-gray-500 border-gray-300', dot: 'bg-gray-400', glow: '' },
+  pending: { label: '審査中', color: 'bg-yellow-50 text-yellow-700 border-yellow-400', dot: 'bg-yellow-400', glow: 'shadow-[0_0_8px_2px_rgba(234,179,8,0.3)]' },
+  approved: { label: '承認済み', color: 'bg-green-50 text-green-700 border-green-400', dot: 'bg-green-500', glow: 'shadow-[0_0_8px_2px_rgba(34,197,94,0.3)]' },
+  rejected: { label: '却下', color: 'bg-red-50 text-red-600 border-red-400', dot: 'bg-red-500', glow: 'shadow-[0_0_8px_2px_rgba(239,68,68,0.3)]' },
+};
                   const s = statusConfig[status] || statusConfig.none;
                   return (
                     <div key={paper.id} className="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-sm transition-shadow">
@@ -1338,10 +1338,10 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                           </h3>
                           <p className="text-xs text-gray-500">{paper.authors} · {paper.year}</p>
                         </div>
-                        <span className={`text-xs font-semibold px-3 py-1 rounded-full border flex-shrink-0 flex items-center gap-1.5 ${s.color}`}>
-                          <span className={`w-2 h-2 rounded-full ${s.dot}`}></span>
-                          {s.label}
-                        </span>
+                        <span className={`text-xs font-semibold px-3 py-1.5 rounded-full border flex-shrink-0 flex items-center gap-1.5 ${s.color} ${s.glow}`}>
+  <span className={`w-2 h-2 rounded-full animate-pulse ${s.dot}`}></span>
+  {s.label}
+</span>
                       </div>
 
                       {/* Bottom row: action buttons */}

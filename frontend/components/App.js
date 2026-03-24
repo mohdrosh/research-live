@@ -1365,16 +1365,16 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                         </button>
 
                         {/* Press release link if approved */}
-                        {status === 'approved' && paper.press_release_url && (
-                          <a
-                            href={paper.press_release_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 font-medium flex items-center gap-1"
-                          >
-                            📰 プレスリリースを見る
-                          </a>
-                        )}
+                        {status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (
+  <a
+    href={paper.press_release_url || `https://pressrelease-seven.vercel.app/release.html?id=${paper.press_release_mongo_id}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 font-medium flex items-center gap-1"
+  >
+    📰 プレスリリースを見る
+  </a>
+)}
 
                         {/* Create press release button if not yet applied */}
                         {(status === 'none' || status === 'rejected') && (
@@ -2825,11 +2825,11 @@ setPapers(prev => prev.map(p =>
                       >
                         詳細を表示
                       </button>
-                      {paper.press_release_url && (
-                        <a href={paper.press_release_url} target="_blank" rel="noopener noreferrer" className="text-sm text-white bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 font-medium">
-                          📰 プレスリリース
-                        </a>
-                      )}
+                      {paper.press_release_status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (
+  <a href={paper.press_release_url || `https://pressrelease-seven.vercel.app/release.html?id=${paper.press_release_mongo_id}`} target="_blank" rel="noopener noreferrer" className="text-sm text-white bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 font-medium">
+    📰 プレスリリース
+  </a>
+)}
                       {paper.press_release_status === 'pending' && (
                         <span className="text-xs text-yellow-700 bg-yellow-100 border border-yellow-300 px-2 py-1 rounded-full font-medium">
                           ⏳ 審査中
@@ -2861,16 +2861,16 @@ setPapers(prev => prev.map(p =>
                       className="px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-50 font-medium">
                       引用
                     </button>
-                    {paper.press_release_url && (
-                      <a
-                        href={paper.press_release_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 font-medium text-center"
-                      >
-                        📰 プレスリリース
-                      </a>
-                    )}
+                    {paper.press_release_status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (
+  <a
+    href={paper.press_release_url || `https://pressrelease-seven.vercel.app/release.html?id=${paper.press_release_mongo_id}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 font-medium text-center"
+  >
+    📰 プレスリリース
+  </a>
+)}
                   </div>
                 </div>
               </div>

@@ -66,6 +66,7 @@ class PaperCreate(BaseModel):
     press_release_status: Optional[str] = "none"
     press_release_url: Optional[str] = None
     press_release_note: Optional[str] = None
+    press_release_mongo_id: Optional[str] = None
     uploaded_by: Optional[str] = ""
 
 
@@ -110,6 +111,7 @@ class PaperResponse(BaseModel):
     press_release_status: Optional[str] = "none"
     press_release_url: Optional[str] = None
     press_release_note: Optional[str] = None
+    press_release_mongo_id: Optional[str] = None
     uploaded_by: Optional[str] = ""
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None

@@ -102,6 +102,58 @@ async def update_press_release_status(paper_id: str, payload: dict):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.patch("/{paper_id}/press-release-mongo-id")
+async def save_press_release_mongo_id(paper_id: str, payload: dict):
+    from app.database import get_db
+    from bson import ObjectId
+    from datetime import datetime, timezone
+    db = get_db()
+    mongo_id = payload.get("mongo_id")
+    if not mongo_id:
+        raise HTTPException(status_code=400, detail="mongo_id required")
+    try:
+        await db["papers"].update_one(
+            {"_id": ObjectId(paper_id)},
+            {"$set": {
+                "press_release_mongo_id": mongo_id,
+                "press_release_status": "pending",
+                "updated_at": datetime.now(timezone.utc)
+            }}
+        )
+        return {"success": True}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/{paper_id}/press-release-sync")
+async def sync_press_release_status(paper_id: str):
+    from app.database import get_db
+    from bson import ObjectId
+    from datetime import datetime, timezone
+    import httpx
+    db = get_db()
+    try:
+        doc = await db["papers"].find_one({"_id": ObjectId(paper_id)}, {"press_release_mongo_id": 1})
+        if not doc or not doc.get("press_release_mongo_id"):
+            return {"status": "none"}
+        mongo_id = doc["press_release_mongo_id"]
+        async with httpx.AsyncClient() as client:
+            res = await client.get("https://pressrelease-tmo5.onrender.com/saves")
+            saves = res.json()
+        entry = next((s for s in saves if s.get("_id") == mongo_id), None)
+        if not entry:
+            return {"status": "none"}
+        status_map = {"draft": "pending", "pending": "pending", "approved": "approved", "rejected": "rejected"}
+        spring8_status = status_map.get(entry.get("status", "draft"), "pending")
+        await db["papers"].update_one(
+            {"_id": ObjectId(paper_id)},
+            {"$set": {"press_release_status": spring8_status, "updated_at": datetime.now(timezone.utc)}}
+        )
+        return {"status": spring8_status}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.patch("/{paper_id}/press-release-url")
 async def update_press_release_url(paper_id: str, payload: dict):
     """Save press release URL to paper."""

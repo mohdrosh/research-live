@@ -284,6 +284,7 @@ const relationshipTypes = [
           failedApproach: p.failed_approach,
           uploaded_by: p.uploaded_by || '',
           press_release_status: p.press_release_status || 'none',
+          press_release_mongo_id: p.press_release_mongo_id || null,
           press_release_url: p.press_release_url || null,
           press_release_note: p.press_release_note || null,
           formData: p.form_data ? {
@@ -299,6 +300,20 @@ const relationshipTypes = [
           } : null,
         }));
         setPapers(normalized);
+
+const toSync = normalized.filter(p => p.press_release_mongo_id);
+const synced = await Promise.all(
+  toSync.map(async p => {
+    try {
+      const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${p.id}/press-release-sync`, { method: 'POST' });
+      const d = await res.json();
+      return { id: p.id, status: d.status };
+    } catch { return null; }
+  })
+);
+synced.filter(Boolean).forEach(({ id, status }) => {
+  setPapers(prev => prev.map(p => p.id === id ? { ...p, press_release_status: status } : p));
+});
       } catch (error) {
         console.error('Failed to load papers:', error);
       }
@@ -1431,6 +1446,15 @@ const relationshipTypes = [
 
                                 // Step 6: Open release.html with the draft ID
                                 window.open(`https://pressrelease-seven.vercel.app/release.html?id=${saveData._id}`, '_blank');
+
+await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/press-release-mongo-id`, {
+  method: 'PATCH',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ mongo_id: saveData._id })
+});
+setPapers(prev => prev.map(p =>
+  p.id === paper.id ? { ...p, press_release_status: 'pending' } : p
+));
 
                                 setPrLoadingId(null);
 

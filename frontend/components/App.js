@@ -40,10 +40,12 @@ const [viewingPaper, setViewingPaper] = useState(null);
 const [isLoggedIn, setIsLoggedIn] = useState(false);
 const [isReviewer, setIsReviewer] = useState(false);
 const [prRequestNote, setPrRequestNote] = useState('');
+const [citationPaper, setCitationPaper] = useState(null);
 const [paperSource, setPaperSource] = useState('search');
 const [prLoadingId, setPrLoadingId] = useState(null); // 'search' or 'mypage'
 const [showLoginModal, setShowLoginModal] = useState(false);
 const [loginUsername, setLoginUsername] = useState('');
+const [loggedInUser, setLoggedInUser] = useState('');
 const [loginPassword, setLoginPassword] = useState('');
 const [loginError, setLoginError] = useState('');
 
@@ -85,6 +87,16 @@ const [loginError, setLoginError] = useState('');
   if (loginUsername === 'spring8' && loginPassword === 'article') {
     setIsLoggedIn(true);
     setIsReviewer(false);
+    setLoggedInUser(loginUsername);
+    setShowLoginModal(false);
+    setLoginError('');
+    setLoginUsername('');
+    setLoginPassword('');
+    setCurrentView('mypage');
+  } else if (loginUsername === 'user2' && loginPassword === 'user2pass') {
+    setIsLoggedIn(true);
+    setIsReviewer(false);
+    setLoggedInUser(loginUsername);
     setShowLoginModal(false);
     setLoginError('');
     setLoginUsername('');
@@ -93,6 +105,7 @@ const [loginError, setLoginError] = useState('');
   } else if (loginUsername === 'reviewer' && loginPassword === 'review123') {
     setIsLoggedIn(true);
     setIsReviewer(true);
+    setLoggedInUser(loginUsername);
     setShowLoginModal(false);
     setLoginError('');
     setLoginUsername('');
@@ -269,6 +282,7 @@ const relationshipTypes = [
           industrialApplication: p.industrial_application,
           crossDomain: p.cross_domain,
           failedApproach: p.failed_approach,
+          uploaded_by: p.uploaded_by || '',
           press_release_status: p.press_release_status || 'none',
           press_release_url: p.press_release_url || null,
           press_release_note: p.press_release_note || null,
@@ -878,6 +892,7 @@ const relationshipTypes = [
           method: formData.method || 'X線回折 (X-ray Diffraction)',
           beamline: formData.beamline || 'BL19B2',
           application: formData.application || '自動車産業 (Automotive)',
+          uploaded_by: loggedInUser,
           main_conclusion: formData.mainConclusion || '',
           industrial_application: formData.industrialPain || '',
           cross_domain: formData.crossDomain || '',
@@ -974,7 +989,8 @@ const relationshipTypes = [
         <h2 className="text-xl font-bold text-gray-900 mb-1">ログイン</h2>
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 mb-4 text-xs text-gray-500">
           <span className="font-semibold text-gray-700">Demo credentials</span><br/>
-          Username: <span className="font-mono text-gray-800">spring8</span> &nbsp;|&nbsp; Password: <span className="font-mono text-gray-800">article</span>
+          User 1: <span className="font-mono text-gray-800">spring8</span> / <span className="font-mono text-gray-800">article</span><br/>
+          User 2: <span className="font-mono text-gray-800">user2</span> / <span className="font-mono text-gray-800">user2pass</span>
         </div>
         {loginError && (
           <div className="mb-3 p-2 bg-red-50 border border-red-200 text-red-600 text-xs rounded">
@@ -1044,7 +1060,7 @@ const relationshipTypes = [
                 {isLoggedIn ? (
   <div className="flex items-center gap-3">
     <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
-    <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
+    <span className="text-sm text-gray-700 font-medium">ようこそ、{loggedInUser}さん 👋</span>
     <button
       onClick={() => { setIsLoggedIn(false); setIsReviewer(false); setCurrentView('upload'); setViewingPaper(null); }}
       className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium"
@@ -1164,9 +1180,71 @@ const relationshipTypes = [
     );
   }
 
+  // Citation Modal
+  const citationModal = citationPaper ? (
+    <div className="fixed inset-0 z-50 flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(4px)'}}>
+      <div className="bg-white rounded-2xl shadow-xl p-6" style={{width: '520px', maxWidth: '90vw'}}>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-bold text-gray-900">引用形式</h2>
+          <button onClick={() => setCitationPaper(null)} className="text-gray-400 hover:text-gray-600 text-xl">✕</button>
+        </div>
+        
+        {/* APA */}
+        <div className="mb-4">
+          <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">APA</div>
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm text-gray-800 leading-relaxed">
+            {citationPaper.authors} ({citationPaper.year}). {citationPaper.title}. <em>SPring-8 Research Journal</em>, Vol. {citationPaper.id}, No. 1, pp. 1-20.
+          </div>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(`${citationPaper.authors} (${citationPaper.year}). ${citationPaper.title}. SPring-8 Research Journal, Vol. ${citationPaper.id}, No. 1, pp. 1-20.`);
+              alert('コピーしました');
+            }}
+            className="mt-1 text-xs text-blue-600 hover:underline"
+          >コピー</button>
+        </div>
+
+        {/* MLA */}
+        <div className="mb-4">
+          <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">MLA</div>
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm text-gray-800 leading-relaxed">
+            {citationPaper.authors.split(',')[0]}, et al. "{citationPaper.title}." <em>SPring-8 Research Journal</em> ({citationPaper.year}): 1-20.
+          </div>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(`${citationPaper.authors.split(',')[0]}, et al. "${citationPaper.title}." SPring-8 Research Journal (${citationPaper.year}): 1-20.`);
+              alert('コピーしました');
+            }}
+            className="mt-1 text-xs text-blue-600 hover:underline"
+          >コピー</button>
+        </div>
+
+        {/* Chicago */}
+        <div className="mb-4">
+          <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Chicago</div>
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm text-gray-800 leading-relaxed">
+            {citationPaper.authors}. "{citationPaper.title}." <em>SPring-8 Research Journal</em> Vol. {citationPaper.id}, no. 1 ({citationPaper.year}): 1-20.
+          </div>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(`${citationPaper.authors}. "${citationPaper.title}." SPring-8 Research Journal Vol. ${citationPaper.id}, no. 1 (${citationPaper.year}): 1-20.`);
+              alert('コピーしました');
+            }}
+            className="mt-1 text-xs text-blue-600 hover:underline"
+          >コピー</button>
+        </div>
+
+        <button
+          onClick={() => setCitationPaper(null)}
+          className="w-full mt-2 px-4 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 text-sm font-medium"
+        >閉じる</button>
+      </div>
+    </div>
+  ) : null;
+
   // マイページビュー (My Page View)
   if (currentView === 'mypage') {
-    const myPapers = papers; // all papers since we don't have per-user tracking yet
+    const myPapers = papers.filter(p => p.uploaded_by === loggedInUser);
     return (
       <div className="min-h-screen bg-white">
         {loginModal}
@@ -1181,7 +1259,7 @@ const relationshipTypes = [
                 {isLoggedIn ? (
                   <div className="flex items-center gap-3">
                     <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
-                    <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
+                    <span className="text-sm text-gray-700 font-medium">ようこそ、{loggedInUser}さん 👋</span>
                     <button onClick={() => { setIsLoggedIn(false); setIsReviewer(false); setCurrentView('upload'); setViewingPaper(null); }} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">ログアウト</button>
                   </div>
                 ) : (
@@ -1433,7 +1511,7 @@ const relationshipTypes = [
                 {isLoggedIn ? (
   <div className="flex items-center gap-3">
     <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
-    <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
+    <span className="text-sm text-gray-700 font-medium">ようこそ、{loggedInUser}さん 👋</span>
     <button
       onClick={() => { setIsLoggedIn(false); setIsReviewer(false); setCurrentView('upload'); setViewingPaper(null); }}
       className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium"
@@ -1831,7 +1909,7 @@ const relationshipTypes = [
                 {isLoggedIn ? (
   <div className="flex items-center gap-3">
     <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
-    <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
+    <span className="text-sm text-gray-700 font-medium">ようこそ、{loggedInUser}さん 👋</span>
     <button
       onClick={() => { setIsLoggedIn(false); setIsReviewer(false); setCurrentView('upload'); setViewingPaper(null); }}
       className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium"
@@ -1991,10 +2069,10 @@ const relationshipTypes = [
                 >
                   AI分析をPDF保存
                 </button>
-                <button className="px-6 py-3 border border-gray-400 text-gray-700 rounded hover:bg-gray-50 font-semibold">
-                  保存
-                </button>
-                <button className="px-6 py-3 border border-gray-400 text-gray-700 rounded hover:bg-gray-50 font-semibold">
+                
+                <button
+                  onClick={() => setCitationPaper(viewingPaper)}
+                  className="px-6 py-3 border border-gray-400 text-gray-700 rounded hover:bg-gray-50 font-semibold">
                   引用
                 </button>
               </div>
@@ -2133,7 +2211,7 @@ const relationshipTypes = [
             </div>
 
             {/* Press Release Section */}
-            <div className="mt-8 p-6 border-2 border-blue-200 rounded-lg bg-blue-50" style={{display: paperSource === 'mypage' ? 'block' : 'none'}}>
+            <div className="mt-8 p-6 border-2 border-blue-200 rounded-lg bg-blue-50" style={{display: 'none'}}>
               <h2 className="text-xl font-bold text-gray-900 mb-4">📰 プレスリリース</h2>
 
               {/* No request yet */}
@@ -2320,6 +2398,7 @@ const relationshipTypes = [
   return (
     <div className="min-h-screen bg-white">
       {loginModal}
+      {citationModal}
       <div className="max-w-full mx-auto">
         {/* Header */}
         <div className="bg-white border-b border-gray-200 px-8 py-4">
@@ -2337,7 +2416,7 @@ const relationshipTypes = [
               {isLoggedIn ? (
                 <div className="flex items-center gap-3">
                   <button onClick={() => setCurrentView('mypage')} className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium">マイページ</button>
-                  <span className="text-sm text-gray-700 font-medium">ようこそ、Spring-8さん 👋</span>
+                  <span className="text-sm text-gray-700 font-medium">ようこそ、{loggedInUser}さん 👋</span>
                   <button
                     onClick={() => setIsLoggedIn(false)}
                     className="px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 font-medium"
@@ -2699,7 +2778,7 @@ const relationshipTypes = [
                     </div>
                     
                     <h3 
-                      onClick={() => setViewingPaper(paper)}
+                      onClick={() => { setViewingPaper(paper); setPaperSource('search'); }}
                       className="text-xl font-serif text-gray-900 mb-2 hover:underline cursor-pointer"
                     >
                       {paper.title}
@@ -2717,7 +2796,7 @@ const relationshipTypes = [
                     
                     <div className="flex items-center gap-3 flex-wrap">
                       <button
-                        onClick={() => setViewingPaper(paper)}
+                        onClick={() => { setViewingPaper(paper); setPaperSource('search'); }}
                         className="text-sm text-blue-700 hover:underline font-medium"
                       >
                         詳細を表示
@@ -2752,10 +2831,10 @@ const relationshipTypes = [
                     >
                       オンライン閲覧
                     </button>
-                    <button className="px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-50 font-medium">
-                      保存
-                    </button>
-                    <button className="px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-50 font-medium">
+                    
+                    <button
+                      onClick={() => setCitationPaper(paper)}
+                      className="px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-50 font-medium">
                       引用
                     </button>
                     {paper.press_release_url && (

@@ -1319,7 +1319,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                 myPapers.map((paper, index) => {
                   const status = paper.press_release_status || 'none';
                   const statusConfig = {
-  none:     { label: '未申請',  color: 'bg-white-100 text-gray-500 border-gray-300', dot: 'bg-gray-400' },
+  none:     { label: '未申請',  color: 'bg-gray-100 text-gray-500 border-gray-300', dot: 'bg-gray-400' },
   pending:  { label: '審査中',  color: 'bg-yellow-400 text-white border-yellow-400', dot: 'bg-white' },
   approved: { label: '承認済み', color: 'bg-green-500 text-white border-green-500',  dot: 'bg-white' },
   rejected: { label: '却下',    color: 'bg-red-500 text-white border-red-500',       dot: 'bg-white' },

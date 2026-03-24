@@ -1319,10 +1319,10 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                 myPapers.map((paper, index) => {
                   const status = paper.press_release_status || 'none';
                   const statusConfig = {
-  none:     { label: '未申請',  color: 'bg-gray-100 text-gray-500 border-gray-300', dot: 'bg-gray-400' },
-  pending:  { label: '審査中',  color: 'bg-yellow-400 text-white border-yellow-400', dot: 'bg-white' },
-  approved: { label: '承認済み', color: 'bg-green-500 text-white border-green-500',  dot: 'bg-white' },
-  rejected: { label: '却下',    color: 'bg-red-500 text-white border-red-500',       dot: 'bg-white' },
+  none:     { label: '未申請',   style: { background: '#f3f4f6', color: '#6b7280', border: '1px solid #d1d5db' }, dotStyle: { background: '#9ca3af' } },
+  pending:  { label: '審査中',   style: { background: '#facc15', color: '#ffffff', border: '1px solid #facc15' }, dotStyle: { background: '#ffffff' } },
+  approved: { label: '承認済み', style: { background: '#22c55e', color: '#ffffff', border: '1px solid #22c55e' }, dotStyle: { background: '#ffffff' } },
+  rejected: { label: '却下',    style: { background: '#ef4444', color: '#ffffff', border: '1px solid #ef4444' }, dotStyle: { background: '#ffffff' } },
 };
                   const s = statusConfig[status] || statusConfig.none;
                   return (
@@ -1338,10 +1338,10 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                           </h3>
                           <p className="text-xs text-gray-500">{paper.authors} · {paper.year}</p>
                         </div>
-                        <span className={`text-xs font-semibold px-3 py-1 rounded-full border flex-shrink-0 flex items-center gap-1.5 ${s.color}`}>
-                          <span className={`w-2 h-2 rounded-full ${s.dot}`}></span>
-                          {s.label}
-                        </span>
+                        <span style={{...s.style, fontSize: '12px', fontWeight: '600', padding: '4px 12px', borderRadius: '9999px', display: 'inline-flex', alignItems: 'center', gap: '6px', flexShrink: 0}}>
+  <span style={{...s.dotStyle, width: '8px', height: '8px', borderRadius: '50%', display: 'inline-block'}}></span>
+  {s.label}
+</span>
                       </div>
 
                       {/* Bottom row: action buttons */}

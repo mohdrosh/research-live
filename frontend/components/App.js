@@ -55,7 +55,7 @@ const [loginError, setLoginError] = useState('');
       console.log('Starting PDF analysis...');
       console.log('PDF filename:', filename);
       
-      const response = await fetch('https://spring8-backend.onrender.com/api/analyze-pdf/', {
+      const response = await fetch('https://publicchemical.spring8.or.jp/research/api/analyze-pdf/', {
 
   method: 'POST',
   headers: {
@@ -269,7 +269,7 @@ const relationshipTypes = [
   React.useEffect(() => {
     const fetchPapers = async () => {
       try {
-        const response = await fetch('https://spring8-backend.onrender.com/api/search', {
+        const response = await fetch('https://publicchemical.spring8.or.jp/research/api/search', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ query: '', filters: {}, page: 1, page_size: 100 })
@@ -305,7 +305,7 @@ const toSync = normalized.filter(p => p.press_release_mongo_id);
 const synced = await Promise.all(
   toSync.map(async p => {
     try {
-      const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${p.id}/press-release-sync`, { method: 'POST' });
+      const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${p.id}/press-release-sync`, { method: 'POST' });
       const d = await res.json();
       return { id: p.id, status: d.status };
     } catch { return null; }
@@ -895,7 +895,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
   const handleSubmit = async () => {
     console.log('Submitting, has pdf:', !!pdfDataUrl, 'length:', pdfDataUrl.length);
     try {
-      const response = await fetch('https://spring8-backend.onrender.com/api/papers/', {
+      const response = await fetch('https://publicchemical.spring8.or.jp/research/api/papers/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1162,7 +1162,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
 
               {/* Press Release Card */}
               <div
-                onClick={() => window.open('https://pressrelease-seven.vercel.app/?view=releases', '_blank')}
+                onClick={() => window.open('https://publicchemical.spring8.or.jp/pressrelease', '_blank')}
                 style={{
                   background: 'white',
                   border: '1.5px solid #d1d5db',
@@ -1350,7 +1350,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                         <button
                           onClick={async () => {
                             try {
-                              const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                              const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}/pdf`);
                               if (!res.ok) throw new Error('not found');
                               const blob = await res.blob();
                               const url = URL.createObjectURL(blob);
@@ -1384,7 +1384,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                 setPrLoadingId(paper.id);
 
                                 // Step 1: Fetch PDF
-                                const pdfRes = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                                const pdfRes = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}/pdf`);
                                 if (!pdfRes.ok) throw new Error('PDFが見つかりません');
                                 const pdfBlob = await pdfRes.blob();
 
@@ -1447,7 +1447,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                 // Step 6: Open release.html with the draft ID
                                 window.open(`https://pressrelease-seven.vercel.app/release.html?id=${saveData._id}`, '_blank');
 
-await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/press-release-mongo-id`, {
+await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}/press-release-mongo-id`, {
   method: 'PATCH',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ mongo_id: saveData._id })
@@ -1487,7 +1487,7 @@ setPapers(prev => prev.map(p =>
                           onClick={async () => {
                             if (window.confirm('この論文を削除しますか？')) {
                               try {
-                                const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}`, {
+                                const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}`, {
                                   method: 'DELETE',
                                 });
                                 if (res.ok) {
@@ -1974,7 +1974,7 @@ setPapers(prev => prev.map(p =>
                 <button
                   onClick={async () => {
                     try {
-                      const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/pdf`);
+                      const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/pdf`);
                       if (!res.ok) throw new Error('not found');
                       const blob = await res.blob();
                       const url = URL.createObjectURL(blob);
@@ -2252,7 +2252,7 @@ setPapers(prev => prev.map(p =>
                       />
                       <button
                         onClick={async () => {
-                          await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'pending', note: prRequestNote })
@@ -2289,7 +2289,7 @@ setPapers(prev => prev.map(p =>
                     <div className="flex gap-3 mt-3">
                       <button
                         onClick={async () => {
-                          await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'approved' })
@@ -2303,7 +2303,7 @@ setPapers(prev => prev.map(p =>
                       </button>
                       <button
                         onClick={async () => {
-                          await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'rejected' })
@@ -2338,7 +2338,7 @@ setPapers(prev => prev.map(p =>
                       />
                       <button
                         onClick={async () => {
-                          await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'pending', note: prRequestNote })
@@ -2383,7 +2383,7 @@ setPapers(prev => prev.map(p =>
                             onClick={async () => {
                               const url = document.getElementById('pr-url-input').value.trim();
                               if (!url) return;
-                              await fetch(`https://spring8-backend.onrender.com/api/papers/${viewingPaper.id}/press-release-url`, {
+                              await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-url`, {
                                 method: 'PATCH',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ url })
@@ -2842,7 +2842,7 @@ setPapers(prev => prev.map(p =>
                     <button 
                       onClick={async () => {
                         try {
-                          const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                          const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}/pdf`);
                           if (!res.ok) throw new Error('not found');
                           const blob = await res.blob();
                           const url = URL.createObjectURL(blob);

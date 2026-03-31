@@ -743,7 +743,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
     },
     {
       id: 'crossDomain',
-      label: '異分野翻訳レイヤー (Cross-Domain Translation)',
+      label: '異分野への適用可能性 (Cross-Domain Translation)',
       placeholder: '他分野での類似問題や応用可能性',
       type: 'textarea',
       required: true,
@@ -775,7 +775,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
     },
     {
       id: 'scalingPossibility',
-      label: 'スケーリング可能性 (Scaling Possibilities)',
+      label: '拡張性 (Scaling Possibilities)',
       placeholder: 'この技術は異なるスケールで機能しますか？',
       type: 'textarea',
       required: false,
@@ -979,15 +979,18 @@ synced.filter(Boolean).forEach(({ id, status }) => {
   };
 
   const filteredPapers = papers.filter(paper => {
-    const matchesSearch = searchQuery === '' || 
-      paper.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      paper.titleEn.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      paper.authors.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      paper.mainConclusion.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      paper.industrialApplication.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      paper.crossDomain.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      paper.field.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      paper.method.toLowerCase().includes(searchQuery.toLowerCase());
+    const searchWords = searchQuery.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    const paperText = [
+      paper.title,
+      paper.titleEn,
+      paper.authors,
+      paper.mainConclusion,
+      paper.industrialApplication,
+      paper.crossDomain,
+      paper.field,
+      paper.method
+    ].join(' ').toLowerCase();
+    const matchesSearch = searchQuery === '' || searchWords.every(word => paperText.includes(word));
     
     const matchesField = selectedFilters.field.length === 0 || selectedFilters.field.includes(paper.field);
     const matchesMethod = selectedFilters.method.length === 0 || selectedFilters.method.includes(paper.method);
@@ -1249,6 +1252,51 @@ synced.filter(Boolean).forEach(({ id, status }) => {
           >コピー</button>
         </div>
 
+        {/* JST */}
+        <div className="mb-4">
+          <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">JST（科学技術振興機構）</div>
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm text-gray-800 leading-relaxed">
+            {citationPaper.authors}. {citationPaper.title}. <em>SPring-8 Research Journal</em>. {citationPaper.year}, Vol. {citationPaper.id}, No. 1, p. 1-20.
+          </div>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(`${citationPaper.authors}. ${citationPaper.title}. SPring-8 Research Journal. ${citationPaper.year}, Vol. ${citationPaper.id}, No. 1, p. 1-20.`);
+              alert('コピーしました');
+            }}
+            className="mt-1 text-xs text-blue-600 hover:underline"
+          >コピー</button>
+        </div>
+
+        {/* Vancouver */}
+        <div className="mb-4">
+          <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Vancouver</div>
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm text-gray-800 leading-relaxed">
+            {citationPaper.authors}. {citationPaper.title}. <em>SPring-8 Res J</em>. {citationPaper.year};{citationPaper.id}(1):1-20.
+          </div>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(`${citationPaper.authors}. ${citationPaper.title}. SPring-8 Res J. ${citationPaper.year};${citationPaper.id}(1):1-20.`);
+              alert('コピーしました');
+            }}
+            className="mt-1 text-xs text-blue-600 hover:underline"
+          >コピー</button>
+        </div>
+
+        {/* IEEE */}
+        <div className="mb-4">
+          <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">IEEE</div>
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm text-gray-800 leading-relaxed">
+            {citationPaper.authors}, "{citationPaper.title}," <em>SPring-8 Research Journal</em>, vol. {citationPaper.id}, no. 1, pp. 1-20, {citationPaper.year}.
+          </div>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(`${citationPaper.authors}, "${citationPaper.title}," SPring-8 Research Journal, vol. ${citationPaper.id}, no. 1, pp. 1-20, ${citationPaper.year}.`);
+              alert('コピーしました');
+            }}
+            className="mt-1 text-xs text-blue-600 hover:underline"
+          >コピー</button>
+        </div>
+
         <button
           onClick={() => setCitationPaper(null)}
           className="w-full mt-2 px-4 py-2 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-50 text-sm font-medium"
@@ -1469,7 +1517,7 @@ setPapers(prev => prev.map(p =>
                             {prLoadingId === paper.id ? (
                               <><Loader className="w-3 h-3 animate-spin" /> 生成中...</>
                             ) : (
-                              <>✏️ プレスリリース申請</>
+                              <>✏️ プレスリリース作成</>
                             )}
                           </button>
                         )}
@@ -1623,27 +1671,39 @@ setPapers(prev => prev.map(p =>
               </div>
             )}
 
-            <div className="space-y-6 max-h-[600px] overflow-y-auto pr-4">
-              {mdrcgQuestions.map((question) => (
-                <div key={question.id} className="border-b pb-6">
-                  <label className="block mb-2">
-                    <span className="text-lg font-semibold text-gray-800">
-                      {question.label}
-                      {question.required && <span className="text-red-500 ml-1">*</span>}
-                    </span>
-                  </label>
-                  <textarea
-                    value={formData[question.id] || ''}
-                    onChange={(e) => handleInputChange(question.id, e.target.value)}
-                    placeholder={question.placeholder}
-                    className="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none min-h-[120px] bg-yellow-50"
-                    required={question.required}
-                  />
-                  <p className="text-xs text-gray-500 mt-1">
-                    💡 AIが生成した内容です。必要に応じて修正してください
-                  </p>
-                </div>
-              ))}
+            <div className="space-y-3">
+              {mdrcgQuestions.map((question) => {
+                const isOpen = formData[`_open_${question.id}`] !== false;
+                return (
+                  <div key={question.id} className="border border-gray-200 rounded-lg overflow-hidden">
+                    <button
+                      type="button"
+                      onClick={() => handleInputChange(`_open_${question.id}`, !isOpen)}
+                      className="w-full flex items-center justify-between px-5 py-4 bg-gray-50 hover:bg-gray-100 text-left transition-colors"
+                    >
+                      <span className="text-base font-semibold text-gray-800">
+                        {question.label}
+                        {question.required && <span className="text-red-500 ml-1">*</span>}
+                      </span>
+                      {isOpen ? <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" /> : <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />}
+                    </button>
+                    {isOpen && (
+                      <div className="px-5 py-4 bg-white">
+                        <textarea
+                          value={formData[question.id] || ''}
+                          onChange={(e) => handleInputChange(question.id, e.target.value)}
+                          placeholder={question.placeholder}
+                          className="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none bg-yellow-50 resize-none"
+                          style={{ minHeight: '120px', height: 'auto' }}
+                          rows={Math.max(4, ((formData[question.id] || '').match(/\n/g) || []).length + 3)}
+                          required={question.required}
+                        />
+                        <p className="text-xs text-gray-500 mt-1">💡 AIが生成した内容です。必要に応じて修正してください</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             <div className="mt-8 flex gap-4">
@@ -1661,251 +1721,6 @@ setPapers(prev => prev.map(p =>
               </button>
             </div>
             </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // 高度検索ビュー (Advanced Search View)
-  if (currentView === 'advancedSearch') {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-6xl mx-auto p-8">
-          {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h1 className="text-4xl font-serif text-gray-900">高度検索</h1>
-              <button
-                onClick={() => setCurrentView('search')}
-                className="text-sm text-blue-700 hover:text-blue-900 underline"
-              >
-                ← 簡易検索に戻る
-              </button>
-            </div>
-            <button className="text-sm text-blue-700 hover:underline">検索ヘルプ</button>
-          </div>
-
-          {/* Tabs */}
-          <div className="border-b-2 border-gray-300 mb-8">
-            <button className="px-6 py-3 text-sm font-semibold border-b-4 border-black -mb-0.5">
-              全コンテンツ
-            </button>
-            <button className="px-6 py-3 text-sm text-gray-600 hover:text-gray-900">
-              画像
-            </button>
-          </div>
-
-          {/* Construct Query Section */}
-          <div className="bg-white rounded-lg border border-gray-300 p-8 mb-8">
-            <h2 className="text-2xl font-serif text-gray-900 mb-6">検索クエリを構築</h2>
-            
-            {advancedSearchRows.map((row, index) => (
-              <div key={row.id} className="mb-4">
-                <div className="grid grid-cols-12 gap-4 items-start">
-                  {index > 0 && (
-                    <div className="col-span-2">
-                      <label className="block text-xs font-semibold text-gray-700 mb-1">論理演算子</label>
-                      <select
-                        value={row.boolean}
-                        onChange={(e) => {
-                          const newRows = [...advancedSearchRows];
-                          newRows[index].boolean = e.target.value;
-                          setAdvancedSearchRows(newRows);
-                        }}
-                        className="w-full px-3 py-2 border border-gray-400 rounded text-sm"
-                      >
-                        <option value="AND">AND</option>
-                        <option value="OR">OR</option>
-                        <option value="NOT">NOT</option>
-                        <option value="NEAR 5">NEAR 5</option>
-                        <option value="NEAR 10">NEAR 10</option>
-                        <option value="NEAR 25">NEAR 25</option>
-                      </select>
-                    </div>
-                  )}
-                  
-                  <div className={index === 0 ? 'col-span-6' : 'col-span-5'}>
-                    <label className="block text-xs font-semibold text-gray-700 mb-1">検索語句</label>
-                    <input
-                      type="text"
-                      value={row.term}
-                      onChange={(e) => {
-                        const newRows = [...advancedSearchRows];
-                        newRows[index].term = e.target.value;
-                        setAdvancedSearchRows(newRows);
-                      }}
-                      className="w-full px-3 py-2 border border-gray-400 rounded text-sm"
-                      placeholder="検索キーワードを入力..."
-                    />
-                  </div>
-                  
-                  <div className="col-span-4">
-                    <label className="block text-xs font-semibold text-gray-700 mb-1">検索フィールド</label>
-                    <select
-                      value={row.field}
-                      onChange={(e) => {
-                        const newRows = [...advancedSearchRows];
-                        newRows[index].field = e.target.value;
-                        setAdvancedSearchRows(newRows);
-                      }}
-                      className="w-full px-3 py-2 border border-gray-400 rounded text-sm"
-                    >
-                      <option value="all">全フィールド</option>
-                      <option value="title">タイトル</option>
-                      <option value="author">著者</option>
-                      <option value="abstract">要旨</option>
-                      <option value="caption">説明</option>
-                    </select>
-                  </div>
-                  
-                  {index > 0 && (
-                    <div className="col-span-1 pt-6">
-                      <button
-                        onClick={() => {
-                          setAdvancedSearchRows(advancedSearchRows.filter(r => r.id !== row.id));
-                        }}
-                        className="text-gray-600 hover:text-red-600"
-                      >
-                        <X className="w-5 h-5" />
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-            
-            <button
-              onClick={() => {
-                setAdvancedSearchRows([
-                  ...advancedSearchRows,
-                  { id: Date.now(), boolean: 'AND', term: '', field: 'all' }
-                ]);
-              }}
-              className="mt-4 px-4 py-2 text-sm border border-gray-400 rounded hover:bg-gray-50 flex items-center gap-2"
-            >
-              <span className="text-lg">+</span> 行を追加
-            </button>
-
-            {/* Access Type */}
-            <div className="mt-8">
-              <label className="block text-xs font-semibold text-gray-700 mb-2">アクセスタイプを選択</label>
-              <select className="w-80 px-3 py-2 border border-gray-400 rounded text-sm">
-                <option>すべて</option>
-                <option>アクセス可能なコンテンツ</option>
-              </select>
-            </div>
-
-            <button
-              onClick={() => {
-                // Apply advanced search and go back to results
-                setCurrentView('search');
-              }}
-              className="mt-6 px-8 py-3 bg-red-800 text-white rounded hover:bg-red-900 font-semibold"
-            >
-              高度検索を実行
-            </button>
-          </div>
-
-          {/* Narrow Results Section */}
-          <div className="bg-white rounded-lg border border-gray-300 p-8">
-            <h2 className="text-2xl font-serif text-gray-900 mb-6">検索結果を絞り込む</h2>
-            
-            {/* Item Type */}
-            <div className="mb-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">アイテムタイプ</h3>
-              <div className="space-y-2">
-                {['論文', '研究報告', 'レビュー', 'その他', '書籍'].map(type => (
-                  <label key={type} className="flex items-center gap-2 text-sm cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={selectedItemTypes.includes(type)}
-                      onChange={() => {
-                        setSelectedItemTypes(prev =>
-                          prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
-                        );
-                      }}
-                      className="w-4 h-4 accent-red-800"
-                    />
-                    <span className="text-gray-700">{type}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Publication Date */}
-            <div className="mb-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">出版日</h3>
-              <div className="flex items-center gap-4">
-                <div>
-                  <label className="block text-xs text-gray-600 mb-1">開始日</label>
-                  <input
-                    type="text"
-                    value={dateFrom}
-                    onChange={(e) => setDateFrom(e.target.value)}
-                    placeholder="yyyy/mm/dd"
-                    className="w-32 px-3 py-2 border border-gray-400 rounded text-sm"
-                  />
-                </div>
-                <div className="pt-6">
-                  <span className="text-gray-600">〜</span>
-                </div>
-                <div>
-                  <label className="block text-xs text-gray-600 mb-1">&nbsp;</label>
-                  <input
-                    type="text"
-                    value={dateTo}
-                    onChange={(e) => setDateTo(e.target.value)}
-                    placeholder="yyyy/mm/dd"
-                    className="w-32 px-3 py-2 border border-gray-400 rounded text-sm"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Disciplines */}
-            <div className="mb-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">学術分野で絞り込む</h3>
-              <div className="space-y-1 max-h-96 overflow-y-auto border border-gray-300 rounded p-4">
-                {Object.entries(disciplines).map(([key, discipline]) => (
-                  <div key={key}>
-                    <label className="flex items-start gap-2 text-sm cursor-pointer hover:bg-gray-50 p-1 rounded">
-                      <input
-                        type="checkbox"
-                        checked={selectedDisciplines.includes(key)}
-                        onChange={() => {
-                          setSelectedDisciplines(prev =>
-                            prev.includes(key) ? prev.filter(d => d !== key) : [...prev, key]
-                          );
-                        }}
-                        className="w-4 h-4 mt-0.5 accent-red-800"
-                      />
-                      <div>
-                        <div className="font-medium text-gray-900">{discipline.label}</div>
-                        {selectedDisciplines.includes(key) && (
-                          <div className="ml-6 mt-2 space-y-1">
-                            {discipline.journals.map(journal => (
-                              <div key={journal} className="text-xs text-blue-700 hover:underline cursor-pointer">
-                                {journal}
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <button
-              onClick={() => {
-                setCurrentView('search');
-              }}
-              className="px-8 py-3 bg-red-800 text-white rounded hover:bg-red-900 font-semibold"
-            >
-              高度検索を実行
-            </button>
           </div>
         </div>
       </div>
@@ -2241,7 +2056,7 @@ setPapers(prev => prev.map(p =>
               {/* No request yet */}
               {(!viewingPaper.press_release_status || viewingPaper.press_release_status === 'none') && (
                 <div>
-                  <p className="text-sm text-gray-600 mb-3">プレスリリースの申請がまだありません。</p>
+                  <p className="text-sm text-gray-600 mb-3">プレスリリースの作成がまだありません。</p>
                   {isLoggedIn && !isReviewer && (
                     <div className="space-y-3">
                       <textarea
@@ -2472,12 +2287,7 @@ setPapers(prev => prev.map(p =>
                 <Search className="w-5 h-5" />
               </button>
             </div>
-            <button
-              onClick={() => setCurrentView('advancedSearch')}
-              className="mt-2 text-sm text-blue-700 hover:text-blue-900 underline"
-            >
-              高度検索
-            </button>
+            
           </div>
         </div>
 
@@ -2486,194 +2296,6 @@ setPapers(prev => prev.map(p =>
           {/* Left Sidebar - Filters */}
           <div className="w-64 border-r border-gray-200 bg-gray-50 p-6 min-h-screen">
             <h2 className="text-lg font-bold text-gray-900 mb-4">Refine Results</h2>
-
-          {/* Advanced Search Modal */}
-          {showAdvancedSearch && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-              <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
-                <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-6 text-white">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h2 className="text-2xl font-bold">高度検索 (Advanced Search)</h2>
-                      <p className="text-sm mt-1">階層的なナレッジツリーで探索 (Explore through hierarchical knowledge tree)</p>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setShowAdvancedSearch(false);
-                        setAdvancedSearchQuery('');
-                        setSelectedPath([]);
-                        setCurrentBranch(null);
-                      }}
-                      className="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2"
-                    >
-                      <X className="w-6 h-6" />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  {/* Breadcrumb Path */}
-                  {selectedPath.length > 0 && (
-                    <div className="mb-4 flex items-center gap-2 text-sm text-gray-600">
-                      <button
-                        onClick={() => {
-                          setSelectedPath([]);
-                          setCurrentBranch(null);
-                        }}
-                        className="hover:text-blue-600"
-                      >
-                        ホーム (Home)
-                      </button>
-                      {selectedPath.map((pathItem, index) => (
-                        <React.Fragment key={index}>
-                          <span>→</span>
-                          <button
-                            onClick={() => {
-                              setSelectedPath(selectedPath.slice(0, index + 1));
-                              // Navigate to this level
-                              let branch = searchKnowledgeTree;
-                              for (let i = 0; i <= index; i++) {
-                                branch = branch[selectedPath[i]];
-                              }
-                              setCurrentBranch(branch);
-                            }}
-                            className="hover:text-blue-600 font-semibold"
-                          >
-                            {pathItem}
-                          </button>
-                        </React.Fragment>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Search Input */}
-                  <div className="relative mb-6">
-                    <Search className="absolute left-4 top-4 text-gray-400 w-5 h-5" />
-                    <input
-                      type="text"
-                      value={advancedSearchQuery}
-                      onChange={(e) => setAdvancedSearchQuery(e.target.value)}
-                      placeholder="キーワードを入力... (Enter keywords...)"
-                      className="w-full pl-12 pr-4 py-4 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none text-lg"
-                      autoFocus
-                    />
-                  </div>
-
-                  {/* Results Area */}
-                  <div className="max-h-[400px] overflow-y-auto">
-                    {advancedSearchQuery === '' && selectedPath.length === 0 ? (
-                      // Show top level categories
-                      <div className="space-y-3">
-                        <p className="text-sm text-gray-600 mb-4">カテゴリーを選択するか、キーワードを入力してください (Select a category or enter keywords)</p>
-                        {Object.keys(searchKnowledgeTree).map(key => (
-                          <div
-                            key={key}
-                            onClick={() => {
-                              setSelectedPath([key]);
-                              setCurrentBranch(searchKnowledgeTree[key]);
-                            }}
-                            className="p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 cursor-pointer transition-all"
-                          >
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <h3 className="font-bold text-gray-800">{searchKnowledgeTree[key].label}</h3>
-                                <p className="text-xs text-gray-500 mt-1">
-                                  {searchKnowledgeTree[key].branches ? 
-                                    `${Object.keys(searchKnowledgeTree[key].branches).length} サブカテゴリー` : 
-                                    '論文を表示'}
-                                </p>
-                              </div>
-                              <ChevronDown className="w-5 h-5 text-gray-400 transform -rotate-90" />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : advancedSearchQuery !== '' ? (
-                      // Show search suggestions
-                      <div className="space-y-3">
-                        {getAdvancedSearchSuggestions(advancedSearchQuery)?.length > 0 ? (
-                          getAdvancedSearchSuggestions(advancedSearchQuery).map((match, index) => (
-                            <div
-                              key={index}
-                              onClick={() => {
-                                setSelectedPath(match.path);
-                                setCurrentBranch(match.data);
-                                setAdvancedSearchQuery('');
-                              }}
-                              className="p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 cursor-pointer transition-all"
-                            >
-                              <div className="flex items-center justify-between">
-                                <div>
-                                  <h3 className="font-bold text-gray-800">{match.data.label}</h3>
-                                  <p className="text-xs text-gray-500 mt-1">
-                                    {match.data.branches ? 
-                                      `${Object.keys(match.data.branches).length} サブカテゴリー` : 
-                                      `${match.data.papers?.length || 0} 件の論文`}
-                                  </p>
-                                </div>
-                                <ChevronDown className="w-5 h-5 text-gray-400 transform -rotate-90" />
-                              </div>
-                            </div>
-                          ))
-                        ) : (
-                          <p className="text-center text-gray-500 py-8">該当する結果が見つかりませんでした (No results found)</p>
-                        )}
-                      </div>
-                    ) : currentBranch ? (
-                      // Show current branch contents
-                      <div className="space-y-3">
-                        {currentBranch.branches && Object.keys(currentBranch.branches).map(key => (
-                          <div
-                            key={key}
-                            onClick={() => {
-                              setSelectedPath([...selectedPath, key]);
-                              setCurrentBranch(currentBranch.branches[key]);
-                            }}
-                            className="p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 cursor-pointer transition-all"
-                          >
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <h3 className="font-bold text-gray-800">{currentBranch.branches[key].label}</h3>
-                                <p className="text-xs text-gray-500 mt-1">
-                                  {currentBranch.branches[key].branches ? 
-                                    `${Object.keys(currentBranch.branches[key].branches).length} サブカテゴリー` : 
-                                    `${currentBranch.branches[key].papers?.length || 0} 件の論文`}
-                                </p>
-                              </div>
-                              <ChevronDown className="w-5 h-5 text-gray-400 transform -rotate-90" />
-                            </div>
-                          </div>
-                        ))}
-                        {currentBranch.papers && (
-                          <div className="space-y-3 mt-4">
-                            <h3 className="font-bold text-gray-700 border-t pt-4">関連論文 (Related Papers)</h3>
-                            {currentBranch.papers.map(paperId => {
-                              const paper = papers.find(p => p.id === paperId);
-                              return paper ? (
-                                <div
-                                  key={paper.id}
-                                  onClick={() => {
-                                    setShowAdvancedSearch(false);
-                                    // Scroll to paper in main view
-                                    document.getElementById(`paper-${paper.id}`)?.scrollIntoView({ behavior: 'smooth' });
-                                  }}
-                                  className="p-4 border-2 border-blue-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 cursor-pointer transition-all"
-                                >
-                                  <h4 className="font-bold text-gray-800">{paper.title}</h4>
-                                  <p className="text-sm text-gray-600 mt-1">{paper.titleEn}</p>
-                                  <p className="text-xs text-gray-500 mt-2">{paper.authors} ({paper.year})</p>
-                                </div>
-                              ) : null;
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
 
           {/* Research Field Filter */}
             <div className="mb-6">
@@ -2819,12 +2441,6 @@ setPapers(prev => prev.map(p =>
                     </p>
                     
                     <div className="flex items-center gap-3 flex-wrap">
-                      <button
-                        onClick={() => { setViewingPaper(paper); setPaperSource('search'); }}
-                        className="text-sm text-blue-700 hover:underline font-medium"
-                      >
-                        詳細を表示
-                      </button>
                       {paper.press_release_status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (
   <a href={paper.press_release_url || `https://pressrelease-seven.vercel.app/release.html?id=${paper.press_release_mongo_id}`} target="_blank" rel="noopener noreferrer" className="text-sm text-white bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 font-medium">
     📰 プレスリリース
@@ -2861,16 +2477,7 @@ setPapers(prev => prev.map(p =>
                       className="px-4 py-2 border border-gray-300 text-gray-700 text-sm rounded hover:bg-gray-50 font-medium">
                       引用
                     </button>
-                    {paper.press_release_status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (
-  <a
-    href={paper.press_release_url || `https://pressrelease-seven.vercel.app/release.html?id=${paper.press_release_mongo_id}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 font-medium text-center"
-  >
-    📰 プレスリリース
-  </a>
-)}
+                    
                   </div>
                 </div>
               </div>

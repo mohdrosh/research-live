@@ -43,6 +43,9 @@ const [prRequestNote, setPrRequestNote] = useState('');
 const [citationPaper, setCitationPaper] = useState(null);
 const [paperSource, setPaperSource] = useState('search');
 const [prLoadingId, setPrLoadingId] = useState(null); // 'search' or 'mypage'
+const [editingPaper, setEditingPaper] = useState(null);
+const [regenLoading, setRegenLoading] = useState({});
+const [regenInput, setRegenInput] = useState({});
 const [showLoginModal, setShowLoginModal] = useState(false);
 const [loginUsername, setLoginUsername] = useState('');
 const [loggedInUser, setLoggedInUser] = useState('');
@@ -895,8 +898,12 @@ synced.filter(Boolean).forEach(({ id, status }) => {
   const handleSubmit = async () => {
     console.log('Submitting, has pdf:', !!pdfDataUrl, 'length:', pdfDataUrl.length);
     try {
-      const response = await fetch('https://spring8-backend.onrender.com/api/papers/', {
-        method: 'POST',
+      const url = editingPaper
+        ? `https://spring8-backend.onrender.com/api/papers/${editingPaper.id}`
+        : 'https://spring8-backend.onrender.com/api/papers/';
+      const method = editingPaper ? 'PUT' : 'POST';
+      const response = await fetch(url, {
+        method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title: formData.title || (uploadedFile ? uploadedFile.name.replace('.pdf', '') : '新規論文'),
@@ -955,7 +962,11 @@ synced.filter(Boolean).forEach(({ id, status }) => {
           combinationPotential: newPaper.form_data.combination_potential,
         } : null,
       };
-      setPapers(prevPapers => [normalized, ...prevPapers]);
+      if (editingPaper) {
+        setPapers(prevPapers => prevPapers.map(p => p.id === normalized.id ? normalized : p));
+      } else {
+        setPapers(prevPapers => [normalized, ...prevPapers]);
+      }
     } catch (error) {
       console.error('Submit error:', error);
       alert('登録に失敗しました: ' + error.message);
@@ -965,6 +976,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
     setSelectedRelatedPapers([]);
     setPdfText('');
     setPdfDataUrl('');
+    setEditingPaper(null);
     setCurrentView('mypage');
   };
 
@@ -1530,6 +1542,39 @@ setPapers(prev => prev.map(p =>
                           詳細
                         </button>
 
+                        {/* Edit button */}
+                        <button
+                          onClick={() => {
+                            const fd = paper.formData || {};
+                            setEditingPaper(paper);
+                            setFormData({
+                              title: paper.title,
+                              title_en: paper.titleEn,
+                              authors: paper.authors,
+                              year: paper.year,
+                              field: paper.field,
+                              method: paper.method,
+                              beamline: paper.beamline,
+                              application: paper.application,
+                              mainConclusion: paper.mainConclusion,
+                              industrialPain: paper.industrialApplication,
+                              crossDomain: paper.crossDomain,
+                              failedApproach: paper.failedApproach,
+                              priorWork: fd.priorWork || '',
+                              novelty: fd.novelty || '',
+                              unknownQuestions: fd.unknownQuestions || '',
+                              abstractPrinciple: fd.abstractPrinciple || '',
+                              experimentalReason: fd.experimentalReason || '',
+                              scalingPossibility: fd.scalingPossibility || '',
+                              combinationPotential: fd.combinationPotential || '',
+                            });
+                            setCurrentView('form');
+                          }}
+                          className="px-3 py-1.5 text-xs border border-blue-300 text-blue-600 rounded hover:bg-blue-50 font-medium"
+                        >
+                          編集
+                        </button>
+
                         {/* Delete button */}
                         <button
                           onClick={async () => {
@@ -1608,9 +1653,9 @@ setPapers(prev => prev.map(p =>
             <div className="bg-white border border-gray-300 rounded-lg p-8">
             <div className="mb-6">
               <h1 className="text-3xl font-bold text-gray-800 mb-2">
-                MDRCG 情報入力フォーム
+                {editingPaper ? '論文を編集' : 'MDRCG 情報入力フォーム'}
               </h1>
-              <p className="text-gray-600">Research Context Information Form</p>
+              <p className="text-gray-600">{editingPaper ? 'Edit Paper' : 'Research Context Information Form'}</p>
             </div>
 
             {/* Paper Relationships Section */}
@@ -1699,6 +1744,67 @@ setPapers(prev => prev.map(p =>
                           required={question.required}
                         />
                         <p className="text-xs text-gray-500 mt-1">💡 AIが生成した内容です。必要に応じて修正してください</p>
+                        <div className="mt-3 flex gap-2 items-center">
+                          <input
+                            type="text"
+                            value={regenInput[question.id] || ''}
+                            onChange={(e) => setRegenInput(prev => ({ ...prev, [question.id]: e.target.value }))}
+                            onKeyDown={async (e) => {
+                              if (e.key === 'Enter' && regenInput[question.id]?.trim()) {
+                                setRegenLoading(prev => ({ ...prev, [question.id]: true }));
+                                try {
+                                  const res = await fetch('https://spring8-backend.onrender.com/api/analyze-pdf/regenerate-field/', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                      field_name: question.label,
+                                      current_text: formData[question.id] || '',
+                                      instruction: regenInput[question.id]
+                                    })
+                                  });
+                                  const data = await res.json();
+                                  handleInputChange(question.id, data.result);
+                                  setRegenInput(prev => ({ ...prev, [question.id]: '' }));
+                                } catch {
+                                  alert('再生成に失敗しました');
+                                } finally {
+                                  setRegenLoading(prev => ({ ...prev, [question.id]: false }));
+                                }
+                              }
+                            }}
+                            placeholder="指示を入力... 例: もっと長く、より丁寧に (Enterで実行)"
+                            className="flex-1 px-3 py-2 text-xs border border-gray-300 rounded-lg focus:border-blue-400 focus:outline-none bg-white"
+                            disabled={regenLoading[question.id]}
+                          />
+                          <button
+                            onClick={async () => {
+                              if (!regenInput[question.id]?.trim()) return;
+                              setRegenLoading(prev => ({ ...prev, [question.id]: true }));
+                              try {
+                                const res = await fetch('https://spring8-backend.onrender.com/api/analyze-pdf/regenerate-field/', {
+                                  method: 'POST',
+                                  headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({
+                                    field_name: question.label,
+                                    current_text: formData[question.id] || '',
+                                    instruction: regenInput[question.id]
+                                  })
+                                });
+                                const data = await res.json();
+                                handleInputChange(question.id, data.result);
+                                setRegenInput(prev => ({ ...prev, [question.id]: '' }));
+                              } catch {
+                                alert('再生成に失敗しました');
+                              } finally {
+                                setRegenLoading(prev => ({ ...prev, [question.id]: false }));
+                              }
+                            }}
+                            disabled={regenLoading[question.id] || !regenInput[question.id]?.trim()}
+                            className="px-3 py-2 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 font-medium"
+                          >
+                            {regenLoading[question.id] ? <><Loader className="w-3 h-3 animate-spin" />生成中</> : '✨ 再生成'}
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -1708,7 +1814,7 @@ setPapers(prev => prev.map(p =>
 
             <div className="mt-8 flex gap-4">
               <button
-                onClick={() => setCurrentView('upload')}
+                onClick={() => { setEditingPaper(null); setFormData({}); setCurrentView('mypage'); }}
                 className="px-6 py-3 border border-gray-400 text-gray-700 rounded hover:bg-gray-50 font-semibold"
               >
                 ← 戻る

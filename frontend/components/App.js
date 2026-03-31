@@ -1467,19 +1467,33 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                     reader.onerror = reject;
                                     reader.readAsDataURL(pdfBlob);
                                   });
-                                  const sys = `あなたはSPring-8・SACLAの研究成果を一般市民・報道機関向けに伝える、日本語サイエンスコミュニケーションの専門家です。実際のSPring-8公式プレスリリースと同じ形式・水準で、学術論文をもとに完全な日本語プレスリリース原稿を生成してください。【絶対に守るルール】1. 必ず有効なJSONのみを返してください。コードブロック・前置き・説明文は一切不要です。2. background・results・futureは各セクション必ず4〜6段落。3. glossaryの各用語は必ず本文中に登場させること。4. summaryは5〜6文で。出力するJSONの構造: {"title":"一般向けの魅力的な見出し","date":"発表日","institution":"研究機関名","summary":"5〜6文の詳細要約","background":"研究背景（4〜6段落、\\n区切り）","results":"研究内容と成果（4〜6段落、\\n区切り）","future":"今後の展開（2〜3段落、\\n区切り）","significance":[{"icon":"🏥","text":"意義"}],"glossary":[{"term":"用語","definition":"説明"}],"figureConcepts":[{"title":"図タイトル","description":"説明"}],"paperInfo":{"title":"論文タイトル","authors":"著者","journal":"掲載誌","doi":"DOI"},"quote":{"text":"研究者コメント","author":"氏名・所属"}}`;
+                                  const sys = `あなたはSPring-8・SACLAの研究成果を一般市民・報道機関向けに伝える、日本語サイエンスコミュニケーションの専門家です。
+
+実際のSPring-8公式プレスリリース（https://new.spring8.or.jp）と同じ形式・水準で、学術論文をもとに完全な日本語プレスリリース原稿を生成してください。
+
+【絶対に守るルール】
+1. 必ず有効なJSONのみを返してください。コードブロック（\`\`\`json等）・前置き・説明文は一切不要です。JSONの最初の文字は { でなければなりません。
+2. background・results・futureは各セクション必ず4〜6段落、各段落3〜5文の充実した内容にしてください。短い要約は禁止です。
+3. 【最重要】glossaryに登録する各用語は、必ずbackground・results・futureの本文中に、まったく同じ表記で1回以上使用してください。用語が本文に一度も登場しない場合、クリックリンクが機能しません。
+4. 本文中で各用語が初めて登場する箇所の直後に、「注１）」「注２）」のように注番号を付けてください（例：「ABC輸送体注１）は…」「SACLA注２）の高輝度X線を…」）。番号はglossary配列の順番（1から）に対応させてください。
+5. summaryは5〜6文で背景・方法・発見・意義をすべて含む詳細な要約にしてください。
+6. backgroundには研究分野の社会的背景・既存研究の限界・本研究の動機を詳しく4〜6段落で書いてください。
+7. resultsには実験方法・具体的な数値・発見内容・メカニズムの解明を詳しく4〜6段落で書いてください。
+8. futureには本研究が開く可能性・応用分野・次のステップを2〜3段落で書いてください。
+
+出力するJSONの構造（これ以外の形式は禁止）:
+{"title":"一般向けの魅力的な見出し","date":"発表日","institution":"研究機関名","summary":"5〜6文の詳細要約","background":"研究背景（4〜6段落、\\n区切り、各用語を使用し注番号付き）","results":"研究内容と成果（4〜6段落、\\n区切り、各用語を使用し注番号付き）","future":"今後の展開（2〜3段落、\\n区切り）","significance":[{"icon":"🏥","text":"医療への意義（2〜3文）"},{"icon":"🔬","text":"技術への貢献（2〜3文）"},{"icon":"🌏","text":"社会への波及（2〜3文）"}],"glossary":[{"term":"用語1（本文中に必ず登場する表記）","definition":"一般向け詳細説明（3〜4文）"},{"term":"用語2","definition":"説明"},{"term":"用語3","definition":"説明"},{"term":"用語4","definition":"説明"},{"term":"用語5","definition":"説明"},{"term":"用語6","definition":"説明"}],"figureConcepts":[{"title":"図1タイトル","description":"デザイナー向け詳細説明（色・ラベル・レイアウト含む）"},{"title":"図2タイトル","description":"説明"},{"title":"図3タイトル","description":"説明"}],"paperInfo":{"title":"論文タイトル（英語）","authors":"著者全員","journal":"掲載誌","doi":"DOI"},"quote":{"text":"研究者コメント（です・ます調、2〜3文）","author":"氏名・所属・役職"}}`;
                                   const prRes = await fetch('https://pressrelease-tmo5.onrender.com', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({
                                       model: 'claude-sonnet-4-20250514',
-                                      max_tokens: 2000,
+                                      max_tokens: 16000,
                                       messages: [{
                                         role: 'user',
                                         content: [
                                           { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: base64 } },
-                                          { type: 'text', text: '以下の論文内容をもとに、SPring-8公式プレスリリースと同じ水準の詳細な原稿を生成してください。' }
-                                        ]
+                                          { type: 'text', text: '以下の論文内容をもとに、SPring-8公式プレスリリースと同じ水準の詳細な原稿を生成してください。各セクションは十分な長さ（4〜6段落）で書いてください。・用語解説（6項目、必ず本文中で使用すること）\n・図のコンセプト（3項目）\n・社会的意義を詳しく\n・研究者コメントを含める' }                                        ]
                                       }]
                                     })
                                   });
@@ -1527,7 +1541,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               {prLoadingId === paper.id ? (
                                 <><Loader className="w-3 h-3 animate-spin" /> 生成中...</>
                               ) : (
-                                <>✏️ プレスリリース申請</>
+                                <>✏️ プレスリリース作成</>
                               )}
                             </button>
                           )}

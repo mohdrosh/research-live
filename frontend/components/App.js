@@ -1372,231 +1372,228 @@ synced.filter(Boolean).forEach(({ id, status }) => {
               </label>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-5">
               {myPapers.length === 0 ? (
-                <div className="text-center py-16 text-gray-400">まだ論文が登録されていません</div>
+                <div className="flex flex-col items-center justify-center py-24 text-gray-400">
+                  <FileText className="w-12 h-12 mb-4 text-gray-300" />
+                  <p className="text-base font-medium text-gray-400">まだ論文が登録されていません</p>
+                  <p className="text-sm text-gray-300 mt-1">上のボタンから論文をアップロードしてください</p>
+                </div>
               ) : (
                 myPapers.map((paper, index) => {
                   const status = paper.press_release_status || 'none';
                   const statusConfig = {
-  none:     { label: '未申請',   style: { background: '#f3f4f6', color: '#6b7280', border: '1px solid #d1d5db' }, dotStyle: { background: '#9ca3af' } },
-  pending:  { label: '審査中',   style: { background: '#facc15', color: '#ffffff', border: '1px solid #facc15' }, dotStyle: { background: '#ffffff' } },
-  approved: { label: '承認済み', style: { background: '#22c55e', color: '#ffffff', border: '1px solid #22c55e' }, dotStyle: { background: '#ffffff' } },
-  rejected: { label: '却下',    style: { background: '#ef4444', color: '#ffffff', border: '1px solid #ef4444' }, dotStyle: { background: '#ffffff' } },
-};
+                    none:     { label: '未申請',   style: { background: '#f3f4f6', color: '#6b7280', border: '1px solid #e5e7eb' }, dotStyle: { background: '#9ca3af' } },
+                    pending:  { label: '審査中',   style: { background: '#fef3c7', color: '#d97706', border: '1px solid #fcd34d' }, dotStyle: { background: '#f59e0b' } },
+                    approved: { label: '承認済み', style: { background: '#dcfce7', color: '#16a34a', border: '1px solid #86efac' }, dotStyle: { background: '#22c55e' } },
+                  };
                   const s = statusConfig[status] || statusConfig.none;
                   return (
-                    <div key={paper.id} className="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-sm transition-shadow">
-                      {/* Top row: title + status badge */}
-                      <div className="flex items-start justify-between gap-4 mb-3">
-                        <div className="flex-1">
-                          <h3
-                            onClick={() => { setViewingPaper(paper); setPaperSource('mypage'); setCurrentView('search'); }}
-                            className="text-base font-serif text-gray-900 hover:underline cursor-pointer mb-1"
-                          >
-                            {index + 1}. {paper.title}
-                          </h3>
-                          <p className="text-xs text-gray-500">{paper.authors} · {paper.year}</p>
+                    <div key={paper.id} className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
+                      {/* Card top accent bar based on status */}
+                      <div style={{height: '3px', background: status === 'approved' ? '#22c55e' : status === 'pending' ? '#f59e0b' : '#e5e7eb'}} />
+                      
+                      <div className="p-6">
+                        {/* Top row: index + title + status */}
+                        <div className="flex items-start justify-between gap-4 mb-4">
+                          <div className="flex items-start gap-3 flex-1 min-w-0">
+                            <span className="flex-shrink-0 w-7 h-7 rounded-full bg-gray-100 text-gray-500 text-xs font-bold flex items-center justify-center mt-0.5">
+                              {index + 1}
+                            </span>
+                            <div className="flex-1 min-w-0">
+                              <h3
+                                onClick={() => { setViewingPaper(paper); setPaperSource('mypage'); setCurrentView('search'); }}
+                                className="text-base font-serif text-gray-900 hover:text-red-800 cursor-pointer leading-snug mb-1 transition-colors"
+                              >
+                                {paper.title}
+                              </h3>
+                              <p className="text-xs text-gray-400 font-medium">{paper.authors} · {paper.year}</p>
+                            </div>
+                          </div>
+                          <span style={{...s.style, fontSize: '11px', fontWeight: '600', padding: '4px 10px', borderRadius: '9999px', display: 'inline-flex', alignItems: 'center', gap: '5px', flexShrink: 0}}>
+                            <span style={{...s.dotStyle, width: '6px', height: '6px', borderRadius: '50%', display: 'inline-block'}}></span>
+                            {s.label}
+                          </span>
                         </div>
-                        <span style={{...s.style, fontSize: '12px', fontWeight: '600', padding: '4px 12px', borderRadius: '9999px', display: 'inline-flex', alignItems: 'center', gap: '6px', flexShrink: 0}}>
-  <span style={{...s.dotStyle, width: '8px', height: '8px', borderRadius: '50%', display: 'inline-block'}}></span>
-  {s.label}
-</span>
-                      </div>
 
-                      {/* Bottom row: action buttons */}
-                      <div className="flex items-center gap-2 flex-wrap pt-3 border-t border-gray-100">
-                        {/* View original PDF */}
-                        <button
-                          onClick={async () => {
-                            try {
-                              const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
-                              if (!res.ok) throw new Error('not found');
-                              const blob = await res.blob();
-                              const url = URL.createObjectURL(blob);
-                              window.open(url, '_blank');
-                            } catch {
-                              alert('この論文のPDFファイルは利用できません');
-                            }
-                          }}
-                          className="px-3 py-1.5 text-xs bg-white text-gray-900 border border-gray-300 rounded hover:bg-gray-50 font-medium flex items-center gap-1"
-                        >
-                          📄 論文を見る
-                        </button>
+                        {/* Divider */}
+                        <div className="border-t border-gray-100 mb-4" />
 
-                        {/* Press release link if approved */}
-                        {status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (
-  <a
-    href={paper.press_release_url || `https://pressrelease-seven.vercel.app/release.html?id=${paper.press_release_mongo_id}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 font-medium flex items-center gap-1"
-  >
-    📰 プレスリリースを見る
-  </a>
-)}
-
-                        {/* Create press release button if not yet applied */}
-                        {(status === 'none' || status === 'rejected') && (
+                        {/* Action buttons row */}
+                        <div className="flex items-center gap-2 flex-wrap">
+                          {/* View PDF */}
                           <button
                             onClick={async () => {
                               try {
-                                setPrLoadingId(paper.id);
-
-                                // Step 1: Fetch PDF
-                                const pdfRes = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
-                                if (!pdfRes.ok) throw new Error('PDFが見つかりません');
-                                const pdfBlob = await pdfRes.blob();
-
-                                // Step 2: Convert to base64
-                                const base64 = await new Promise((resolve, reject) => {
-                                  const reader = new FileReader();
-                                  reader.onload = () => resolve(reader.result.split(',')[1]);
-                                  reader.onerror = reject;
-                                  reader.readAsDataURL(pdfBlob);
-                                });
-
-                                // Step 3: Generate PR
-                                const sys = `あなたはSPring-8・SACLAの研究成果を一般市民・報道機関向けに伝える、日本語サイエンスコミュニケーションの専門家です。実際のSPring-8公式プレスリリースと同じ形式・水準で、学術論文をもとに完全な日本語プレスリリース原稿を生成してください。【絶対に守るルール】1. 必ず有効なJSONのみを返してください。コードブロック・前置き・説明文は一切不要です。2. background・results・futureは各セクション必ず4〜6段落。3. glossaryの各用語は必ず本文中に登場させること。4. summaryは5〜6文で。出力するJSONの構造: {"title":"一般向けの魅力的な見出し","date":"発表日","institution":"研究機関名","summary":"5〜6文の詳細要約","background":"研究背景（4〜6段落、\\n区切り）","results":"研究内容と成果（4〜6段落、\\n区切り）","future":"今後の展開（2〜3段落、\\n区切り）","significance":[{"icon":"🏥","text":"意義"}],"glossary":[{"term":"用語","definition":"説明"}],"figureConcepts":[{"title":"図タイトル","description":"説明"}],"paperInfo":{"title":"論文タイトル","authors":"著者","journal":"掲載誌","doi":"DOI"},"quote":{"text":"研究者コメント","author":"氏名・所属"}}`;
-
-                                const prRes = await fetch('https://pressrelease-tmo5.onrender.com', {
-                                  method: 'POST',
-                                  headers: { 'Content-Type': 'application/json' },
-                                  body: JSON.stringify({
-                                    model: 'claude-sonnet-4-20250514',
-                                    max_tokens: 2000,
-                                    system: sys,
-                                    messages: [{
-                                      role: 'user',
-                                      content: [
-                                        { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: base64 } },
-                                        { type: 'text', text: '以下の論文内容をもとに、SPring-8公式プレスリリースと同じ水準の詳細な原稿を生成してください。' }
-                                      ]
-                                    }]
-                                  })
-                                });
-
-                                const prData = await prRes.json();
-                                if (!prData.content) throw new Error('PR生成に失敗しました');
-
-                                // Step 4: Parse JSON
-                                let raw = prData.content.map(x => x.text || '').join('').trim();
-                                raw = raw.replace(/^```json\s*/, '').replace(/^```\s*/, '').replace(/\s*```$/, '').trim();
-                                const s2 = raw.indexOf('{');
-                                const e2 = raw.lastIndexOf('}');
-                                if (s2 !== -1 && e2 !== -1) raw = raw.slice(s2, e2 + 1);
-                                const prJson = JSON.parse(raw);
-
-                                // Step 5: Save as draft to press release backend
-                                const saveRes = await fetch('https://pressrelease-tmo5.onrender.com/saves', {
-                                  method: 'POST',
-                                  headers: { 'Content-Type': 'application/json' },
-                                  body: JSON.stringify({
-                                    title: prJson.title || paper.title,
-                                    institution: prJson.institution || '',
-                                    date: prJson.date || '',
-                                    category: '',
-                                    subcategory: '',
-                                    status: 'draft',
-                                    pr: prJson
-                                  })
-                                });
-                                const saveData = await saveRes.json();
-                                if (!saveData._id) throw new Error('IDの取得に失敗しました');
-
-                                // Step 6: Open release.html with the draft ID
-                                window.open(`https://pressrelease-seven.vercel.app/release.html?id=${saveData._id}`, '_blank');
-
-await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/press-release-mongo-id`, {
-  method: 'PATCH',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ mongo_id: saveData._id })
-});
-setPapers(prev => prev.map(p =>
-  p.id === paper.id ? { ...p, press_release_status: 'pending' } : p
-));
-
-                                setPrLoadingId(null);
-
-                              } catch (err) {
-                                alert('プレスリリース生成に失敗しました: ' + err.message);
-                                setPrLoadingId(null);
+                                const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                                if (!res.ok) throw new Error('not found');
+                                const blob = await res.blob();
+                                const url = URL.createObjectURL(blob);
+                                window.open(url, '_blank');
+                              } catch {
+                                alert('この論文のPDFファイルは利用できません');
                               }
                             }}
-                            className={`px-3 py-1.5 text-xs rounded font-medium flex items-center gap-1 border ${prLoadingId === paper.id ? 'bg-gray-100 text-gray-500 border-gray-300 cursor-not-allowed' : 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700'}`}
-                            disabled={prLoadingId === paper.id}
+                            className="px-3 py-1.5 text-xs bg-gray-50 text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-100 font-medium flex items-center gap-1.5 transition-colors"
                           >
-                            {prLoadingId === paper.id ? (
-                              <><Loader className="w-3 h-3 animate-spin" /> 生成中...</>
-                            ) : (
-                              <>✏️ プレスリリース作成</>
-                            )}
+                            📄 論文を見る
                           </button>
-                        )}
 
-                        {/* Detail button */}
-                        <button
-                          onClick={() => { setViewingPaper(paper); setPaperSource('mypage'); setCurrentView('search'); }}
-                          className="px-3 py-1.5 text-xs border border-gray-300 text-gray-900 bg-white rounded hover:bg-gray-50 font-medium"
-                        >
-                          詳細
-                        </button>
+                          {/* Press release link if approved */}
+                          {status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (
+                            <a
+                            
+                              href={paper.press_release_url || `https://pressrelease-seven.vercel.app/release.html?id=${paper.press_release_mongo_id}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-3 py-1.5 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium flex items-center gap-1.5 transition-colors"
+                            >
+                              📰 プレスリリースを見る
+                            </a>
+                          )}
 
-                        {/* Edit button */}
-                        <button
-                          onClick={() => {
-                            const fd = paper.formData || {};
-                            setEditingPaper(paper);
-                            setFormData({
-                              title: paper.title,
-                              title_en: paper.titleEn,
-                              authors: paper.authors,
-                              year: paper.year,
-                              field: paper.field,
-                              method: paper.method,
-                              beamline: paper.beamline,
-                              application: paper.application,
-                              mainConclusion: paper.mainConclusion,
-                              industrialPain: paper.industrialApplication,
-                              crossDomain: paper.crossDomain,
-                              failedApproach: paper.failedApproach,
-                              priorWork: fd.priorWork || '',
-                              novelty: fd.novelty || '',
-                              unknownQuestions: fd.unknownQuestions || '',
-                              abstractPrinciple: fd.abstractPrinciple || '',
-                              experimentalReason: fd.experimentalReason || '',
-                              scalingPossibility: fd.scalingPossibility || '',
-                              combinationPotential: fd.combinationPotential || '',
-                            });
-                            setCurrentView('form');
-                          }}
-                          className="px-3 py-1.5 text-xs border border-blue-300 text-blue-600 rounded hover:bg-blue-50 font-medium"
-                        >
-                          編集
-                        </button>
+                          {/* Press release apply button */}
+                          {status === 'none' && (
+                            <button
+                              onClick={async () => {
+                                try {
+                                  setPrLoadingId(paper.id);
+                                  const pdfRes = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                                  if (!pdfRes.ok) throw new Error('PDFが見つかりません');
+                                  const pdfBlob = await pdfRes.blob();
+                                  const base64 = await new Promise((resolve, reject) => {
+                                    const reader = new FileReader();
+                                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                                    reader.onerror = reject;
+                                    reader.readAsDataURL(pdfBlob);
+                                  });
+                                  const sys = `あなたはSPring-8・SACLAの研究成果を一般市民・報道機関向けに伝える、日本語サイエンスコミュニケーションの専門家です。実際のSPring-8公式プレスリリースと同じ形式・水準で、学術論文をもとに完全な日本語プレスリリース原稿を生成してください。【絶対に守るルール】1. 必ず有効なJSONのみを返してください。コードブロック・前置き・説明文は一切不要です。2. background・results・futureは各セクション必ず4〜6段落。3. glossaryの各用語は必ず本文中に登場させること。4. summaryは5〜6文で。出力するJSONの構造: {"title":"一般向けの魅力的な見出し","date":"発表日","institution":"研究機関名","summary":"5〜6文の詳細要約","background":"研究背景（4〜6段落、\\n区切り）","results":"研究内容と成果（4〜6段落、\\n区切り）","future":"今後の展開（2〜3段落、\\n区切り）","significance":[{"icon":"🏥","text":"意義"}],"glossary":[{"term":"用語","definition":"説明"}],"figureConcepts":[{"title":"図タイトル","description":"説明"}],"paperInfo":{"title":"論文タイトル","authors":"著者","journal":"掲載誌","doi":"DOI"},"quote":{"text":"研究者コメント","author":"氏名・所属"}}`;
+                                  const prRes = await fetch('https://pressrelease-tmo5.onrender.com', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                      model: 'claude-sonnet-4-20250514',
+                                      max_tokens: 2000,
+                                      messages: [{
+                                        role: 'user',
+                                        content: [
+                                          { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: base64 } },
+                                          { type: 'text', text: '以下の論文内容をもとに、SPring-8公式プレスリリースと同じ水準の詳細な原稿を生成してください。' }
+                                        ]
+                                      }]
+                                    })
+                                  });
+                                  const prData = await prRes.json();
+                                  if (!prData.content) throw new Error('PR生成に失敗しました');
+                                  let raw = prData.content.map(x => x.text || '').join('').trim();
+                                  raw = raw.replace(/^```json\s*/, '').replace(/^```\s*/, '').replace(/\s*```$/, '').trim();
+                                  const s2 = raw.indexOf('{');
+                                  const e2 = raw.lastIndexOf('}');
+                                  if (s2 !== -1 && e2 !== -1) raw = raw.slice(s2, e2 + 1);
+                                  const prJson = JSON.parse(raw);
+                                  const saveRes = await fetch('https://pressrelease-tmo5.onrender.com/saves', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                      title: prJson.title || paper.title,
+                                      institution: prJson.institution || '',
+                                      date: prJson.date || '',
+                                      category: '',
+                                      subcategory: '',
+                                      status: 'draft',
+                                      pr: prJson
+                                    })
+                                  });
+                                  const saveData = await saveRes.json();
+                                  if (!saveData._id) throw new Error('IDの取得に失敗しました');
+                                  window.open(`https://pressrelease-seven.vercel.app/release.html?id=${saveData._id}`, '_blank');
+                                  await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/press-release-mongo-id`, {
+                                    method: 'PATCH',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ mongo_id: saveData._id })
+                                  });
+                                  setPapers(prev => prev.map(p =>
+                                    p.id === paper.id ? { ...p, press_release_status: 'pending' } : p
+                                  ));
+                                  setPrLoadingId(null);
+                                } catch (err) {
+                                  alert('プレスリリース生成に失敗しました: ' + err.message);
+                                  setPrLoadingId(null);
+                                }
+                              }}
+                              className={`px-3 py-1.5 text-xs rounded-lg font-medium flex items-center gap-1.5 border transition-colors ${prLoadingId === paper.id ? 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed' : 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700'}`}
+                              disabled={prLoadingId === paper.id}
+                            >
+                              {prLoadingId === paper.id ? (
+                                <><Loader className="w-3 h-3 animate-spin" /> 生成中...</>
+                              ) : (
+                                <>✏️ プレスリリース申請</>
+                              )}
+                            </button>
+                          )}
 
-                        {/* Delete button */}
-                        <button
-                          onClick={async () => {
-                            if (window.confirm('この論文を削除しますか？')) {
-                              try {
-                                const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}`, {
-                                  method: 'DELETE',
-                                });
-                                if (res.ok) {
-                                  setPapers(prevPapers => prevPapers.filter(p => p.id !== paper.id));
-                                } else {
+                          {/* Edit button */}
+                          <button
+                            onClick={() => {
+                              const fd = paper.formData || {};
+                              setEditingPaper(paper);
+                              setFormData({
+                                title: paper.title,
+                                title_en: paper.titleEn,
+                                authors: paper.authors,
+                                year: paper.year,
+                                field: paper.field,
+                                method: paper.method,
+                                beamline: paper.beamline,
+                                application: paper.application,
+                                mainConclusion: paper.mainConclusion,
+                                industrialPain: paper.industrialApplication,
+                                crossDomain: paper.crossDomain,
+                                failedApproach: paper.failedApproach,
+                                priorWork: fd.priorWork || '',
+                                novelty: fd.novelty || '',
+                                unknownQuestions: fd.unknownQuestions || '',
+                                abstractPrinciple: fd.abstractPrinciple || '',
+                                experimentalReason: fd.experimentalReason || '',
+                                scalingPossibility: fd.scalingPossibility || '',
+                                combinationPotential: fd.combinationPotential || '',
+                              });
+                              setCurrentView('form');
+                            }}
+                            className="px-3 py-1.5 text-xs border border-blue-200 text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 font-medium transition-colors"
+                          >
+                            ✏️ 編集
+                          </button>
+
+                          {/* Detail button */}
+                          <button
+                            onClick={() => { setViewingPaper(paper); setPaperSource('mypage'); setCurrentView('search'); }}
+                            className="px-3 py-1.5 text-xs border border-gray-200 text-gray-600 bg-white rounded-lg hover:bg-gray-50 font-medium transition-colors"
+                          >
+                            詳細
+                          </button>
+
+                          {/* Delete button — pushed to the right */}
+                          <button
+                            onClick={async () => {
+                              if (window.confirm('この論文を削除しますか？')) {
+                                try {
+                                  const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}`, { method: 'DELETE' });
+                                  if (res.ok) {
+                                    setPapers(prevPapers => prevPapers.filter(p => p.id !== paper.id));
+                                  } else {
+                                    alert('削除に失敗しました');
+                                  }
+                                } catch {
                                   alert('削除に失敗しました');
                                 }
-                              } catch {
-                                alert('削除に失敗しました');
                               }
-                            }
-                          }}
-                          className="px-3 py-1.5 text-xs border border-red-300 text-red-600 rounded hover:bg-red-50 font-medium ml-auto"
-                        >
-                          削除
-                        </button>
+                            }}
+                            className="px-3 py-1.5 text-xs border border-red-200 text-red-500 bg-red-50 rounded-lg hover:bg-red-100 font-medium ml-auto transition-colors"
+                          >
+                            削除
+                          </button>
+                        </div>
                       </div>
                     </div>
                   );

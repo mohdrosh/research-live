@@ -270,6 +270,10 @@ const relationshipTypes = [
 
   // Load papers from backend on first render
   React.useEffect(() => {
+  fetch('https://spring8-backend.onrender.com/health').catch(() => {});
+  fetch('https://pressrelease-tmo5.onrender.com/health').catch(() => {});
+}, []);
+  React.useEffect(() => {
     const fetchPapers = async () => {
       try {
         const response = await fetch('https://spring8-backend.onrender.com/api/search', {

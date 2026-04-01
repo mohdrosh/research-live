@@ -1452,23 +1452,6 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               </h3>
                               <div className="flex items-center gap-3 flex-wrap mt-1">
                                 <p className="text-xs text-gray-400 font-medium">{paper.authors} · {paper.year}</p>
-                                <button
-                                  onClick={async (e) => {
-                                    e.stopPropagation();
-                                    try {
-                                      const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
-                                      if (!res.ok) throw new Error('not found');
-                                      const blob = await res.blob();
-                                      const url = URL.createObjectURL(blob);
-                                      window.open(url, '_blank');
-                                    } catch {
-                                      alert('この論文のPDFファイルは利用できません');
-                                    }
-                                  }}
-                                  className="text-xs text-red-800 hover:text-red-900 font-medium hover:underline transition-colors"
-                                >
-                                  📄 論文を見る →
-                                </button>
                               </div>
                             </div>
                           </div>
@@ -1482,7 +1465,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                         <div className="border-t border-gray-100 mb-3" />
 
                         {/* Action buttons row */}
-                        <div className="flex items-center gap-2 flex-wrap mb-2">
+                        <div className="flex items-center gap-2 flex-wrap mb-2" style={{justifyContent: 'flex-start'}}>
                           {/* Edit button — first */}
                           <button
                             onClick={() => {
@@ -1559,7 +1542,24 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                             削除
                           </button>
 
-                          
+                          {/* View PDF — rightmost */}
+                          <button
+                            onClick={async (e) => {
+                              e.stopPropagation();
+                              try {
+                                const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                                if (!res.ok) throw new Error('not found');
+                                const blob = await res.blob();
+                                const url = URL.createObjectURL(blob);
+                                window.open(url, '_blank');
+                              } catch {
+                                alert('この論文のPDFファイルは利用できません');
+                              }
+                            }}
+                            className="px-3 py-1.5 text-xs border border-gray-200 text-gray-700 bg-white rounded-lg hover:bg-gray-50 font-medium transition-colors ml-auto"
+                          >
+                            📄 論文を見る
+                          </button>
 
                           {/* Press release link if approved — uniform style */}
                           {status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (
@@ -1967,6 +1967,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
   if (currentView === 'search' && viewingPaper) {
     return (
       <div className="min-h-screen bg-white">
+        {citationModal}
         <div className="max-w-full mx-auto">
           {/* Header */}
           <div className="bg-white border-b border-gray-200 px-8 py-4">
@@ -1976,7 +1977,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
               </h1>
               <div className="flex gap-3">
                 <button
-                  onClick={() => { setViewingPaper(null); setCurrentView(paperSource); }}
+                  onClick={() => { setViewingPaper(null); setCurrentView(paperSource); window.scrollTo(0, 0); }}
                   className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium"
                 >
                   {paperSource === 'mypage' ? '← マイページに戻る' : '← 検索結果に戻る'}
@@ -2457,10 +2458,10 @@ synced.filter(Boolean).forEach(({ id, status }) => {
             {/* Back Button */}
             <div className="mt-6">
               <button
-                onClick={() => { setViewingPaper(null); setCurrentView(paperSource); }}
-                className="px-6 py-3 border border-gray-400 text-gray-700 rounded hover:bg-gray-50 font-semibold"
-              >
-                {paperSource === 'mypage' ? '← マイページに戻る' : '← 検索結果に戻る'}
+                onClick={() => { setViewingPaper(null); setCurrentView(paperSource); window.scrollTo(0, 0); }}
+                  className="px-6 py-3 border border-gray-400 text-gray-700 rounded hover:bg-gray-50 font-semibold"
+                >
+                  {paperSource === 'mypage' ? '← マイページに戻る' : '← 検索結果に戻る'}
               </button>
             </div>
           </div>

@@ -937,6 +937,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
 
   const handleSubmit = async () => {
     console.log('Submitting, has pdf:', !!pdfDataUrl, 'length:', pdfDataUrl.length);
+    setIsProcessing(true);
     try {
       const url = editingPaper
         ? `https://spring8-backend.onrender.com/api/papers/${editingPaper.id}`
@@ -1017,6 +1018,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
     setPdfText('');
     setPdfDataUrl('');
     setEditingPaper(null);
+    setIsProcessing(false);
     setCurrentView('mypage');
   };
 
@@ -1472,7 +1474,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               alert('この論文のPDFファイルは利用できません');
                             }
                           }}
-                          className="w-full px-3 py-2 text-sm bg-gray-900 text-white rounded-lg hover:bg-gray-700 font-medium flex items-center justify-center gap-2 mb-3"
+                          className="w-full px-3 py-2 text-sm bg-red-800 text-white border border-red-900 rounded-lg hover:bg-red-900 font-medium flex items-center justify-center gap-2 mb-3"
                         >
                           📄 論文を見る
                         </button>
@@ -1487,7 +1489,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               href={paper.press_release_url || `https://pressrelease-seven.vercel.app/release.html?id=${paper.press_release_mongo_id}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-3 py-1.5 text-xs bg-green-600 text-white border border-green-700 rounded-lg hover:bg-green-700 font-medium flex items-center gap-1.5 transition-colors shadow-sm"
+                              className="px-3 py-1.5 text-xs bg-green-700 text-white border-2 border-green-800 rounded-lg hover:bg-green-800 font-semibold flex items-center gap-1.5 transition-colors shadow"
                             >
                               📰 プレスリリースを見る
                             </a>
@@ -1806,7 +1808,8 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                   }`}
                                 >
                                   <div className="flex items-center gap-2 mb-1">
-                                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${selectedChoices[question.id] === i ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'}`}>
+                                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${selectedChoices[question.id] === i ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}
+                                      style={{color: selectedChoices[question.id] === i ? '#ffffff' : '#4b5563'}}>
                                       案 {i + 1}
                                     </span>
                                     {selectedChoices[question.id] === i && <span className="text-blue-500 text-xs font-semibold">✓ 選択中</span>}
@@ -1904,9 +1907,17 @@ synced.filter(Boolean).forEach(({ id, status }) => {
               </button>
               <button
                 onClick={handleSubmit}
-                className="flex-1 px-6 py-3 bg-red-800 text-white rounded hover:bg-red-900 font-semibold"
+                disabled={isProcessing}
+                className={`flex-1 px-6 py-3 bg-red-800 text-white rounded font-semibold flex items-center justify-center gap-2 ${isProcessing ? 'opacity-70 cursor-not-allowed' : 'hover:bg-red-900'}`}
               >
-                登録
+                {isProcessing ? (
+                  <>
+                    <Loader className="w-4 h-4 animate-spin" />
+                    登録中...
+                  </>
+                ) : (
+                  '登録'
+                )}
               </button>
             </div>
             </div>

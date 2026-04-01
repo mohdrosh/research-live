@@ -1465,7 +1465,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                         <div className="border-t border-gray-100 mb-3" />
 
                         {/* Action buttons row */}
-                        <div className="flex items-center gap-2 flex-wrap mb-2" style={{justifyContent: 'flex-start'}}>
+                        <div className="flex items-center gap-2 mb-2">
                           {/* Edit button — first */}
                           <button
                             onClick={() => {
@@ -1540,25 +1540,6 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                             className="px-3 py-1.5 text-xs border border-red-200 text-red-500 bg-red-50 rounded-lg hover:bg-red-100 font-medium transition-colors"
                           >
                             削除
-                          </button>
-
-                          {/* View PDF — rightmost */}
-                          <button
-                            onClick={async (e) => {
-                              e.stopPropagation();
-                              try {
-                                const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
-                                if (!res.ok) throw new Error('not found');
-                                const blob = await res.blob();
-                                const url = URL.createObjectURL(blob);
-                                window.open(url, '_blank');
-                              } catch {
-                                alert('この論文のPDFファイルは利用できません');
-                              }
-                            }}
-                            className="px-3 py-1.5 text-xs border border-gray-200 text-gray-700 bg-white rounded-lg hover:bg-gray-50 font-medium transition-colors ml-auto"
-                          >
-                            📄 論文を見る
                           </button>
 
                           {/* Press release link if approved — uniform style */}
@@ -1670,6 +1651,25 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               )}
                             </button>
                           )}
+
+                          {/* View PDF — pinned rightmost */}
+                          <button
+                            onClick={async (e) => {
+                              e.stopPropagation();
+                              try {
+                                const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                                if (!res.ok) throw new Error('not found');
+                                const blob = await res.blob();
+                                const url = URL.createObjectURL(blob);
+                                window.open(url, '_blank');
+                              } catch {
+                                alert('この論文のPDFファイルは利用できません');
+                              }
+                            }}
+                            className="px-3 py-1.5 text-xs border border-gray-200 text-gray-700 bg-white rounded-lg hover:bg-gray-50 font-medium transition-colors ml-auto"
+                          >
+                            📄 論文を見る
+                          </button>
                         </div>
                       </div>
                     </div>

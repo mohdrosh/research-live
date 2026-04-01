@@ -1489,9 +1489,31 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                 scalingPossibility: fd.scalingPossibility || '',
                                 combinationPotential: fd.combinationPotential || '',
                               });
+                              // Pre-populate choices and selections so fields are visible in edit mode
+                              const editChoices = {};
+                              const editSelected = {};
+                              mdrcgQuestions.forEach(q => {
+                                const val = {
+                                  mainConclusion: paper.mainConclusion,
+                                  industrialPain: paper.industrialApplication,
+                                  crossDomain: paper.crossDomain,
+                                  failedApproach: paper.failedApproach,
+                                  priorWork: fd.priorWork || '',
+                                  novelty: fd.novelty || '',
+                                  unknownQuestions: fd.unknownQuestions || '',
+                                  abstractPrinciple: fd.abstractPrinciple || '',
+                                  experimentalReason: fd.experimentalReason || '',
+                                  scalingPossibility: fd.scalingPossibility || '',
+                                  combinationPotential: fd.combinationPotential || '',
+                                }[q.id] || '';
+                                editChoices[q.id] = val ? [val] : [];
+                                editSelected[q.id] = val ? 0 : null;
+                              });
+                              setFieldChoices(editChoices);
+                              setSelectedChoices(editSelected);
                               setCurrentView('form');
                             }}
-                            className="px-3 py-1.5 text-xs border border-blue-200 text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 font-medium transition-colors"
+                            className="px-3 py-1.5 text-xs border border-blue-200 text-blue-600 bg-blue-50 rounded-lg hover:bg-gray-50 font-medium transition-colors"
                           >
                             ✏️ 編集
                           </button>

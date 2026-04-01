@@ -1255,7 +1255,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
   // Citation Modal
   const citationModal = citationPaper ? (
     <div className="fixed inset-0 z-50 flex items-center justify-center" style={{backgroundColor: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(4px)'}}>
-      <div className="bg-white rounded-2xl shadow-xl p-6" style={{width: '520px', maxWidth: '90vw'}}>
+      <div className="bg-white rounded-2xl shadow-xl p-6" style={{width: '520px', maxWidth: '90vw', maxHeight: '85vh', overflowY: 'auto'}}>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold text-gray-900">引用形式</h2>
           <button onClick={() => setCitationPaper(null)} className="text-gray-400 hover:text-gray-600 text-xl">✕</button>
@@ -1463,7 +1463,61 @@ synced.filter(Boolean).forEach(({ id, status }) => {
 
                         {/* Action buttons row */}
                         <div className="flex items-center gap-2 flex-wrap mb-2">
-                          {/* View PDF button - always first and visible */}
+                          {/* Edit button — first */}
+                          <button
+                            onClick={() => {
+                              const fd = paper.formData || {};
+                              setEditingPaper(paper);
+                              setFormData({
+                                title: paper.title,
+                                title_en: paper.titleEn,
+                                authors: paper.authors,
+                                year: paper.year,
+                                field: paper.field,
+                                method: paper.method,
+                                beamline: paper.beamline,
+                                application: paper.application,
+                                mainConclusion: paper.mainConclusion,
+                                industrialPain: paper.industrialApplication,
+                                crossDomain: paper.crossDomain,
+                                failedApproach: paper.failedApproach,
+                                priorWork: fd.priorWork || '',
+                                novelty: fd.novelty || '',
+                                unknownQuestions: fd.unknownQuestions || '',
+                                abstractPrinciple: fd.abstractPrinciple || '',
+                                experimentalReason: fd.experimentalReason || '',
+                                scalingPossibility: fd.scalingPossibility || '',
+                                combinationPotential: fd.combinationPotential || '',
+                              });
+                              setCurrentView('form');
+                            }}
+                            className="px-3 py-1.5 text-xs border border-blue-200 text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 font-medium transition-colors"
+                          >
+                            ✏️ 編集
+                          </button>
+
+                          {/* Delete button — second */}
+                          <button
+                            onClick={async () => {
+                              if (window.confirm('この論文を削除しますか？')) {
+                                try {
+                                  const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}`, { method: 'DELETE' });
+                                  if (res.ok) {
+                                    setPapers(prevPapers => prevPapers.filter(p => p.id !== paper.id));
+                                  } else {
+                                    alert('削除に失敗しました');
+                                  }
+                                } catch {
+                                  alert('削除に失敗しました');
+                                }
+                              }
+                            }}
+                            className="px-3 py-1.5 text-xs border border-red-200 text-red-500 bg-red-50 rounded-lg hover:bg-red-100 font-medium transition-colors"
+                          >
+                            削除
+                          </button>
+
+                          {/* View PDF button — third, uniform style */}
                           <button
                             onClick={async () => {
                               try {
@@ -1476,19 +1530,21 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                 alert('この論文のPDFファイルは利用できません');
                               }
                             }}
-                            style={{background: '#1f2937', color: '#ffffff', border: '1px solid #1f2937', fontSize: '12px', fontWeight: '500', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px'}}
+                            className="px-3 py-1.5 text-xs border border-gray-200 text-gray-700 bg-white rounded-lg hover:bg-gray-50 font-medium transition-colors"
                           >
                             📄 論文を見る
                           </button>
 
-                          {/* Press release link if approved */}
+                          {/* Press release link if approved — uniform style */}
                           {status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (
                             <a
                             
                               href={paper.press_release_url || `https://pressrelease-seven.vercel.app/release.html?id=${paper.press_release_mongo_id}`}
+                          
                               target="_blank"
                               rel="noopener noreferrer"
-                              style={{background: '#15803d', color: '#ffffff', border: '2px solid #14532d', fontSize: '12px', fontWeight: '600', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px', textDecoration: 'none'}}
+                              className="px-3 py-1.5 text-xs border border-gray-200 text-gray-700 bg-white rounded-lg hover:bg-gray-50 font-medium transition-colors"
+                              style={{textDecoration: 'none'}}
                             >
                               📰 プレスリリースを見る
                             </a>
@@ -1588,68 +1644,6 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               )}
                             </button>
                           )}
-
-                          {/* Edit button */}
-                          <button
-                            onClick={() => {
-                              const fd = paper.formData || {};
-                              setEditingPaper(paper);
-                              setFormData({
-                                title: paper.title,
-                                title_en: paper.titleEn,
-                                authors: paper.authors,
-                                year: paper.year,
-                                field: paper.field,
-                                method: paper.method,
-                                beamline: paper.beamline,
-                                application: paper.application,
-                                mainConclusion: paper.mainConclusion,
-                                industrialPain: paper.industrialApplication,
-                                crossDomain: paper.crossDomain,
-                                failedApproach: paper.failedApproach,
-                                priorWork: fd.priorWork || '',
-                                novelty: fd.novelty || '',
-                                unknownQuestions: fd.unknownQuestions || '',
-                                abstractPrinciple: fd.abstractPrinciple || '',
-                                experimentalReason: fd.experimentalReason || '',
-                                scalingPossibility: fd.scalingPossibility || '',
-                                combinationPotential: fd.combinationPotential || '',
-                              });
-                              setCurrentView('form');
-                            }}
-                            className="px-3 py-1.5 text-xs border border-blue-200 text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 font-medium transition-colors"
-                          >
-                            ✏️ 編集
-                          </button>
-
-                          {/* Detail button */}
-                          <button
-                            onClick={() => { setViewingPaper(paper); setPaperSource('mypage'); setCurrentView('search'); }}
-                            className="px-3 py-1.5 text-xs border border-gray-200 text-gray-600 bg-white rounded-lg hover:bg-gray-50 font-medium transition-colors"
-                          >
-                            詳細
-                          </button>
-
-                          {/* Delete button — pushed to the right */}
-                          <button
-                            onClick={async () => {
-                              if (window.confirm('この論文を削除しますか？')) {
-                                try {
-                                  const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}`, { method: 'DELETE' });
-                                  if (res.ok) {
-                                    setPapers(prevPapers => prevPapers.filter(p => p.id !== paper.id));
-                                  } else {
-                                    alert('削除に失敗しました');
-                                  }
-                                } catch {
-                                  alert('削除に失敗しました');
-                                }
-                              }
-                            }}
-                            className="px-3 py-1.5 text-xs border border-red-200 text-red-500 bg-red-50 rounded-lg hover:bg-red-100 font-medium ml-auto transition-colors"
-                          >
-                            削除
-                          </button>
                         </div>
                       </div>
                     </div>

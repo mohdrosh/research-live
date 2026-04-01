@@ -847,12 +847,12 @@ synced.filter(Boolean).forEach(({ id, status }) => {
         });
         
                 // Call Claude API to analyze PDF
-        // Generate 3 choices for each field in parallel
-        const [analysis1, analysis2, analysis3] = await Promise.all([
-          analyzePDF(base64Data, file.name),
-          analyzePDF(base64Data, file.name),
-          analyzePDF(base64Data, file.name),
-        ]);
+        // Generate 3 choices sequentially to avoid overwhelming the backend
+        const analysis1 = await analyzePDF(base64Data, file.name);
+        await new Promise(r => setTimeout(r, 1000));
+        const analysis2 = await analyzePDF(base64Data, file.name);
+        await new Promise(r => setTimeout(r, 1000));
+        const analysis3 = await analyzePDF(base64Data, file.name);
 
         // Store PDF data URL for viewing later
         const pdfUrl = 'data:application/pdf;base64,' + base64Data;
@@ -1459,28 +1459,27 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                         </div>
 
                         {/* Divider */}
-                        <div className="border-t border-gray-100 mb-4" />
-
-                        {/* View PDF - main button above actions */}
-                        <button
-                          onClick={async () => {
-                            try {
-                              const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
-                              if (!res.ok) throw new Error('not found');
-                              const blob = await res.blob();
-                              const url = URL.createObjectURL(blob);
-                              window.open(url, '_blank');
-                            } catch {
-                              alert('この論文のPDFファイルは利用できません');
-                            }
-                          }}
-                          className="px-3 py-1.5 text-xs bg-gray-900 text-white border border-gray-900 rounded-lg hover:bg-gray-700 font-medium flex items-center gap-1.5 transition-colors"
-                        >
-                          📄 論文を見る
-                        </button>
+                        <div className="border-t border-gray-100 mb-3" />
 
                         {/* Action buttons row */}
-                        <div className="flex items-center gap-2 flex-wrap">
+                        <div className="flex items-center gap-2 flex-wrap mb-2">
+                          {/* View PDF button - always first and visible */}
+                          <button
+                            onClick={async () => {
+                              try {
+                                const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                                if (!res.ok) throw new Error('not found');
+                                const blob = await res.blob();
+                                const url = URL.createObjectURL(blob);
+                                window.open(url, '_blank');
+                              } catch {
+                                alert('この論文のPDFファイルは利用できません');
+                              }
+                            }}
+                            style={{background: '#1f2937', color: '#ffffff', border: '1px solid #1f2937', fontSize: '12px', fontWeight: '500', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px'}}
+                          >
+                            📄 論文を見る
+                          </button>
 
                           {/* Press release link if approved */}
                           {status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (
@@ -1489,7 +1488,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               href={paper.press_release_url || `https://pressrelease-seven.vercel.app/release.html?id=${paper.press_release_mongo_id}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-3 py-1.5 text-xs bg-green-700 text-white border-2 border-green-800 rounded-lg hover:bg-green-800 font-semibold flex items-center gap-1.5 transition-colors shadow"
+                              style={{background: '#15803d', color: '#ffffff', border: '2px solid #14532d', fontSize: '12px', fontWeight: '600', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px', textDecoration: 'none'}}
                             >
                               📰 プレスリリースを見る
                             </a>
@@ -1806,18 +1805,26 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                       handleInputChange(question.id, choice);
                                     }
                                   }}
-                                  className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-xs leading-relaxed whitespace-pre-line ${
-                                    selectedChoices[question.id] === i
-                                      ? 'border-blue-500 bg-blue-50 text-gray-800'
-                                      : 'border-gray-200 bg-gray-50 text-gray-600 hover:border-gray-300 hover:bg-gray-100'
-                                  }`}
+                                  style={{
+                                    padding: '12px',
+                                    borderRadius: '8px',
+                                    border: selectedChoices[question.id] === i ? '2px solid #3b82f6' : '2px solid #e5e7eb',
+                                    background: selectedChoices[question.id] === i ? '#eff6ff' : '#f9fafb',
+                                    cursor: 'pointer',
+                                    fontSize: '12px',
+                                    lineHeight: '1.6',
+                                    whiteSpace: 'pre-line',
+                                    color: '#111827',
+                                    display: 'block',
+                                    width: '100%',
+                                    textAlign: 'left',
+                                  }}
                                 >
                                   <div className="flex items-center gap-2 mb-1">
-                                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${selectedChoices[question.id] === i ? 'bg-blue-100' : 'bg-gray-200'}`}
-                                      style={{color: '#1f2937'}}>
+                                    <span style={{fontSize: '11px', fontWeight: '700', padding: '2px 8px', borderRadius: '9999px', background: selectedChoices[question.id] === i ? '#dbeafe' : '#e5e7eb', color: '#111827', display: 'inline-block'}}>
                                       案 {i + 1}
                                     </span>
-                                    {selectedChoices[question.id] === i && <span className="text-blue-500 text-xs font-semibold">✓ 選択中</span>}
+                                    {selectedChoices[question.id] === i && <span style={{fontSize: '11px', fontWeight: '600', color: '#2563eb'}}>✓ 選択中</span>}
                                   </div>
                                   {choice}
                                 </div>

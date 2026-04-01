@@ -1474,7 +1474,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               alert('この論文のPDFファイルは利用できません');
                             }
                           }}
-                          className="w-full px-3 py-2 text-sm bg-red-800 text-white border border-red-900 rounded-lg hover:bg-red-900 font-medium flex items-center justify-center gap-2 mb-3"
+                          className="px-3 py-1.5 text-xs bg-gray-900 text-white border border-gray-900 rounded-lg hover:bg-gray-700 font-medium flex items-center gap-1.5 transition-colors"
                         >
                           📄 論文を見る
                         </button>
@@ -1798,8 +1798,13 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                 <div
                                   key={i}
                                   onClick={() => {
-                                    setSelectedChoices(prev => ({ ...prev, [question.id]: i }));
-                                    handleInputChange(question.id, choice);
+                                    if (selectedChoices[question.id] === i) {
+                                      setSelectedChoices(prev => ({ ...prev, [question.id]: null }));
+                                      handleInputChange(question.id, '');
+                                    } else {
+                                      setSelectedChoices(prev => ({ ...prev, [question.id]: i }));
+                                      handleInputChange(question.id, choice);
+                                    }
                                   }}
                                   className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-xs leading-relaxed whitespace-pre-line ${
                                     selectedChoices[question.id] === i
@@ -1808,28 +1813,32 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                   }`}
                                 >
                                   <div className="flex items-center gap-2 mb-1">
-                                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${selectedChoices[question.id] === i ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}
-                                      style={{color: selectedChoices[question.id] === i ? '#ffffff' : '#4b5563'}}>
+                                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${selectedChoices[question.id] === i ? 'bg-blue-100' : 'bg-gray-200'}`}
+                                      style={{color: '#1f2937'}}>
                                       案 {i + 1}
                                     </span>
                                     {selectedChoices[question.id] === i && <span className="text-blue-500 text-xs font-semibold">✓ 選択中</span>}
                                   </div>
-                                  {choice.length > 200 ? choice.substring(0, 200) + '...' : choice}
+                                  {choice}
                                 </div>
                               ))}
                             </div>
                           </div>
                         )}
-                        <textarea
-                          value={formData[question.id] || ''}
-                          onChange={(e) => handleInputChange(question.id, e.target.value)}
-                          placeholder={question.placeholder}
-                          className="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none bg-yellow-50 resize-none"
-                          style={{ minHeight: '120px', height: 'auto' }}
-                          rows={Math.max(4, ((formData[question.id] || '').match(/\n/g) || []).length + 3)}
-                          required={question.required}
-                        />
-                        <p className="text-xs text-gray-500 mt-1">✏️ 選択した案を自由に編集できます</p>
+                        {selectedChoices[question.id] != null && (
+                          <>
+                            <textarea
+                              value={formData[question.id] || ''}
+                              onChange={(e) => handleInputChange(question.id, e.target.value)}
+                              placeholder={question.placeholder}
+                              className="w-full p-4 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none bg-yellow-50 resize-none"
+                              style={{ minHeight: '120px', height: 'auto' }}
+                              rows={Math.max(4, ((formData[question.id] || '').match(/\n/g) || []).length + 3)}
+                              required={question.required}
+                            />
+                            <p className="text-xs text-gray-500 mt-1">✏️ 選択した案を自由に編集できます</p>
+                          </>
+                        )}
                         <div className="mt-3 flex gap-2 items-center">
                           <input
                             type="text"

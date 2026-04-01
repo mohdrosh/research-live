@@ -1465,7 +1465,8 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                         <div className="border-t border-gray-100 mb-3" />
 
                         {/* Action buttons row */}
-                        <div className="flex items-center gap-2 mb-2">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
                           {/* Edit button — first */}
                           <button
                             onClick={() => {
@@ -1652,6 +1653,8 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                             </button>
                           )}
 
+                          </div>
+
                           {/* View PDF — pinned rightmost */}
                           <button
                             onClick={async (e) => {
@@ -1666,7 +1669,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                 alert('この論文のPDFファイルは利用できません');
                               }
                             }}
-                            className="px-3 py-1.5 text-xs border border-gray-200 text-gray-700 bg-white rounded-lg hover:bg-gray-50 font-medium transition-colors ml-auto"
+                            className="px-3 py-1.5 text-xs border border-gray-200 text-gray-700 bg-white rounded-lg hover:bg-gray-50 font-medium transition-colors flex-shrink-0"
                           >
                             📄 論文を見る
                           </button>

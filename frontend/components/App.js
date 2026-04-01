@@ -1365,10 +1365,11 @@ synced.filter(Boolean).forEach(({ id, status }) => {
     return (
       <div className="min-h-screen bg-white">
         {loginModal}
-        <div className="max-w-full mx-auto">
-          <div className="bg-white border-b border-gray-200 px-8 py-4">
-            <div className="flex items-center justify-between mb-6">
-              <h1 className="text-2xl font-bold text-gray-900">SPring-8 研究データベース</h1>
+      {citationModal}
+      <div className="max-w-full mx-auto">
+        <div className="bg-white border-b border-gray-200 px-8 py-4">
+          <div className="flex items-center justify-between mb-6">
+            <h1 className="text-2xl font-bold text-gray-900">SPring-8 研究データベース</h1>
               <div className="flex gap-3">
                 <button onClick={() => setCurrentView('upload')} className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 font-medium flex items-center gap-1">
                   <Home className="w-4 h-4" />
@@ -1449,7 +1450,26 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               >
                                 {paper.title}
                               </h3>
-                              <p className="text-xs text-gray-400 font-medium">{paper.authors} · {paper.year}</p>
+                              <div className="flex items-center gap-3 flex-wrap mt-1">
+                                <p className="text-xs text-gray-400 font-medium">{paper.authors} · {paper.year}</p>
+                                <button
+                                  onClick={async (e) => {
+                                    e.stopPropagation();
+                                    try {
+                                      const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                                      if (!res.ok) throw new Error('not found');
+                                      const blob = await res.blob();
+                                      const url = URL.createObjectURL(blob);
+                                      window.open(url, '_blank');
+                                    } catch {
+                                      alert('この論文のPDFファイルは利用できません');
+                                    }
+                                  }}
+                                  className="text-xs text-red-800 hover:text-red-900 font-medium hover:underline transition-colors"
+                                >
+                                  📄 論文を見る →
+                                </button>
+                              </div>
                             </div>
                           </div>
                           <span style={{...s.style, fontSize: '11px', fontWeight: '600', padding: '4px 10px', borderRadius: '9999px', display: 'inline-flex', alignItems: 'center', gap: '5px', flexShrink: 0}}>
@@ -1539,23 +1559,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                             削除
                           </button>
 
-                          {/* View PDF button — third, uniform style */}
-                          <button
-                            onClick={async () => {
-                              try {
-                                const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
-                                if (!res.ok) throw new Error('not found');
-                                const blob = await res.blob();
-                                const url = URL.createObjectURL(blob);
-                                window.open(url, '_blank');
-                              } catch {
-                                alert('この論文のPDFファイルは利用できません');
-                              }
-                            }}
-                            className="px-3 py-1.5 text-xs border border-gray-200 text-gray-700 bg-white rounded-lg hover:bg-gray-50 font-medium transition-colors"
-                          >
-                            📄 論文を見る
-                          </button>
+                          
 
                           {/* Press release link if approved — uniform style */}
                           {status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (

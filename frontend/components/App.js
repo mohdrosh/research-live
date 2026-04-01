@@ -46,6 +46,8 @@ const [prLoadingId, setPrLoadingId] = useState(null); // 'search' or 'mypage'
 const [editingPaper, setEditingPaper] = useState(null);
 const [regenLoading, setRegenLoading] = useState({});
 const [regenInput, setRegenInput] = useState({});
+const [fieldChoices, setFieldChoices] = useState({});
+const [selectedChoices, setSelectedChoices] = useState({});
 const [showLoginModal, setShowLoginModal] = useState(false);
 const [loginUsername, setLoginUsername] = useState('');
 const [loggedInUser, setLoggedInUser] = useState('');
@@ -845,14 +847,48 @@ synced.filter(Boolean).forEach(({ id, status }) => {
         });
         
                 // Call Claude API to analyze PDF
-        const analysis = await analyzePDF(base64Data, file.name);
-        
+        // Generate 3 choices for each field in parallel
+        const [analysis1, analysis2, analysis3] = await Promise.all([
+          analyzePDF(base64Data, file.name),
+          analyzePDF(base64Data, file.name),
+          analyzePDF(base64Data, file.name),
+        ]);
+
         // Store PDF data URL for viewing later
         const pdfUrl = 'data:application/pdf;base64,' + base64Data;
         setPdfDataUrl(pdfUrl);
-        console.log('PDF URL stored in state, length:', pdfUrl.length);
-        
-        setFormData(analysis);
+
+        // Build choices map: { fieldId: [choice1, choice2, choice3] }
+        const choices = {};
+        const firstSelected = {};
+        mdrcgQuestions.forEach(q => {
+          choices[q.id] = [
+            analysis1[q.id] || '',
+            analysis2[q.id] || '',
+            analysis3[q.id] || '',
+          ].filter(Boolean);
+          // Auto-select first choice
+          if (choices[q.id].length > 0) firstSelected[q.id] = 0;
+        });
+        setFieldChoices(choices);
+        setSelectedChoices(firstSelected);
+        // Set formData to first choices by default
+        const defaultFormData = {};
+        mdrcgQuestions.forEach(q => {
+          defaultFormData[q.id] = choices[q.id][0] || '';
+        });
+        // Also keep non-question fields from analysis1
+        Object.assign(defaultFormData, {
+          title: analysis1.title,
+          title_en: analysis1.title_en,
+          authors: analysis1.authors,
+          year: analysis1.year,
+          field: analysis1.field,
+          method: analysis1.method,
+          beamline: analysis1.beamline,
+          application: analysis1.application,
+        });
+        setFormData(defaultFormData);
         setIsProcessing(false);
         setCurrentView('form');
       } catch (error) {
@@ -1423,25 +1459,26 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                         {/* Divider */}
                         <div className="border-t border-gray-100 mb-4" />
 
+                        {/* View PDF - main button above actions */}
+                        <button
+                          onClick={async () => {
+                            try {
+                              const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
+                              if (!res.ok) throw new Error('not found');
+                              const blob = await res.blob();
+                              const url = URL.createObjectURL(blob);
+                              window.open(url, '_blank');
+                            } catch {
+                              alert('この論文のPDFファイルは利用できません');
+                            }
+                          }}
+                          className="w-full px-3 py-2 text-sm bg-gray-900 text-white rounded-lg hover:bg-gray-700 font-medium flex items-center justify-center gap-2 mb-3"
+                        >
+                          📄 論文を見る
+                        </button>
+
                         {/* Action buttons row */}
                         <div className="flex items-center gap-2 flex-wrap">
-                          {/* View PDF */}
-                          <button
-                            onClick={async () => {
-                              try {
-                                const res = await fetch(`https://spring8-backend.onrender.com/api/papers/${paper.id}/pdf`);
-                                if (!res.ok) throw new Error('not found');
-                                const blob = await res.blob();
-                                const url = URL.createObjectURL(blob);
-                                window.open(url, '_blank');
-                              } catch {
-                                alert('この論文のPDFファイルは利用できません');
-                              }
-                            }}
-                            className="px-3 py-1.5 text-xs bg-gray-50 text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-100 font-medium flex items-center gap-1.5 transition-colors"
-                          >
-                            📄 論文を見る
-                          </button>
 
                           {/* Press release link if approved */}
                           {status === 'approved' && (paper.press_release_url || paper.press_release_mongo_id) && (
@@ -1450,7 +1487,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               href={paper.press_release_url || `https://pressrelease-seven.vercel.app/release.html?id=${paper.press_release_mongo_id}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-3 py-1.5 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium flex items-center gap-1.5 transition-colors"
+                              className="px-3 py-1.5 text-xs bg-green-600 text-white border border-green-700 rounded-lg hover:bg-green-700 font-medium flex items-center gap-1.5 transition-colors shadow-sm"
                             >
                               📰 プレスリリースを見る
                             </a>
@@ -1493,6 +1530,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                     body: JSON.stringify({
                                       model: 'claude-sonnet-4-20250514',
                                       max_tokens: 16000,
+                                      system: sys,
                                       messages: [{
                                         role: 'user',
                                         content: [
@@ -1749,6 +1787,36 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                     </button>
                     {isOpen && (
                       <div className="px-5 py-4 bg-white">
+                        {/* 3 AI choice cards */}
+                        {fieldChoices[question.id] && fieldChoices[question.id].length > 1 && (
+                          <div className="mb-4">
+                            <p className="text-xs font-semibold text-gray-500 mb-2">💡 AIが生成した3つの案から選んでください</p>
+                            <div className="grid grid-cols-1 gap-2">
+                              {fieldChoices[question.id].map((choice, i) => (
+                                <div
+                                  key={i}
+                                  onClick={() => {
+                                    setSelectedChoices(prev => ({ ...prev, [question.id]: i }));
+                                    handleInputChange(question.id, choice);
+                                  }}
+                                  className={`p-3 rounded-lg border-2 cursor-pointer transition-all text-xs leading-relaxed whitespace-pre-line ${
+                                    selectedChoices[question.id] === i
+                                      ? 'border-blue-500 bg-blue-50 text-gray-800'
+                                      : 'border-gray-200 bg-gray-50 text-gray-600 hover:border-gray-300 hover:bg-gray-100'
+                                  }`}
+                                >
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${selectedChoices[question.id] === i ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'}`}>
+                                      案 {i + 1}
+                                    </span>
+                                    {selectedChoices[question.id] === i && <span className="text-blue-500 text-xs font-semibold">✓ 選択中</span>}
+                                  </div>
+                                  {choice.length > 200 ? choice.substring(0, 200) + '...' : choice}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                         <textarea
                           value={formData[question.id] || ''}
                           onChange={(e) => handleInputChange(question.id, e.target.value)}
@@ -1758,7 +1826,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                           rows={Math.max(4, ((formData[question.id] || '').match(/\n/g) || []).length + 3)}
                           required={question.required}
                         />
-                        <p className="text-xs text-gray-500 mt-1">💡 AIが生成した内容です。必要に応じて修正してください</p>
+                        <p className="text-xs text-gray-500 mt-1">✏️ 選択した案を自由に編集できます</p>
                         <div className="mt-3 flex gap-2 items-center">
                           <input
                             type="text"
@@ -2567,11 +2635,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
     📰 プレスリリース
   </a>
 )}
-                      {paper.press_release_status === 'pending' && (
-                        <span className="text-xs text-yellow-700 bg-yellow-100 border border-yellow-300 px-2 py-1 rounded-full font-medium">
-                          ⏳ 審査中
-                        </span>
-                      )}
+                      
                     </div>
                   </div>
                   

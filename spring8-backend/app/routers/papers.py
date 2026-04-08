@@ -138,7 +138,7 @@ async def sync_press_release_status(paper_id: str):
             return {"status": "none"}
         mongo_id = doc["press_release_mongo_id"]
         async with httpx.AsyncClient() as client:
-            res = await client.get("https://pressrelease-tmo5.onrender.com/saves")
+            res = await client.get("https://publicchemical.spring8.or.jp/pressrelease/saves")
             saves = res.json()
         entry = next((s for s in saves if s.get("_id") == mongo_id), None)
         if not entry:

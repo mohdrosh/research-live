@@ -1219,7 +1219,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
 
               {/* Press Release Card */}
               <div
-                onClick={() => window.open('https://publicchemical.spring8.or.jp/pressrelease', '_blank')}
+                onClick={() => window.open('https://publicchemical.spring8.or.jp/pressrelease/?view=releases', '_blank')}
                 style={{
                   background: 'white',
                   border: '1.5px solid #d1d5db',

@@ -60,7 +60,7 @@ const [loginError, setLoginError] = useState('');
       console.log('Starting PDF analysis...');
       console.log('PDF filename:', filename);
       
-      const response = await fetch('https://publicchemical.spring8.or.jp/research/api/api/analyze-pdf/', {
+      const response = await fetch('https://publicchemical.spring8.or.jp/research/api/analyze-pdf/', {
 
   method: 'POST',
   headers: {
@@ -278,7 +278,7 @@ const relationshipTypes = [
   React.useEffect(() => {
     const fetchPapers = async () => {
       try {
-        const response = await fetch('https://publicchemical.spring8.or.jp/research/api/api/search', {
+        const response = await fetch('https://publicchemical.spring8.or.jp/research/api/search', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ query: '', filters: {}, page: 1, page_size: 100 })
@@ -314,7 +314,7 @@ const toSync = normalized.filter(p => p.press_release_mongo_id);
 const synced = await Promise.all(
   toSync.map(async p => {
     try {
-      const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${p.id}/press-release-sync`, { method: 'POST' });
+      const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${p.id}/press-release-sync`, { method: 'POST' });
       const d = await res.json();
       return { id: p.id, status: d.status };
     } catch { return null; }
@@ -940,8 +940,8 @@ synced.filter(Boolean).forEach(({ id, status }) => {
     setIsProcessing(true);
     try {
       const url = editingPaper
-        ? `https://publicchemical.spring8.or.jp/research/api/api/papers/${editingPaper.id}`
-        : 'https://publicchemical.spring8.or.jp/research/api/api/papers/';
+        ? `https://publicchemical.spring8.or.jp/research/api/papers/${editingPaper.id}`
+        : 'https://publicchemical.spring8.or.jp/research/api/papers/';
       const method = editingPaper ? 'PUT' : 'POST';
       const response = await fetch(url, {
         method,
@@ -1527,7 +1527,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                             onClick={async () => {
                               if (window.confirm('この論文を削除しますか？')) {
                                 try {
-                                  const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${paper.id}`, { method: 'DELETE' });
+                                  const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}`, { method: 'DELETE' });
                                   if (res.ok) {
                                     setPapers(prevPapers => prevPapers.filter(p => p.id !== paper.id));
                                   } else {
@@ -1564,7 +1564,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               onClick={async () => {
                                 try {
                                   setPrLoadingId(paper.id);
-                                  const pdfRes = await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${paper.id}/pdf`);
+                                  const pdfRes = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}/pdf`);
                                   if (!pdfRes.ok) throw new Error('PDFが見つかりません');
                                   const pdfBlob = await pdfRes.blob();
                                   const base64 = await new Promise((resolve, reject) => {
@@ -1628,7 +1628,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                                   const saveData = await saveRes.json();
                                   if (!saveData._id) throw new Error('IDの取得に失敗しました');
                                   window.open(`https://publicchemical.spring8.or.jp/pressrelease/release.html?id=${saveData._id}`, '_blank');
-                                  await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${paper.id}/press-release-mongo-id`, {
+                                  await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}/press-release-mongo-id`, {
                                     method: 'PATCH',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ mongo_id: saveData._id })
@@ -1660,7 +1660,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                             onClick={async (e) => {
                               e.stopPropagation();
                               try {
-                                const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${paper.id}/pdf`);
+                                const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}/pdf`);
                                 if (!res.ok) throw new Error('not found');
                                 const blob = await res.blob();
                                 const url = URL.createObjectURL(blob);
@@ -1878,7 +1878,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               if (e.key === 'Enter' && regenInput[question.id]?.trim()) {
                                 setRegenLoading(prev => ({ ...prev, [question.id]: true }));
                                 try {
-                                  const res = await fetch('https://publicchemical.spring8.or.jp/research/api/api/analyze-pdf/regenerate-field/', {
+                                  const res = await fetch('https://publicchemical.spring8.or.jp/research/api/analyze-pdf/regenerate-field/', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({
@@ -1906,7 +1906,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                               if (!regenInput[question.id]?.trim()) return;
                               setRegenLoading(prev => ({ ...prev, [question.id]: true }));
                               try {
-                                const res = await fetch('https://publicchemical.spring8.or.jp/research/api/api/analyze-pdf/regenerate-field/', {
+                                const res = await fetch('https://publicchemical.spring8.or.jp/research/api/analyze-pdf/regenerate-field/', {
                                   method: 'POST',
                                   headers: { 'Content-Type': 'application/json' },
                                   body: JSON.stringify({
@@ -2029,7 +2029,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                 <button
                   onClick={async () => {
                     try {
-                      const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${viewingPaper.id}/pdf`);
+                      const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/pdf`);
                       if (!res.ok) throw new Error('not found');
                       const blob = await res.blob();
                       const url = URL.createObjectURL(blob);
@@ -2307,7 +2307,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                       />
                       <button
                         onClick={async () => {
-                          await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'pending', note: prRequestNote })
@@ -2344,7 +2344,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                     <div className="flex gap-3 mt-3">
                       <button
                         onClick={async () => {
-                          await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'approved' })
@@ -2358,7 +2358,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                       </button>
                       <button
                         onClick={async () => {
-                          await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'rejected' })
@@ -2393,7 +2393,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                       />
                       <button
                         onClick={async () => {
-                          await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${viewingPaper.id}/press-release-status`, {
+                          await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-status`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ status: 'pending', note: prRequestNote })
@@ -2438,7 +2438,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                             onClick={async () => {
                               const url = document.getElementById('pr-url-input').value.trim();
                               if (!url) return;
-                              await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${viewingPaper.id}/press-release-url`, {
+                              await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${viewingPaper.id}/press-release-url`, {
                                 method: 'PATCH',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ url })
@@ -2694,7 +2694,7 @@ synced.filter(Boolean).forEach(({ id, status }) => {
                     <button 
                       onClick={async () => {
                         try {
-                          const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/api/papers/${paper.id}/pdf`);
+                          const res = await fetch(`https://publicchemical.spring8.or.jp/research/api/papers/${paper.id}/pdf`);
                           if (!res.ok) throw new Error('not found');
                           const blob = await res.blob();
                           const url = URL.createObjectURL(blob);
